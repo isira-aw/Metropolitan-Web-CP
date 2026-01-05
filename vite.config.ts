@@ -35,7 +35,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://metropolitan-web-b-production.up.railway.app',
         changeOrigin: true,
       },
     },
@@ -43,5 +43,18 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
-  },
+  }
+  // server: {
+  //   port: 3000,
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://localhost:5000',
+  //       changeOrigin: true,
+  //     },
+  //   },
+  //   fs: {
+  //     strict: true,
+  //     deny: ["**/.*"],
+  //   },
+  // },
 });
