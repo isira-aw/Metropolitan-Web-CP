@@ -19,6 +19,10 @@ export function SectionHeader({ title, subtitle, align = "center", light = false
       )}>
         {title}
       </h2>
+            <div className={cn(
+        "h-1.5 w-20 bg-primary mb-6 rounded-full",
+        align === "center" ? "mx-auto" : ""
+      )} />
       {subtitle && (
         <p className={cn(
           "text-lg",
@@ -27,10 +31,7 @@ export function SectionHeader({ title, subtitle, align = "center", light = false
           {subtitle}
         </p>
       )}
-      <div className={cn(
-        "h-1.5 w-20 bg-primary mt-6 rounded-full",
-        align === "center" ? "mx-auto" : ""
-      )} />
+
     </div>
   );
 }

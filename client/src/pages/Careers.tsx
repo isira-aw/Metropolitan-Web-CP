@@ -11,17 +11,39 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { insertJobApplicationSchema, type InsertJobApplication } from "@shared/schema";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Loader2, Briefcase, MapPin, Clock } from "lucide-react";
+import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
 
-// Hardcoded jobs for UI
-const JOBS = [
-  { title: "Senior Structural Engineer", location: "New York, NY", type: "Full-time", dept: "Infrastructure" },
-  { title: "Project Manager", location: "London, UK", type: "Full-time", dept: "Commercial" },
-  { title: "Sustainability Consultant", location: "Berlin, DE", type: "Full-time", dept: "Energy" },
+// // Hardcoded jobs for UI
+// const JOBS = [
+//   { title: "Senior Structural Engineer", location: "New York, NY", type: "Full-time", dept: "Infrastructure" },
+//   { title: "Project Manager", location: "London, UK", type: "Full-time", dept: "Commercial" },
+//   { title: "Sustainability Consultant", location: "Berlin, DE", type: "Full-time", dept: "Energy" },
+// ];
+
+const POLICIES = [
+  {
+    title: "Daily Attendance & Check-in",
+    detail: "Employees must log their attendance via the portal before 9:00 AM daily.",
+    category: "Operations",
+    status: "Required"
+  },
+  {
+    title: "Sustainability Protocol",
+    detail: "Adhere to the 2026 Zero-Waste office policy for all physical documentation.",
+    category: "Environment",
+    status: "Active"
+  },
+  {
+    title: "Remote Work Application",
+    detail: "Submit remote requests at least 48 hours in advance for manager approval.",
+    category: "HR Policy",
+    status: "Process"
+  },
 ];
 
 export default function Careers() {
   const mutation = useApplyJob();
-  
+
   const form = useForm<InsertJobApplication>({
     resolver: zodResolver(insertJobApplicationSchema),
     defaultValues: {
@@ -42,7 +64,7 @@ export default function Careers() {
   return (
     <div className="min-h-screen bg-background font-sans">
       <Navbar />
-      
+
       <div className="bg-secondary text-white pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <SectionHeader title="Join Our Team" subtitle="Build your career with a global leader." light />
@@ -51,11 +73,13 @@ export default function Careers() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          
+
           {/* Job Listings */}
           <div>
-            <h2 className="text-3xl font-display font-bold text-secondary mb-8">Open Positions</h2>
-            <div className="space-y-6">
+            <SectionHeaderSmall
+              title="Open Positions"
+            />
+            {/* <div className="space-y-6">
               {JOBS.map((job, i) => (
                 <Card key={i} className="hover:shadow-lg transition-all cursor-pointer border-l-4  shadow-2xl   hover:border-l-primary">
                   <CardContent className="p-6">
@@ -70,15 +94,54 @@ export default function Careers() {
                   </CardContent>
                 </Card>
               ))}
+            </div> */}
+            <div className="space-y-6">
+              {POLICIES.map((policy, i) => (
+                <Card
+                  key={i}
+                  className="group hover:shadow-xl transition-all duration-300 cursor-default border-l-8 border-[#144C94] hover:border-[#C90815] shadow-md bg-white overflow-hidden"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
+                      <div className="flex items-center gap-3">
+                        {/* Red Circle Icon Bullet */}
+                        <div className="w-2 h-2 rounded-full bg-[#C90815]" />
+                        <h3 className="text-xl font-bold text-[#144C94] group-hover:text-black transition-colors">
+                          {policy.title}
+                        </h3>
+                      </div>
+                      <span className="text-[10px] uppercase tracking-widest font-black text-white bg-[#C90815] px-3 py-1 rounded-full">
+                        {policy.category}
+                      </span>
+                    </div>
+
+                    <p className="text-gray-600 leading-relaxed mb-4 border-b border-gray-100 pb-4">
+                      {policy.detail}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex gap-4 text-sm font-medium text-gray-400">
+                        <span className="flex items-center italic">
+                          Status: <span className="ml-1 text-black not-italic">{policy.status}</span>
+                        </span>
+                      </div>
+
+                      {/* <button className="text-[#144C94] text-sm font-bold flex items-center group-hover:underline">
+                        Read Full Policy <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                      </button> */}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-            
+
             <div className="mt-12 p-8 bg-muted/30 rounded-2xl">
               <h3 className="text-xl font-bold text-secondary mb-4">Why Metropolitan?</h3>
               <ul className="space-y-3">
                 {["Competitive salary and benefits", "Global mobility opportunities", "Professional development programs", "Inclusive and diverse culture"].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                     <div className="w-2 h-2 rounded-full bg-primary" />
-                     <span>{item}</span>
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -87,10 +150,12 @@ export default function Careers() {
 
           {/* Application Form */}
           <div>
-             <Card className="shadow-xl">
-               <CardContent className="p-8">
-                 <h2 className="text-2xl font-display font-bold text-secondary mb-6">Apply Now</h2>
-                 <Form {...form}>
+            <SectionHeaderSmall
+              title="Apply Now"
+            />
+            <Card className="shadow-xl">
+              <CardContent className="p-8">
+                <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
                       control={form.control}
@@ -153,10 +218,10 @@ export default function Careers() {
                         <FormItem>
                           <FormLabel>Cover Letter</FormLabel>
                           <FormControl>
-                            <Textarea 
-                              placeholder="Tell us why you're a good fit..." 
-                              className="min-h-[150px]" 
-                              {...field} 
+                            <Textarea
+                              placeholder="Tell us why you're a good fit..."
+                              className="min-h-[150px]"
+                              {...field}
                               value={field.value || ''}
                             />
                           </FormControl>
@@ -164,17 +229,17 @@ export default function Careers() {
                         </FormItem>
                       )}
                     />
-                    <Button 
-                      type="submit" 
-                      className="w-full h-12 text-lg bg-primary hover:bg-primary/90"
+                    <Button
+                      type="submit"
+                      className="w-full h-12 text-lg bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-full font-semibold"
                       disabled={mutation.isPending}
                     >
                       {mutation.isPending ? <Loader2 className="animate-spin" /> : "Submit Application"}
                     </Button>
                   </form>
-                 </Form>
-               </CardContent>
-             </Card>
+                </Form>
+              </CardContent>
+            </Card>
           </div>
 
         </div>

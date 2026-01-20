@@ -11,7 +11,7 @@ import { Loader2, Send } from "lucide-react";
 
 export function InquiryForm({ division }: { division?: string }) {
   const mutation = useCreateInquiry();
-  
+
   const form = useForm<InsertInquiry>({
     resolver: zodResolver(insertInquirySchema),
     defaultValues: {
@@ -102,10 +102,10 @@ export function InquiryForm({ division }: { division?: string }) {
                 <FormItem>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="Tell us about your project requirements..." 
-                      className="min-h-[120px] bg-muted/30 border-muted-foreground/20 focus:border-primary focus:ring-primary/10 resize-none" 
-                      {...field} 
+                    <Textarea
+                      placeholder="Tell us about your project requirements..."
+                      className="min-h-[120px] bg-muted/30 border-muted-foreground/20 focus:border-primary focus:ring-primary/10 resize-none"
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -113,9 +113,9 @@ export function InquiryForm({ division }: { division?: string }) {
               )}
             />
 
-            <Button 
-              type="submit" 
-              className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20"
+            <Button
+              type="submit"
+              className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-full"
               disabled={mutation.isPending}
             >
               {mutation.isPending ? (

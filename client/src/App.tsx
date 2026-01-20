@@ -28,7 +28,7 @@ function Router() {
       <Route path="/divisions" component={DivisionsIntro} />
       <Route path="/divisions/central-ac" component={CentralAC} />
       <Route path="/divisions/elevators-and-travelators" component={Elevators} />
-      <Route path="/divisions/fire-detection-&-protection" component={FireProtection} />
+      <Route path="/divisions/fire-detection-protection" component={FireProtection} />
       <Route path="/divisions/generator" component={Generator} />
       <Route path="/divisions/solar" component={Solar} />
       <Route path="/divisions/elv" component={ELV} />

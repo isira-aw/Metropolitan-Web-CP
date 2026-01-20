@@ -1,15 +1,17 @@
-import { Navbar } from "@/components/Navbar";
+
 import { Footer } from "@/components/Footer";
 import { InquiryForm } from "@/components/InquiryForm";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
+import { Navbar } from "@/components/Navbar";
 
 export default function Contact() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <div className="bg-secondary text-white pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <SectionHeader title="Contact Us" subtitle="Get in touch with our global team." light />
@@ -18,12 +20,13 @@ export default function Contact() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          
+
           {/* Contact Info */}
           <div>
-            <h2 className="text-3xl font-display font-bold text-secondary mb-8">Headquarters</h2>
-            
-            <div className="space-y-8">
+            <SectionHeaderSmall
+              title="Headquarters"
+            />
+            <div className="space-y-8 mt-5">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
                   <MapPin className="w-6 h-6" />
@@ -63,11 +66,11 @@ export default function Contact() {
 
             {/* Map Placeholder */}
             <div className="mt-12 h-64 bg-muted rounded-2xl border border-border flex items-center justify-center relative overflow-hidden group">
-               <img 
-                 src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074&auto=format&fit=crop" 
-                 className="absolute inset-0 w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-500"
-               />
-               <Button variant="secondary" className="relative z-10 shadow-lg">View on Google Maps</Button>
+              <img
+                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074&auto=format&fit=crop"
+                className="absolute inset-0 w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-500"
+              />
+              <Button variant="secondary" className="relative z-10 shadow-lg">View on Google Maps</Button>
             </div>
           </div>
 
