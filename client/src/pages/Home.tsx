@@ -246,7 +246,7 @@ export default function Home() {
             <div className="relative opacity-0 animate-fadeInRight delay-200">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
                 <img
-                  src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop"
+                  src="https://img.freepik.com/premium-photo/working-image-4k_1025666-5.jpg"
                   alt="Company site"
                   className="w-full h-full object-cover"
                 />
