@@ -80,12 +80,7 @@ export function Navbar() {
               )}>
                 METROPOLITAN
               </span>
-              <span className={cn(
-                "text-[10px] font-semibold tracking-widest uppercase transition-all duration-500",
-                scrolled ? "text-[#C90815]" : "text-[#C90815]/90"
-              )}>
-                Engineering Excellence
-              </span>
+
             </div>
           </Link>
 
