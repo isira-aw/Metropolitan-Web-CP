@@ -155,11 +155,11 @@ export default function Home() {
               <span className="text-white">Technologies</span>
             </h1>
           </div>
-          
+
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12 opacity-0 animate-fadeInUp delay-200 leading-relaxed">
             Engineering excellence across six core departments: Central AC, Elevators, Fire Protection, Generators, ELV & Solar
           </p>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-fadeInUp delay-300">
             <Link href="/case-studies">
               <Button size="lg" className="h-14 px-8 rounded-full bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 transition-transform hover:scale-105 hover:bg-primary/90">
@@ -200,15 +200,7 @@ export default function Home() {
       {/* MISSION & VISION */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-sm tracking-wide uppercase mb-6">
-              Why Choose Us
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold text-secondary mb-6 tracking-tight">
-              Our Mission & Vision
-            </h2>
-            <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-          </div>
+          <SectionHeader title="Our Mission & Vision" subtitle="" />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div className="opacity-0 animate-fadeInLeft delay-100">
@@ -218,33 +210,33 @@ export default function Home() {
               <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
                 Our vision is to build infrastructure that not only meets the needs of today but anticipates the challenges of tomorrow, fostering communities that are resilient, connected, and vibrant.
               </p>
-              
-<div className="grid gap-4 mb-10">
-  {[
-    { icon: "", text: "Powering Progress with Precision" },
-    { icon: "", text: "Electrical Engineering Excellence" },
-    { icon: "", text: "Powering the Future Through Expertise" }
-  ].map((item, i) => (
-    <div 
-      key={i} 
-      className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
-    >
-      {/* Icon Container with Primary/Accent Interaction */}
-      <div className="flex h-1 w-5 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-xl group-hover:bg-primary group-hover:text-white transition-colors">
-        {item.icon}
-      </div>
-      
-      {/* Text Content */}
-      <span className="text-lg font-medium text-secondary group-hover:text-primary transition-colors">
-        {item.text}
-      </span>
-    </div>
-  ))}
-</div>
-              
+
+              <div className="grid gap-4 mb-10">
+                {[
+                  { icon: "", text: "Powering Progress with Precision" },
+                  { icon: "", text: "Electrical Engineering Excellence" },
+                  { icon: "", text: "Powering the Future Through Expertise" }
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
+                  >
+                    {/* Icon Container with Primary/Accent Interaction */}
+                    <div className="flex h-1 w-5 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-xl group-hover:bg-primary group-hover:text-white transition-colors">
+                      {item.icon}
+                    </div>
+
+                    {/* Text Content */}
+                    <span className="text-lg font-medium text-secondary group-hover:text-primary transition-colors">
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
               <Link href="/about">
                 <Button variant="ghost" className="p-0 text-primary font-bold text-lg h-auto hover:gap-3 transition-all">
-                  Learn More About Us 
+                  Learn More About Us
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
@@ -276,7 +268,7 @@ export default function Home() {
                 We proudly collaborate with industry leaders worldwide
               </p>
             </div>
-            
+
             <div className="flex gap-12 items-center justify-center flex-wrap">
               {customerLogos.map((item, index) => (
                 <a
@@ -297,6 +289,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* OUR PLATFORMS */}
       <section className="py-24 bg-gray-50">
@@ -367,16 +360,8 @@ export default function Home() {
       {testimonialsData && testimonialsData.length > 0 && (
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-secondary tracking-tight mb-6">
-                What Our Clients Say
-              </h2>
-              <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-                Trusted by industry leaders across multiple sectors
-              </p>
-            </div>
-            
+            <SectionHeader title="What Our Clients Say" subtitle="Trusted by industry leaders across multiple sectors." />
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonialsData.slice(0, 6).map((testimonial, i) => (
                 <Card key={testimonial.id} className={`border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 opacity-0 animate-fadeInUp delay-${Math.min(i + 1, 5)}00`}>
@@ -404,20 +389,12 @@ export default function Home() {
 
       {/* LATEST PROJECTS */}
       <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-secondary tracking-tight mb-6">
-                Featured Projects
-              </h2>
-              <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-                Highlighting our recent contributions to the urban landscape
-              </p>
-            <Link href="/case-studies" className="hidden lg:flex items-center text-primary font-bold text-lg hover:gap-3 transition-all">
-              View All Projects 
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader title="Featured Projects" subtitle="Highlighting our recent contributions to the urban landscape" />
+          <Link href="/case-studies" className="hidden lg:flex items-center text-primary font-bold text-lg hover:gap-3 transition-all">
+            View All Projects
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Link>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {latestProjects?.data?.map((project, i) => (
@@ -425,10 +402,10 @@ export default function Home() {
                 <CaseStudyCard item={project} />
               </div>
             )) || (
-              Array(3).fill(0).map((_, i) => (
-                <div key={i} className="h-[400px] bg-muted animate-pulse rounded-2xl" />
-              ))
-            )}
+                Array(3).fill(0).map((_, i) => (
+                  <div key={i} className="h-[400px] bg-muted animate-pulse rounded-2xl" />
+                ))
+              )}
           </div>
 
           <div className="mt-12 text-center lg:hidden">
@@ -441,7 +418,7 @@ export default function Home() {
         </div>
       </section>
 
-      
+
       {/* INQUIRY SECTION */}
       <section className="py-24 bg-secondary relative overflow-hidden">
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
