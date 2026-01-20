@@ -259,8 +259,8 @@ export default function About() {
             </motion.div>
           ))}
         </div>
-        
-        <div className="bg-[#144C94] text-white rounded-3xl p-12 text-center">
+
+        <div className="bg-[#144C94] text-white rounded-3xl py-10 p-12 text-center">
           <h2 className="text-3xl font-bold font-display mb-10 text-white">Our Core Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white ">
             {["Safety First", "Sustainability", "Integrity"].map((v, i) => (
@@ -416,6 +416,76 @@ export default function About() {
                 </div>
               )}
 
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* Using our New Small Header with Red Line */}
+          <SectionHeaderSmall
+            title="Story of Our Company"
+            subtitle="A legacy of quality and entrepreneurship since 1958"
+            className="mb-6"
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Column: The Founder's Origin */}
+            <div className="lg:col-span-7 space-y-6 text-gray-700 leading-relaxed text-lg">
+              <p >
+                <span className="text-5xl font-bold text-[#C90815] mr-3 float-left">
+                  Mr
+                </span>. J S Ambani, a young accountant by profession working for a large conglomerate,
+                was irked by the very hard touch of the typewriters in use. This prompted a search
+                for quality that would eventually change the landscape of Sri Lankan business.
+              </p>
+              <p>
+                He looked to the USA and discovered the <span className="text-[#144C94] font-bold">"Royal" typewriter</span>—the
+                Rolls Royce of its time. When local vendors refused to import them, he saw an
+                opportunity for those with the courage to choose quality. He quit his job and
+                founded Metropolitan on the 25th of August, 1958.
+              </p>
+            </div>
+
+            {/* Right Column: Featured Historical Image */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden  border border-gray-100">
+                <img
+                  src="https://ik.imagekit.io/ayen/Metropolitan/company-history-founder.jpg"
+                  alt="Mr. J.S Ambani at the Launch of Royal Typewriters"
+                  className="w-full h-auto"
+                />
+                <div className="bg-[#144C94] p-4 text-white text-sm italic">
+                  Mr. J.S Ambani with the American Ambassador at the Launch of Royal Typewriters in Sri Lanka, 1958
+                </div>
+              </div>
+            </div>
+
+            {/* Full Width Bottom Section: The Evolution */}
+            <div className="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-600 border-t border-gray-100 ">
+              <div className="bg-[#F8F9FA] p-8 rounded-2xl border-l-4 border-[#144C94]">
+                <p className="italic font-medium text-[#144C94]">
+                  <span className="text-5xl font-bold text-[#C90815] mr-3 float-left">
+                    "
+                  </span>Today, six decades later, the legacy of quality and support is engrained in our DNA,
+                  providing state-of-the-art technology solutions across IT, Communications, and Imaging
+                  to empower the success of our customers.  <span className="text-5xl font-bold text-[#C90815] mr-3 float-right">
+                    "
+                  </span>
+                </p>
+              </div>
+              <div className="space-y-4">
+                <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-[#C90815] first-letter:mr-3 first-letter:float-left">
+                  Metropolitan soon represented world-renowned brands such as <span className="font-semibold">Facit Calculators</span> and
+                  <span className="font-semibold"> Ericsson switchboards</span>. His quest for quality didn’t stop at products;
+                  it was backed by superlative after-sales service that remains the bedrock of our trust today.
+                </p>
+                <p>
+                  With the support of his five sons—experts in Finance, Marketing, Engineering, and IT—the company
+                  pioneered electronic office products, becoming to the office what Unilever or Nestle is to the home.
+                </p>
+              </div>
             </div>
           </div>
         </div>

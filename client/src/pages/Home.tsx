@@ -391,7 +391,7 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader title="Featured Projects" subtitle="Highlighting our recent contributions to the urban landscape" />
-          <Link href="/case-studies" className="hidden lg:flex items-center text-primary font-bold text-lg hover:gap-3 transition-all">
+          <Link href="/case-studies" className="hidden lg:flex items-center text-primary font-bold text-lg hover:gap-3 transition-all mb-3">
             View All Projects
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
