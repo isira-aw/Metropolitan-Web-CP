@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/Navbar";
+
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Card } from "@/components/ui/card";
@@ -6,6 +6,7 @@ import { ArrowRight, BriefcaseBusiness, CheckCircle, CheckCircle2, Clock, Handsh
 import { useState } from "react";
 import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
 import { motion } from "framer-motion";
+import { Navbar } from "@/components/Navbar";
 
 const containerVariants = {
   hidden: { opacity: 0 },

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, Zap, Users, Award, Clock, Quote } from "lucide-react";
-import { Navbar } from "@/components/Navbar";
+
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { type Testimonial } from "@shared/schema";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
+import { Navbar } from "@/components/Navbar";
 
 export default function Home() {
   const { data: latestProjects } = useCaseStudies({ limit: 3 });

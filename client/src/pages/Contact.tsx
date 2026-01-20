@@ -1,10 +1,11 @@
-import { Navbar } from "@/components/Navbar";
+
 import { Footer } from "@/components/Footer";
 import { InquiryForm } from "@/components/InquiryForm";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
+import { Navbar } from "@/components/Navbar";
 
 export default function Contact() {
   return (
