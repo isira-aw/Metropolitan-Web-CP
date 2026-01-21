@@ -101,5 +101,13 @@ export function buildUrl(path: string, params?: Record<string, string | number>)
       }
     });
   }
+
+  // In production, prepend the API base URL if it's set
+  // This allows the frontend to call a separate backend service
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+  if (apiBaseUrl) {
+    return `${apiBaseUrl}${url}`;
+  }
+
   return url;
 }
