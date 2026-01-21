@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertCaseStudySchema, insertInquirySchema, insertJobApplicationSchema, insertNewsSchema, caseStudies, news, inquiries, jobApplications } from './schema';
+import { insertCaseStudySchema, insertInquirySchema, insertJobApplicationSchema, insertNewsSchema, caseStudies, news, inquiries, jobApplications, testimonials } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
@@ -87,6 +87,19 @@ export const api = {
       responses: {
         201: z.custom<typeof jobApplications.$inferSelect>(),
         400: errorSchemas.validation,
+      },
+    },
+  },
+  testimonials: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/testimonials',
+      input: z.object({
+        division: z.string().optional(),
+        limit: z.coerce.number().optional(),
+      }).optional(),
+      responses: {
+        200: z.array(z.custom<typeof testimonials.$inferSelect>()),
       },
     },
   },

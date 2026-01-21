@@ -6,24 +6,16 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { InquiryForm } from "@/components/InquiryForm";
 import { useCaseStudies } from "@/hooks/use-case-studies";
-import { type Testimonial } from "@shared/schema";
 import { Sun, Leaf, DollarSign, TrendingDown, CheckCircle2, Quote, Lightbulb, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useQuery } from "@tanstack/react-query";
+import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Solar() {
   const { data: projects, isLoading } = useCaseStudies({ division: "Solar", limit: 3 });
 
-  const { data: testimonialsData } = useQuery<Testimonial[]>({
-    queryKey: ["/api/testimonials", "Solar"],
-    queryFn: async () => {
-      const res = await fetch(`/api/testimonials?division=Solar`);
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return res.json();
-    }
-  });
+  const { data: testimonialsData } = useTestimonials({ division: "Solar" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

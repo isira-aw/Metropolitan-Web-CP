@@ -6,23 +6,15 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { InquiryForm } from "@/components/InquiryForm";
 import { useCaseStudies } from "@/hooks/use-case-studies";
-import { type Testimonial } from "@shared/schema";
 import { Snowflake, Thermometer, Wind, Gauge, CheckCircle2, Quote, TrendingDown, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useQuery } from "@tanstack/react-query";
+import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function CentralAC() {
   const { data: projects, isLoading } = useCaseStudies({ division: "Central AC", limit: 3 });
 
-  const { data: testimonialsData } = useQuery<Testimonial[]>({
-    queryKey: ["/api/testimonials", "Central AC"],
-    queryFn: async () => {
-      const res = await fetch(`/api/testimonials?division=Central AC`);
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return res.json();
-    }
-  });
+  const { data: testimonialsData } = useTestimonials({ division: "Central AC" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

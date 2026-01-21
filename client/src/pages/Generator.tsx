@@ -6,23 +6,15 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { InquiryForm } from "@/components/InquiryForm";
 import { useCaseStudies } from "@/hooks/use-case-studies";
-import { type Testimonial } from "@shared/schema";
 import { Zap, Battery, Volume2, Settings, CheckCircle2, Quote, Power, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useQuery } from "@tanstack/react-query";
+import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Generator() {
   const { data: projects, isLoading } = useCaseStudies({ division: "Generator", limit: 3 });
 
-  const { data: testimonialsData } = useQuery<Testimonial[]>({
-    queryKey: ["/api/testimonials", "Generator"],
-    queryFn: async () => {
-      const res = await fetch(`/api/testimonials?division=Generator`);
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return res.json();
-    }
-  });
+  const { data: testimonialsData } = useTestimonials({ division: "Generator" });
 
   useEffect(() => {
     window.scrollTo(0, 0);
