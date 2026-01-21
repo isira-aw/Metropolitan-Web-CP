@@ -325,38 +325,93 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
-      <section className="py-24 bg-muted/30">
+    
+      {/* WHY CHOOSE US - MODERN BENTO VERSION WITH IMAGES */}
+      <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold text-secondary tracking-tight mb-6">
-              Why Metropolitan
-            </h2>
-            <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Driven by values that ensure success in every project
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div className="flex-1">
+              <SectionHeader title="Why Metropolitan?" subtitle="" />
+            </div>
+            <p className="text-lg text-muted-foreground max-w-md border-l-4 border-primary pl-6 py-2">
+              We combine industrial-grade power with surgical precision to deliver results that redefine standards.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-[240px]">
             {[
-              { icon: Zap, title: "Advanced Equipment", desc: "State-of-the-art tools and technology for superior results", bg: "bg-yellow-100" },
-              { icon: Users, title: "Trained Staff", desc: "Expert professionals committed to excellence", bg: "bg-blue-100" },
-              { icon: Award, title: "Quality Assurance", desc: "Uncompromising standards in every project", bg: "bg-green-100" },
-              { icon: Clock, title: "24/7 Service", desc: "Round-the-clock support whenever you need us", bg: "bg-purple-100" }
+              {
+                icon: Zap,
+                title: "Advanced Equipment",
+                desc: "Harnessing state-of-the-art tools and AI-driven tech for superior results.",
+                span: "md:col-span-3 lg:col-span-4",
+                gradient: "from-amber-600/20 to-orange-600/20",
+                img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop"
+              },
+              {
+                icon: Users,
+                title: "Trained Staff",
+                desc: "Expert professionals undergo 200+ hours of specialized training yearly.",
+                span: "md:col-span-3 lg:col-span-4",
+                gradient: "from-blue-600/20 to-indigo-600/20",
+                img: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop"
+              },
+              {
+                icon: Award,
+                title: "Quality Assurance",
+                desc: "Every project passes a 50-point inspection protocol before delivery.",
+                span: "md:col-span-6 lg:col-span-4 row-span-1 md:row-span-2",
+                gradient: "from-emerald-600/20 to-teal-600/20",
+                isLarge: true,
+                img: "https://www.smallbizdaily.com/wp-content/uploads/2021/10/shutterstock_1155561991.jpg"
+              },
+              {
+                icon: Clock,
+                title: "24/7 Priority Support",
+                desc: "Round-the-clock emergency response units always on standby.",
+                span: "md:col-span-6 lg:col-span-8",
+                gradient: "from-purple-600/20 to-fuchsia-600/20",
+                img: "https://media.istockphoto.com/id/1494073880/photo/a-man-holding-icon-virtual-24-7-support-services-for-worldwide-nonstop-and-full-time.jpg?s=170667a&w=0&k=20&c=HoMXtrk5Js-aKnhIfceYqFKvWuFZjgATmWbcVkb1fuQ="
+              }
             ].map((feature, idx) => (
-              <div key={idx} className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 opacity-0 animate-fadeInUp delay-${idx + 1}00`}>
-                <div className={`w-16 h-16 ${feature.bg} rounded-full flex items-center justify-center mb-6 text-primary`}>
-                  <feature.icon className="w-8 h-8" />
+              <div
+                key={idx}
+                className={`group relative overflow-hidden rounded-3xl border border-slate-200 p-8 transition-all duration-500 hover:shadow-2xl ${feature.span}`}
+              >
+                {/* 1. Background Image with Zoom Effect */}
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src={feature.img}
+                    alt={feature.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  {/* Base Overlay for text legibility */}
+                  <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-70" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/20 to-transparent" />
                 </div>
-                <h3 className="text-xl font-bold text-secondary mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+
+                {/* 2. Color Tint Overlay (Fades in on hover) */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10`} />
+
+                {/* 3. Content */}
+                <div className="relative z-20 h-full flex flex-col">
+                  <div className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center mb-auto text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                    <feature.icon className="w-6 h-6" />
+                  </div>
+
+                  <div className={feature.isLarge ? "mt-auto" : "mt-8"}>
+                    <h3 className="text-2xl font-bold text-white mb-2">{feature.title}</h3>
+                    <p className="text-white/80 leading-relaxed group-hover:text-white transition-colors duration-300">
+                      {feature.desc}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* TESTIMONIALS */}
       {testimonialsData && testimonialsData.length > 0 && (
         <section className="py-24 bg-white">
