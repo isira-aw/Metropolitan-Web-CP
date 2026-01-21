@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { api, buildUrl } from "@shared/routes";
+import { api } from "@shared/routes";
+import { api as apiClient } from "@/lib/api-client";
 
 interface UseTestimonialsOptions {
   division?: string;
@@ -16,13 +17,8 @@ export function useTestimonials(options: UseTestimonialsOptions = {}) {
       if (options.division) params.division = options.division;
       if (options.limit) params.limit = options.limit;
 
-      const url = buildUrl(api.testimonials.list.path);
-      const queryString = new URLSearchParams(params as Record<string, string>).toString();
-      const finalUrl = queryString ? `${url}?${queryString}` : url;
-
-      const res = await fetch(finalUrl);
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return api.testimonials.list.responses[200].parse(await res.json());
+      const result = await apiClient.get(api.testimonials.list.path, params);
+      return api.testimonials.list.responses[200].parse(result);
     },
   });
 }
