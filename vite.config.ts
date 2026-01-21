@@ -35,7 +35,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://metropolitan-web-cp-production.up.railway.app',
+        target: 'https://metropolitan-web-b-production.up.railway.app',
         changeOrigin: true,
       },
     },
