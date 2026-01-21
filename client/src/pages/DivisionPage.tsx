@@ -6,10 +6,10 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { InquiryForm } from "@/components/InquiryForm";
 import { useCaseStudies } from "@/hooks/use-case-studies";
-import { DIVISIONS, type Testimonial } from "@shared/schema";
+import { DIVISIONS } from "@shared/schema";
 import { ArrowRight, CheckCircle2, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
+import { useTestimonials } from "@/hooks/use-testimonials";
 
 // Static data mapping for divisions
 const DIVISION_DATA: Record<string, {
@@ -65,14 +65,7 @@ export default function DivisionPage() {
   const capitalizedDivision = divisionKey === "elv" ? "ELV" : divisionKey.charAt(0).toUpperCase() + divisionKey.slice(1);
   const { data: projects, isLoading } = useCaseStudies({ division: capitalizedDivision, limit: 3 });
 
-  const { data: testimonialsData } = useQuery<Testimonial[]>({
-    queryKey: ["/api/testimonials", capitalizedDivision],
-    queryFn: async () => {
-      const res = await fetch(`/api/testimonials?division=${capitalizedDivision}`);
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return res.json();
-    }
-  });
+  const { data: testimonialsData } = useTestimonials({ division: capitalizedDivision });
 
   // Scroll to top on change
   useEffect(() => {

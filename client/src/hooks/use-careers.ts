@@ -1,26 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 import { api, type InsertJobApplication } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
+import { api as apiClient } from "@/lib/api-client";
 
 export function useApplyJob() {
   const { toast } = useToast();
 
   return useMutation({
     mutationFn: async (data: InsertJobApplication) => {
-      const res = await fetch(api.careers.apply.path, {
-        method: api.careers.apply.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) {
-        if (res.status === 400) {
-          const error = api.careers.apply.responses[400].parse(await res.json());
-          throw new Error(error.message);
-        }
-        throw new Error("Failed to submit application");
-      }
-      return api.careers.apply.responses[201].parse(await res.json());
+      const result = await apiClient.post(api.careers.apply.path, data);
+      return api.careers.apply.responses[201].parse(result);
     },
     onSuccess: () => {
       toast({

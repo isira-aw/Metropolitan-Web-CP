@@ -8,23 +8,15 @@ import { InquiryForm } from "@/components/InquiryForm";
 import { Button } from "@/components/ui/button";
 import { useCaseStudies } from "@/hooks/use-case-studies";
 import { Card } from "@/components/ui/card";
-import { type Testimonial } from "@shared/schema";
-import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
+import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Home() {
   const { data: latestProjects } = useCaseStudies({ limit: 3 });
   const [scrollY, setScrollY] = useState(0);
 
-  const { data: testimonialsData } = useQuery<Testimonial[]>({
-    queryKey: ["/api/testimonials"],
-    queryFn: async () => {
-      const res = await fetch(`/api/testimonials?limit=6`);
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return res.json();
-    }
-  });
+  const { data: testimonialsData } = useTestimonials({ limit: 6 });
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);

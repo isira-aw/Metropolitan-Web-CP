@@ -6,23 +6,15 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { InquiryForm } from "@/components/InquiryForm";
 import { useCaseStudies } from "@/hooks/use-case-studies";
-import { type Testimonial } from "@shared/schema";
 import { ArrowUp, Shield, Wrench, Zap, Users, Clock, Award, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useQuery } from "@tanstack/react-query";
+import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Elevators() {
   const { data: projects, isLoading } = useCaseStudies({ division: "Elevators and Travelators", limit: 3 });
 
-  const { data: testimonialsData } = useQuery<Testimonial[]>({
-    queryKey: ["/api/testimonials", "Elevators and Travelators"],
-    queryFn: async () => {
-      const res = await fetch(`/api/testimonials?division=Elevators and Travelators`);
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return res.json();
-    }
-  });
+  const { data: testimonialsData } = useTestimonials({ division: "Elevators and Travelators" });
 
   useEffect(() => {
     window.scrollTo(0, 0);
