@@ -12,9 +12,9 @@ import { Badge } from "@/components/ui/badge";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Generator() {
-  const { data: projects, isLoading } = useCaseStudies({ division: "Generator", limit: 3 });
+  const { data: projects, isLoading } = useCaseStudies({ division: "GENERATOR", limit: 3 });
 
-  const { data: testimonialsData } = useTestimonials({ division: "Generator" });
+  const { data: testimonialsData } = useTestimonials({ division: "GENERATOR" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -12,9 +12,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function FireProtection() {
-  const { data: projects, isLoading } = useCaseStudies({ division: "Fire Detection & Protection", limit: 3 });
+  const { data: projects, isLoading } = useCaseStudies({ division: "FIRE_PROTECTION", limit: 3 });
 
-  const { data: testimonialsData } = useTestimonials({ division: "Fire Detection & Protection" });
+  const { data: testimonialsData } = useTestimonials({ division: "FIRE_PROTECTION" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

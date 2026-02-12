@@ -81,19 +81,34 @@ export type InsertJobApplication = z.infer<typeof insertJobApplicationSchema>;
 export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = z.infer<typeof insertTestimonialSchema>;
 
-export type Division = 
-  | "Central AC"
-  | "Elevators and Travelators"
-  | "Fire Detection & Protection"
-  | "Generator"
-  | "Solar"
-  | "ELV";
+// === DIVISION ENUMS (for API calls) ===
+export const DIVISION_VALUES = {
+  ELV: "ELV",
+  CENTRAL_AC: "Central AC",
+  FIRE_PROTECTION: "Fire Detection & Protection",
+  ELEVATORS: "Elevators and Travelators",
+  GENERATOR: "Generator",
+  SOLAR: "Solar",
+} as const;
 
-export const DIVISIONS: Division[] = [
-  "Central AC",
-  "Elevators and Travelators",
-  "Fire Detection & Protection",
-  "Generator",
-  "Solar",
-  "ELV"
+export type DivisionKey = keyof typeof DIVISION_VALUES;
+
+// === DISPLAY NAMES (for UI) ===
+export const DIVISIONS: DivisionKey[] = [
+  "ELV",
+  "CENTRAL_AC",
+  "FIRE_PROTECTION",
+  "ELEVATORS",
+  "GENERATOR",
+  "SOLAR",
 ];
+
+// Helper to get display name from division key
+export function getDivisionDisplayName(key: DivisionKey): string {
+  return DIVISION_VALUES[key];
+}
+
+// Helper to get division key from display name (for backward compatibility)
+export function getDivisionKeyFromDisplayName(displayName: string): DivisionKey | undefined {
+  return Object.entries(DIVISION_VALUES).find(([_, value]) => value === displayName)?.[0] as DivisionKey;
+}

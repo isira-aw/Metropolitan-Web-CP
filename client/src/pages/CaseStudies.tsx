@@ -5,28 +5,27 @@ import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { useCaseStudies } from "@/hooks/use-case-studies";
-import { DIVISIONS } from "@shared/schema";
+import { DIVISIONS, getDivisionDisplayName, type DivisionKey } from "@shared/schema";
 import { cn } from "@/lib/utils";
 
 export default function CaseStudies() {
-  const [selectedDivision, setSelectedDivision] = useState<string | undefined>();
+  const [selectedDivision, setSelectedDivision] = useState<DivisionKey | undefined>();
   const { data, isLoading } = useCaseStudies({ division: selectedDivision });
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-
-            <div className="bg-secondary text-white pt-32 pb-20">
+      <div className="bg-secondary text-white pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <SectionHeader title="Our Projects" subtitle="Explore our portfolio of landmark projects that have transformed communities." light />
         </div>
       </div>
-      
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Filters */}
         <div className="flex flex-wrap gap-2 justify-center mb-12">
-          <Button 
+          <Button
             variant={!selectedDivision ? "default" : "outline"}
             onClick={() => setSelectedDivision(undefined)}
             className={cn("rounded-full", !selectedDivision && "bg-primary hover:bg-primary/90")}
@@ -40,7 +39,7 @@ export default function CaseStudies() {
               onClick={() => setSelectedDivision(div)}
               className={cn("rounded-full", selectedDivision === div && "bg-primary hover:bg-primary/90")}
             >
-              {div}
+              {getDivisionDisplayName(div)}
             </Button>
           ))}
         </div>

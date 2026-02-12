@@ -12,9 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function CentralAC() {
-  const { data: projects, isLoading } = useCaseStudies({ division: "Central AC", limit: 3 });
-
-  const { data: testimonialsData } = useTestimonials({ division: "Central AC" });
+  const { data: projects, isLoading } = useCaseStudies({ division: "CENTRAL_AC", limit: 3 });
+  const { data: testimonialsData } = useTestimonials({ division: "CENTRAL_AC" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

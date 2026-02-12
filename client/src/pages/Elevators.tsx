@@ -12,9 +12,9 @@ import { Badge } from "@/components/ui/badge";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Elevators() {
-  const { data: projects, isLoading } = useCaseStudies({ division: "Elevators and Travelators", limit: 3 });
+  const { data: projects, isLoading } = useCaseStudies({ division: "ELEVATORS", limit: 3 });
 
-  const { data: testimonialsData } = useTestimonials({ division: "Elevators and Travelators" });
+  const { data: testimonialsData } = useTestimonials({ division: "ELEVATORS" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

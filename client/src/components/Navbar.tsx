@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { DIVISIONS } from "@shared/schema";
+import { DIVISIONS, getDivisionDisplayName, type DivisionKey } from "@shared/schema";
 
-// Map division names to URL paths
-const DIVISION_PATHS = {
-  "Central AC": "/divisions/central-ac",
-  "Elevators and Travelators": "/divisions/elevators-and-travelators",
-  "Fire Detection & Protection": "/divisions/fire-detection-protection",
-  "Generator": "/divisions/generator",
-  "Solar": "/divisions/solar",
-  "ELV": "/divisions/elv"
+// Map division keys to URL paths
+const DIVISION_PATHS: Record<DivisionKey, string> = {
+  CENTRAL_AC: "/divisions/central-ac",
+  ELEVATORS: "/divisions/elevators-and-travelators",
+  FIRE_PROTECTION: "/divisions/fire-detection-protection",
+  GENERATOR: "/divisions/generator",
+  SOLAR: "/divisions/solar",
+  ELV: "/divisions/elv"
 };
 
 const NAV_ITEMS = [
@@ -172,7 +172,7 @@ export function Navbar() {
                       )}
                         style={{ transitionDelay: `${idx * 30}ms` }}>
                         <span className="font-semibold text-black/80 group-hover:text-[#144C94] transition-colors">
-                          {div}
+                          {getDivisionDisplayName(div)}
                         </span>
                         <ArrowRight className="w-4 h-4 text-[#C90815] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
                       </div>
@@ -246,7 +246,7 @@ export function Navbar() {
                     className="pl-8 pr-4 py-3 rounded-lg text-black/70 font-semibold hover:bg-gradient-to-r hover:from-[#C90815]/5 hover:to-[#144C94]/5 hover:text-[#144C94] hover:translate-x-2 transition-all duration-200 flex items-center justify-between group"
                     style={{ transitionDelay: divisionsOpen ? `${idx * 40}ms` : '0ms' }}
                   >
-                    <span>{div}</span>
+                    <span>{getDivisionDisplayName(div)}</span>
                     <ArrowRight className="w-4 h-4 text-[#C90815] opacity-0 group-hover:opacity-100 transition-all duration-200" />
                   </div>
                 </Link>
