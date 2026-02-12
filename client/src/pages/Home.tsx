@@ -33,6 +33,7 @@ export default function Home() {
     { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
     { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/7.png', link: 'https://www.amazon.com' },
     { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/8.png', link: 'https://www.netflix.com' },
+      { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
   ];
 
   return (
@@ -262,22 +263,40 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex gap-12 items-center justify-center flex-wrap">
-              {customerLogos.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 transform hover:scale-110"
-                >
-                  <img
-                    src={item.logo}
-                    alt="Customer Logo"
-                    className="h-16 w-auto object-contain"
-                  />
-                </a>
-              ))}
+            <div className="relative overflow-hidden">
+              {/* Decorative background element for a "tech" feel */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(27, 59, 110, 0.05)_0%,transparent_70%)] pointer-events-none" />
+
+              <div className="relative flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-5xl mx-auto ">
+                {customerLogos.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`
+          group relative flex items-center justify-center
+          p-4 rounded-2xl border border-gray-100 bg-white/80 backdrop-blur-sm
+          shadow-[0_2px_10px_-3px_rgba(0,0,0,0.07)]
+          hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]
+          hover:-translate-y-2 transition-all duration-500
+          ${index % 2 === 0 ? 'mt-12' : 'mb-12'} // This creates the staggered "floating" effect
+        `}
+                  >
+                    {/* Subtle border highlight on hover */}
+                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/10 transition-colors duration-500" />
+
+                    <img
+                      src={item.logo}
+                      alt="Customer Logo"
+                      className="h-16 w-auto object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                    />
+
+                    {/* A tiny "verified" dot that appears on hover */}
+                    <span className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-blue-500 scale-0 group-hover:scale-100 transition-transform duration-300 delay-100" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -285,39 +304,61 @@ export default function Home() {
 
 
       {/* OUR PLATFORMS */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight mb-6">
-              Our Platforms
-            </h2>
-            <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-          </div>
+<section className="pb-24">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Header Section */}
+    <div className="text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight mb-6">
+        Our Platforms
+      </h2>
+      <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
+    </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-16 opacity-0 animate-fadeInUp delay-100">
-            {[
-              { img: "/Assets/Images/metrocorp.webp", alt: "Metrocorp", href: "https://www.metrocorp.net/" },
-              { img: "https://th.bing.com/th/id/OIP.ct6sNfeRE_eChwh-aFxfwQAAAA?w=148&h=150&c=7&r=0&o=7&pid=1.7&rm=3", alt: "mCentre", href: "https://mcentre.lk/" },
-              { img: "/Assets/Images/metropolitan.webp", alt: "Metropolitan", href: "https://metropolitan.lk/" }
-            ].map((platform, i) => (
-              <Link
-                key={i}
-                href={platform.href}
-                target="_blank"
-                className="group relative p-8 transition-all duration-300 hover:-translate-y-3"
-              >
-                <img
-                  src={platform.img}
-                  alt={platform.alt}
-                  className="h-20 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="relative overflow-hidden pt-12 pb-12">
+      {/* Decorative background glow for a "new" tech feel */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)] pointer-events-none" />
 
-    
+      {/* Staggered Floating Grid */}
+      <div className="relative flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-0 animate-fadeInUp delay-100">
+        {[
+          { img: "https://www.metrocorpgroup.com/web/image/website/6/logo?unique=e6d8511", alt: "Metrocorp", href: "https://www.metrocorp.net/" },
+          { img: "https://media.licdn.com/dms/image/v2/C560BAQFCM7g-fP9IzQ/company-logo_200_200/company-logo_200_200/0/1630664045240?e=2147483647&v=beta&t=PNaC8Yed1qrnA1Il8cFyRzyLJWE3eSaAuCx0WUEsNP8", alt: "mCentre", href: "https://mcentre.lk/" },
+          { img: "https://www.metropolitan.lk/img/metrologo.png", alt: "Metrocorp", href: "https://www.metropolitan.lk/" },
+        ].map((platform, i) => (
+          <a
+            key={i}
+            href={platform.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+              group relative flex items-center justify-center
+              w-64 h-40 md:w-80 md:h-48
+              p-6 rounded-3xl border border-gray-100 bg-white/90 backdrop-blur-md
+              shadow-[0_8px_30px_rgb(0,0,0,0.04)]
+              hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]
+              hover:-translate-y-4 transition-all duration-500 ease-out
+              ${i % 2 === 0 ? 'mt-12' : 'mb-12'} 
+            `}
+          >
+            {/* Inner hover glow */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Animated corner accent */}
+            <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary group-hover:scale-150 transition-all duration-300" />
+
+            <img
+              src={platform.img}
+              alt={platform.alt}
+              className="relative h-24 md:h-28 w-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+
       {/* WHY CHOOSE US - MODERN BENTO VERSION WITH IMAGES */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
