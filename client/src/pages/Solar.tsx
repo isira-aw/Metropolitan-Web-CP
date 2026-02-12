@@ -13,9 +13,9 @@ import { Badge } from "@/components/ui/badge";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Solar() {
-  const { data: projects, isLoading } = useCaseStudies({ division: "Solar", limit: 3 });
+  const { data: projects, isLoading } = useCaseStudies({ division: "SOLAR", limit: 3 });
 
-  const { data: testimonialsData } = useTestimonials({ division: "Solar" });
+  const { data: testimonialsData } = useTestimonials({ division: "SOLAR" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

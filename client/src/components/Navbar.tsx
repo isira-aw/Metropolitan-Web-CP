@@ -48,8 +48,8 @@ export function Navbar() {
     <nav
       className={cn(
         "fixed w-full z-50 transition-all duration-500 ease-out",
-        scrolled 
-          ? "bg-white shadow-2xl border-b-2 border-[#C90815]/10" 
+        scrolled
+          ? "bg-white shadow-2xl border-b-2 border-[#C90815]/10"
           : "bg-gradient-to-b from-black/80 via-black/60 to-transparent backdrop-blur-sm"
       )}
     >
@@ -57,7 +57,7 @@ export function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo with Advanced Animation */}
           <Link href="/" className="flex-shrink-0 flex items-center gap-3 group">
-            <div className="relative">
+            {/* <div className="relative">
               <div className={cn(
                 "absolute inset-0 rounded-lg blur-md transition-all duration-500 group-hover:blur-lg",
                 scrolled 
@@ -72,7 +72,20 @@ export function Navbar() {
               )}>
                 M
               </div>
-            </div>
+
+              
+            </div> */}
+            <img
+              src="/metrologo.png"
+              alt="Metro Logo"
+              className={cn(
+                "relative w-10 h-10 rounded-lg object-contain",
+                scrolled
+                  ? "shadow-lg"
+                  : "shadow-xl"
+              )}
+            />
+
             <div className="flex flex-col -space-y-1">
               <span className={cn(
                 "font-black text-xl tracking-tighter transition-all duration-500 group-hover:tracking-tight",
@@ -94,18 +107,18 @@ export function Navbar() {
                 <div className={cn(
                   "relative px-4 py-2 text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer group",
                   location === item.href
-                    ? scrolled 
-                      ? "text-[#C90815]" 
+                    ? scrolled
+                      ? "text-[#C90815]"
                       : "text-white"
                     : scrolled
-                    ? "text-black/70 hover:text-[#144C94]"
-                    : "text-white/80 hover:text-white"
+                      ? "text-black/70 hover:text-[#144C94]"
+                      : "text-white/80 hover:text-white"
                 )}>
                   {item.label}
                   <div className={cn(
                     "absolute bottom-0 left-0 h-0.5 transition-all duration-300 ease-out",
-                    location === item.href 
-                      ? "w-full bg-gradient-to-r from-[#C90815] to-[#144C94]" 
+                    location === item.href
+                      ? "w-full bg-gradient-to-r from-[#C90815] to-[#144C94]"
                       : "w-0 group-hover:w-full bg-gradient-to-r from-[#144C94] to-[#C90815]"
                   )} />
                 </div>
@@ -119,12 +132,12 @@ export function Navbar() {
                 className={cn(
                   "px-4 py-2 text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer flex items-center gap-1 group",
                   location.startsWith("/divisions")
-                    ? scrolled 
-                      ? "text-[#C90815]" 
+                    ? scrolled
+                      ? "text-[#C90815]"
                       : "text-white"
                     : scrolled
-                    ? "text-black/70 hover:text-[#144C94]"
-                    : "text-white/80 hover:text-white"
+                      ? "text-black/70 hover:text-[#144C94]"
+                      : "text-white/80 hover:text-white"
                 )}
               >
                 Divisions
@@ -135,7 +148,7 @@ export function Navbar() {
                 <div className={cn(
                   "absolute bottom-0 left-0 h-0.5 transition-all duration-300 ease-out",
                   location.startsWith("/divisions") || divisionsOpen
-                    ? "w-full bg-gradient-to-r from-[#C90815] to-[#144C94]" 
+                    ? "w-full bg-gradient-to-r from-[#C90815] to-[#144C94]"
                     : "w-0 group-hover:w-full bg-gradient-to-r from-[#144C94] to-[#C90815]"
                 )} />
               </button>
@@ -143,21 +156,21 @@ export function Navbar() {
               {/* Divisions Dropdown */}
               <div className={cn(
                 "absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border-2 border-[#144C94]/10 overflow-hidden transition-all duration-300 origin-top",
-                divisionsOpen 
-                  ? "opacity-100 scale-100 translate-y-0" 
+                divisionsOpen
+                  ? "opacity-100 scale-100 translate-y-0"
                   : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
               )}>
                 <div className="p-2">
                   {DIVISIONS.map((div, idx) => (
-                    <Link 
-                      key={div} 
+                    <Link
+                      key={div}
                       href={DIVISION_PATHS[div] || `/divisions/${div.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}
                     >
                       <div className={cn(
                         "px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between group cursor-pointer",
                         "hover:bg-gradient-to-r hover:from-[#C90815]/5 hover:to-[#144C94]/5 hover:translate-x-1"
                       )}
-                      style={{ transitionDelay: `${idx * 30}ms` }}>
+                        style={{ transitionDelay: `${idx * 30}ms` }}>
                         <span className="font-semibold text-black/80 group-hover:text-[#144C94] transition-colors">
                           {div}
                         </span>
@@ -171,10 +184,10 @@ export function Navbar() {
 
             {/* CTA Button */}
             <Link href="/contact">
-                              <button className="relative px-6 py-2.5 bg-[#C90815] text-white font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
-                  <span className="relative z-10">Get a Quote</span>
-                  <div className="absolute inset-0 bg-[#144C94] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                </button>
+              <button className="relative px-6 py-2.5 bg-[#C90815] text-white font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
+                <span className="relative z-10">Get a Quote</span>
+                <div className="absolute inset-0 bg-[#144C94] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              </button>
             </Link>
           </div>
 
@@ -184,8 +197,8 @@ export function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className={cn(
                 "p-3 rounded-xl transition-all duration-300 relative overflow-hidden group",
-                scrolled 
-                  ? "bg-gradient-to-br from-[#C90815]/10 to-[#144C94]/10 text-black hover:from-[#C90815]/20 hover:to-[#144C94]/20" 
+                scrolled
+                  ? "bg-gradient-to-br from-[#C90815]/10 to-[#144C94]/10 text-black hover:from-[#C90815]/20 hover:to-[#144C94]/20"
                   : "bg-white/10 backdrop-blur-md text-white hover:bg-white/20"
               )}
             >
@@ -203,8 +216,8 @@ export function Navbar() {
       {/* Mobile Menu */}
       <div className={cn(
         "lg:hidden absolute top-full left-0 w-full bg-white border-b-4 border-[#C90815] shadow-2xl overflow-hidden transition-all duration-500 ease-out origin-top",
-        isOpen 
-          ? "max-h-screen opacity-100 scale-y-100" 
+        isOpen
+          ? "max-h-screen opacity-100 scale-y-100"
           : "max-h-0 opacity-0 scale-y-0"
       )}>
         <div className="px-4 py-6 space-y-2 max-h-[calc(100vh-6rem)] overflow-y-auto">
@@ -225,11 +238,11 @@ export function Navbar() {
               divisionsOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
             )}>
               {DIVISIONS.map((div, idx) => (
-                <Link 
-                  key={div} 
+                <Link
+                  key={div}
                   href={DIVISION_PATHS[div] || `/divisions/${div.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}
                 >
-                  <div 
+                  <div
                     className="pl-8 pr-4 py-3 rounded-lg text-black/70 font-semibold hover:bg-gradient-to-r hover:from-[#C90815]/5 hover:to-[#144C94]/5 hover:text-[#144C94] hover:translate-x-2 transition-all duration-200 flex items-center justify-between group"
                     style={{ transitionDelay: divisionsOpen ? `${idx * 40}ms` : '0ms' }}
                   >
@@ -251,8 +264,8 @@ export function Navbar() {
               <div
                 className={cn(
                   "px-4 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-between group",
-                  location === item.href 
-                    ? "bg-gradient-to-r from-[#C90815] to-[#144C94] text-white shadow-lg" 
+                  location === item.href
+                    ? "bg-gradient-to-r from-[#C90815] to-[#144C94] text-white shadow-lg"
                     : "text-black/70 hover:bg-gradient-to-r hover:from-[#C90815]/5 hover:to-[#144C94]/5 hover:text-[#144C94] hover:translate-x-2"
                 )}
                 style={{ transitionDelay: isOpen ? `${(idx + DIVISIONS.length) * 40}ms` : '0ms' }}
