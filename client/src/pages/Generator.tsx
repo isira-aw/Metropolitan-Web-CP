@@ -431,10 +431,7 @@ export default function Generator() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-3 animate-in slide-in-from-left-10 fade-in duration-700">
-              <Badge className="mb-4 bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 border-blue-500/30">
-                <Zap className="w-3 h-3 mr-1" />
-                Department of Generators
-              </Badge>
+
               <h1 className="text-6xl md:text-7xl font-display font-bold text-white mb-6">
                 Power
                 <span className="text-blue-400"> Generation</span> Solutions
@@ -443,14 +440,7 @@ export default function Generator() {
                 Specializing in comprehensive solutions for power generation systems. Our experienced
                 engineers and technicians deliver reliable and efficient power for a wide range of applications.
               </p>
-              <div className="flex gap-4">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                  Get a Quote
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20">
-                  Our Services
-                </Button>
-              </div>
+
             </div>
 
             
