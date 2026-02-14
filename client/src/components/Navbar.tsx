@@ -265,7 +265,7 @@ export function Navbar() {
                 className={cn(
                   "px-4 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-between group",
                   location === item.href
-                    ? "bg-gradient-to-r from-[#C90815] to-[#144C94] text-white shadow-lg"
+                    ? "bg-gradient-to-r from-[#ffffff] to-[#144C94] text-[#c90815] shadow-lg"
                     : "text-black/70 hover:bg-gradient-to-r hover:from-[#C90815]/5 hover:to-[#144C94]/5 hover:text-[#144C94] hover:translate-x-2"
                 )}
                 style={{ transitionDelay: isOpen ? `${(idx + DIVISIONS.length) * 40}ms` : '0ms' }}
@@ -281,7 +281,7 @@ export function Navbar() {
           {/* Mobile CTA */}
           <div className="pt-6">
             <Link href="/contact">
-              <Button className="w-full bg-gradient-to-r from-[#C90815] to-[#144C94] text-white font-bold rounded-xl py-6 text-base shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 group">
+              <Button className="w-full bg-[#144C94] text-white font-bold rounded-xl py-6 text-base shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 group">
                 Get a Quote
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
