@@ -108,18 +108,18 @@ export function Navbar() {
                   "relative px-4 py-2 text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer group",
                   location === item.href
                     ? scrolled
-                      ? "text-[#C90815]"
+                      ? "text-[#144C94]"
                       : "text-white"
                     : scrolled
-                      ? "text-black/70 hover:text-[#144C94]"
+                      ? "text-black/70 hover:text-[#C90815]"
                       : "text-white/80 hover:text-white"
                 )}>
                   {item.label}
                   <div className={cn(
                     "absolute bottom-0 left-0 h-0.5 transition-all duration-300 ease-out",
                     location === item.href
-                      ? "w-full bg-gradient-to-r from-[#C90815] to-[#144C94]"
-                      : "w-0 group-hover:w-full bg-gradient-to-r from-[#144C94] to-[#C90815]"
+                      ? "w-full bg-gradient-to-r from-[#ffffff] to-[#144C94]"
+                      : "w-0 group-hover:w-full bg-gradient-to-r from-[#144C94] to-[#ffffff]"
                   )} />
                 </div>
               </Link>
@@ -133,10 +133,10 @@ export function Navbar() {
                   "px-4 py-2 text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer flex items-center gap-1 group",
                   location.startsWith("/divisions")
                     ? scrolled
-                      ? "text-[#C90815]"
+                      ? "text-[#144C94]"
                       : "text-white"
                     : scrolled
-                      ? "text-black/70 hover:text-[#144C94]"
+                      ? "text-black/70 hover:text-[#C90815]"
                       : "text-white/80 hover:text-white"
                 )}
               >
@@ -148,8 +148,8 @@ export function Navbar() {
                 <div className={cn(
                   "absolute bottom-0 left-0 h-0.5 transition-all duration-300 ease-out",
                   location.startsWith("/divisions") || divisionsOpen
-                    ? "w-full bg-gradient-to-r from-[#C90815] to-[#144C94]"
-                    : "w-0 group-hover:w-full bg-gradient-to-r from-[#144C94] to-[#C90815]"
+                    ? "w-full bg-gradient-to-r from-[#ffffff] to-[#144C94]"
+                    : "w-0 group-hover:w-full bg-gradient-to-r from-[#144C94] to-[#ffffff]"
                 )} />
               </button>
 
@@ -184,9 +184,9 @@ export function Navbar() {
 
             {/* CTA Button */}
             <Link href="/contact">
-              <button className="relative px-6 py-2.5 bg-[#C90815] text-white font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
+              <button className="relative px-6 py-2.5 bg-[#144C94] text-white font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
                 <span className="relative z-10">Get a Quote</span>
-                <div className="absolute inset-0 bg-[#144C94] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
               </button>
             </Link>
           </div>

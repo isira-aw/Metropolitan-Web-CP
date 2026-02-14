@@ -31,10 +31,9 @@ export function InquiryForm({ division }: { division?: string }) {
   }
 
   return (
-    <Card className="shadow-2xl shadow-primary/5 border-none overflow-hidden">
-      <div className="h-2 bg-gradient-to-r from-primary to-secondary" />
+    <Card className="shadow-lg border border-gray-100 rounded-lg overflow-hidden">
       <CardContent className="p-8">
-        <h3 className="text-2xl font-display font-bold text-secondary mb-6">Send us a Message</h3>
+        <h3 className="text-xl font-bold text-[#212529] mb-6">Send us a Message</h3>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -45,7 +44,7 @@ export function InquiryForm({ division }: { division?: string }) {
                   <FormItem>
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} className="h-12 bg-muted/30 border-muted-foreground/20 focus:border-primary focus:ring-primary/10" />
+                      <Input placeholder="John Doe" {...field} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -58,7 +57,7 @@ export function InquiryForm({ division }: { division?: string }) {
                   <FormItem>
                     <FormLabel>Email Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="john@company.com" {...field} className="h-12 bg-muted/30 border-muted-foreground/20 focus:border-primary focus:ring-primary/10" />
+                      <Input placeholder="john@company.com" {...field} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -74,7 +73,7 @@ export function InquiryForm({ division }: { division?: string }) {
                   <FormItem>
                     <FormLabel>Phone (Optional)</FormLabel>
                     <FormControl>
-                      <Input placeholder="+1 (555) 000-0000" {...field} value={field.value || ''} className="h-12 bg-muted/30 border-muted-foreground/20 focus:border-primary focus:ring-primary/10" />
+                      <Input placeholder="+1 (555) 000-0000" {...field} value={field.value || ''} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -87,7 +86,7 @@ export function InquiryForm({ division }: { division?: string }) {
                   <FormItem>
                     <FormLabel>Subject</FormLabel>
                     <FormControl>
-                      <Input placeholder="Project Inquiry" {...field} value={field.value || ''} className="h-12 bg-muted/30 border-muted-foreground/20 focus:border-primary focus:ring-primary/10" />
+                      <Input placeholder="Project Inquiry" {...field} value={field.value || ''} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -104,7 +103,7 @@ export function InquiryForm({ division }: { division?: string }) {
                   <FormControl>
                     <Textarea
                       placeholder="Tell us about your project requirements..."
-                      className="min-h-[120px] bg-muted/30 border-muted-foreground/20 focus:border-primary focus:ring-primary/10 resize-none"
+                      className="min-h-[120px] bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10 resize-none"
                       {...field}
                     />
                   </FormControl>
@@ -115,7 +114,7 @@ export function InquiryForm({ division }: { division?: string }) {
 
             <Button
               type="submit"
-              className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-full"
+              className="w-full h-12 text-base font-medium bg-[#144A92] hover:bg-[#CB0816] shadow-md rounded-lg transition-colors duration-200"
               disabled={mutation.isPending}
             >
               {mutation.isPending ? (
