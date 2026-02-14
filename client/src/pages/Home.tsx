@@ -1,16 +1,16 @@
 import { Link } from "wouter";
-import { ArrowRight, Zap, Users, Award, Clock, Quote } from "lucide-react";
-
+import { ArrowRight, Zap, Users, Award, Clock, Quote, CheckCircle, Sun, Battery, Shield, Activity, Leaf, Play, Check } from "lucide-react";
+import { motion } from 'framer-motion';
 import { Footer } from "@/components/Footer";
-import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { InquiryForm } from "@/components/InquiryForm";
 import { Button } from "@/components/ui/button";
 import { useCaseStudies } from "@/hooks/use-case-studies";
 import { Card } from "@/components/ui/card";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { Navbar } from "@/components/Navbar";
 import { useTestimonials } from "@/hooks/use-testimonials";
+import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
 
 export default function Home() {
   const { data: latestProjects } = useCaseStudies({ limit: 3 });
@@ -24,448 +24,434 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const customerLogos = [
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/1.png', link: 'https://www.google.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/2.png', link: 'https://www.microsoft.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/3.png', link: 'https://www.amazon.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/4.png', link: 'https://www.netflix.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/5.png', link: 'https://www.google.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/7.png', link: 'https://www.amazon.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/8.png', link: 'https://www.netflix.com' },
-      { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
+  // Colors based on user preference
+  const COLORS = {
+    primary: "#6EC1E4",      // Light Blue (as specified)
+    secondary: "#144A92",   // Dark Blue (replacing green accent)
+    dark: "#060606",
+    gray: "#7A7A7A",
+    text: "#424242"
+  };
+
+  const divisions = [
+    {
+      name: "Central AC",
+      description: "Advanced climate control systems for commercial and industrial spaces",
+      icon: Activity,
+      color: COLORS.primary,
+      link: "/divisions/central-ac"
+    },
+    {
+      name: "Elevators",
+      description: "Vertical transportation solutions with cutting-edge safety features",
+      icon: Zap,
+      color: COLORS.secondary,
+      link: "/divisions/elevators"
+    },
+    {
+      name: "Fire Protection",
+      description: "Comprehensive fire safety and suppression systems",
+      icon: Shield,
+      color: "#61CE70",
+      link: "/divisions/fire-protection"
+    },
+    {
+      name: "Generators",
+      description: "Reliable backup power solutions for uninterrupted operations",
+      icon: Battery,
+      color: COLORS.gray,
+      link: "/divisions/generator"
+    },
+    {
+      name: "ELV Systems",
+      description: "Extra low voltage systems including security and automation",
+      icon: Award,
+      color: COLORS.secondary,
+      link: "/divisions/elv"
+    },
+    {
+      name: "Solar Energy",
+      description: "Sustainable solar power solutions for a greener future",
+      icon: Sun,
+      color: "#61CE70",
+      link: "/divisions/solar"
+    }
   ];
 
-  return (
-    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden scroll-smooth">
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes fadeInRight {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-        
-        .animate-fadeInUp {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .animate-fadeInLeft {
-          animation: fadeInLeft 0.8s ease-out forwards;
-        }
-        
-        .animate-fadeInRight {
-          animation: fadeInRight 0.8s ease-out forwards;
-        }
-        
-        .animate-scaleIn {
-          animation: scaleIn 0.6s ease-out forwards;
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        
-        html {
-          scroll-behavior: smooth;
-        }
-      `}</style>
+  const features = [
+    {
+      title: "Sustainable Solutions",
+      description: "Eco-friendly technologies that reduce environmental impact while maximizing efficiency",
+      icon: Leaf,
+      stat: "40%",
+      statLabel: "Energy Savings"
+    },
+    {
+      title: "Expert Team",
+      description: "Certified professionals with decades of combined industry experience",
+      icon: Users,
+      stat: "65+",
+      statLabel: "Years Experience"
+    },
+    {
+      title: "Quality Assured",
+      description: "ISO certified processes ensuring the highest standards of delivery",
+      icon: Award,
+      stat: "500+",
+      statLabel: "Projects Completed"
+    },
+    {
+      title: "24/7 Support",
+      description: "Round-the-clock technical assistance for peace of mind",
+      icon: Clock,
+      stat: "24/7",
+      statLabel: "Customer Support"
+    }
+  ];
 
+  const stats = [
+    { number: "65+", label: "Years of Excellence" },
+    { number: "500+", label: "Projects Completed" },
+    { number: "200+", label: "Expert Engineers" },
+    { number: "24/7", label: "Support Available" }
+  ];
+
+  // Custom Button Template
+const ButtonTemplate = ({ children, href, isArrow }: { children: ReactNode; href: string; isArrow?: boolean }) => (
+  <Link href={href}>
+    <button className="relative px-6 py-2.5 bg-[#144C94] mt-6 text-white font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
+      {/* Content Container */}
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        {children}
+        {isArrow && (
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
+        )}
+      </span>
+
+      {/* Hover Slide Background */}
+      <div className="absolute inset-0 bg-[#C90815] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+    </button>
+  </Link>
+);
+
+  return (
+    <div className="min-h-screen bg-white font-body text-[#424242] overflow-x-hidden">
       <Navbar />
 
-      {/* HERO SECTION */}
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+      {/* HERO SECTION - Full Screen with Geometric Cut */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#060606]">
+
+        {/* Background Image with Parallax */}
         <div
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
+          className="absolute inset-0 z-0"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')`,
-            transform: `scale(1.1) translateY(${scrollY * 0.5}px)`
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            transform: `translateY(${scrollY * 0.3}px)`
           }}
         />
-        <div className="absolute inset-0 z-10 bg-secondary/80" />
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-        {/* Animated shapes */}
-        <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        {/* Multi-layered Overlays for Depth */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-br from-[#060606] via-[#060606]/80 to-transparent" />
+        <div className="absolute inset-0 z-10 bg-[#144A92]/10 mix-blend-overlay" />
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
-          <div className="opacity-0 animate-fadeInUp">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight tracking-tight">
-              <span className="text-primary">Metropolitan</span>
+        {/* The "Cut" Shape - CSS Clip Path */}
+        <div
+          className="absolute bottom-0 left-0 w-full h-24 bg-white z-30"
+          style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 0)' }}
+        />
+
+        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+          <div className="max-w-4xl"> {/* Left-aligned for a more modern corporate look */}
+
+
+            {/* Main Heading */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading text-white mb-8 leading-[1.1] tracking-tight">
+              <span className="relative">
+                Metropolitan
+                <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C90815]" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" strokeWidth="2" fill="transparent" />
+                </svg>
+              </span>
               <br />
-              <span className="text-white">Technologies</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6EC1E4] to-[#144A92]">
+                Technologies
+              </span>
             </h1>
-          </div>
 
-          <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12 opacity-0 animate-fadeInUp delay-200 leading-relaxed">
-            Engineering excellence across six core departments: Central AC, Elevators, Fire Protection, Generators, ELV & Solar
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-fadeInUp delay-300">
-            <Link href="/case-studies">
-              <Button size="lg" className="h-14 px-8 rounded-full bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 transition-transform hover:scale-105 hover:bg-primary/90">
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-6">
+              <ButtonTemplate href="/case-studies">
                 Explore Projects
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="h-14 px-8 rounded-full border-2 border-white text-white hover:bg-white hover:text-secondary backdrop-blur-sm bg-white/10 transition-transform hover:scale-105 font-bold text-lg">
-                Contact Us
-              </Button>
-            </Link>
-          </div>
+              </ButtonTemplate>
 
-          {/* Stats banner */}
-          {/* <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto opacity-0 animate-fadeInUp delay-400">
-            {[
-              { num: "65+", label: "Years Experience" },
-              { num: "500+", label: "Projects Completed" },
-              { num: "24/7", label: "Support Available" }
-            ].map((stat, i) => (
-              <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2">{stat.num}</div>
-                <div className="text-white/80 text-sm md:text-base">{stat.label}</div>
-              </div>
-            ))}
-          </div> */}
+              <Link href="/contact" className="group flex mt-6 items-center gap-3 text-white font-heading font-semibold text-lg">
+                <span className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white/10 transition-all">
+                  <Play className="w-4 h-4 fill-white" />
+                </span>
+                Watch Showreel
+              </Link>
+            </div>
+          </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 opacity-0 animate-fadeInUp delay-500">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce" />
-          </div>
+        {/* Bottom Decorative Number */}
+        <div className="absolute bottom-20 right-12 z-20 hidden lg:block">
+          <span className="text-[12rem] font-heading text-white/5 leading-none select-none">
+            01
+          </span>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-40">
+          <span className="text-white/80 text-xs font-accent tracking-[0.2em] uppercase">
+            Engineering Excellence Since 1958
+          </span>
         </div>
       </section>
 
-      {/* MISSION & VISION */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Our Mission & Vision" subtitle="" />
+      {/* DIVISIONS SHOWCASE - Icon as Background + Red Accent Line */}
+      <section className="py-32 bg-[#FAFBFC] overflow-hidden">
+        <div className="max-w-7xl mx-auto lg:px-8">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div className="opacity-0 animate-fadeInLeft delay-100">
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                We offer Work Place and Personal Productivity solutions and services that exceed customer expectations and unparalleled marketing capabilities to our business partners whilst providing our Staff the opportunity for personal advancement with performance based recognition and rewards.
-              </p>
-              <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-                Our vision is to build infrastructure that not only meets the needs of today but anticipates the challenges of tomorrow, fostering communities that are resilient, connected, and vibrant.
-              </p>
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
+            <div className="max-w-xl">
+              <span className="text-[#6EC1E4] font-accent tracking-widest uppercase text-sm font-bold mb-4 block">
+                Our Expertise
+              </span>
+              <h2 className="text-4xl md:text-5xl font-heading text-[#060606] leading-tight">
+                Engineering the <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#144A92] to-[#6EC1E4]">
+                  Future of Infrastructure
+                </span>
+              </h2>
+            </div>
 
-              <div className="grid gap-4 mb-10">
-                {[
-                  { icon: "", text: "Powering Progress with Precision" },
-                  { icon: "", text: "Electrical Engineering Excellence" },
-                  { icon: "", text: "Powering the Future Through Expertise" }
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
-                  >
-                    {/* Icon Container with Primary/Accent Interaction */}
-                    <div className="flex h-1 w-5 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-xl group-hover:bg-primary group-hover:text-white transition-colors">
-                      {item.icon}
+            <p className="text-[#7A7A7A] text-lg max-w-md font-body pb-1">
+              Innovative divisions specialized in delivering high-impact, sustainable engineering solutions across global sectors.
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {divisions.map((division, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Link href={division.link} className="group block h-full">
+                  <div className="relative h-full p-6 rounded-xl border border-gray-100 bg-[#F9FAFB] hover:bg-white hover:shadow-xl hover:shadow-[#6EC1E4]/10 transition-all duration-500 ease-out overflow-hidden">
+
+
+                    {/* Hover Accent Line Top */}
+                    <div className="absolute top-0 left-0 w-0 h-0.5 bg-[#144A92] transition-all duration-300 group-hover:w-full rounded-t-xl" />
+
+                    {/* ICON AS BACKGROUND */}
+                    <division.icon
+                      className="absolute -right-16 -bottom-16 w-48 h-48 opacity-[0.2] group-hover:opacity-[0.08] group-hover:scale-110 transition-all duration-500"
+                      style={{ color: division.color }}
+                    />
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <SectionHeaderSmall
+                        title={division.name}
+                        subtitle={division.description}
+                        className="mb-6"
+                      />
+
+
+                      <div className="flex items-center text-[10px] font-bold uppercase tracking-wider text-[#C90815] transform translate-x-[-10px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+                        View Details <ArrowRight className="w-3 h-3 ml-1" />
+                      </div>
                     </div>
 
-                    {/* Text Content */}
-                    <span className="text-lg font-medium text-secondary group-hover:text-primary transition-colors">
-                      {item.text}
-                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ABOUT/FEATURES SECTION - Modern Bento Style */}
+      <section className="py-24 bg-[#FFFFFF] relative overflow-hidden">
+        {/* Subtle Background Decoration */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#144A92] blur-[100px]" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-[#6EC1E4] blur-[120px]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            
+            {/* Left Content Side */}
+            <div className="lg:w-2/5 sticky top-24">
+
+              
+              <h2 className="text-4xl md:text-5xl font-heading text-[#060606] mb-8 leading-[1.1]">
+                Engineering <br /> 
+                <span className="italic font-light">Excellence</span> through <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#144A92] to-[#6EC1E4]">Forward Innovation</span>
+              </h2>
+
+              <p className="text-[#7A7A7A] text-lg font-body leading-relaxed mb-10 max-w-md">
+                We don't just build infrastructure; we engineer sustainable legacies. 
+                Our approach merges classic precision with next-gen technology.
+              </p>
+
+              <div className="space-y-5 mb-10">
+                {[
+                  "Industry-leading technical expertise",
+                  "Sustainable and eco-friendly solutions",
+                  "Comprehensive project management",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <div className="w-8 h-8 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-[#6EC1E4] transition-colors">
+                      <Check className="w-4 h-4 text-[#144A92]" />
+                    </div>
+                    <span className="text-[#424242] font-medium font-body">{item}</span>
                   </div>
                 ))}
               </div>
 
-              <Link href="/about">
-                <Button variant="ghost" className="p-0 text-primary font-bold text-lg h-auto hover:gap-3 transition-all">
-                  Learn More About Us
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
+              <ButtonTemplate href="/about" isArrow={false}>
+                Discover Our Story
+              </ButtonTemplate>
             </div>
 
-            <div className="relative opacity-0 animate-fadeInRight delay-200">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+            {/* Right Features Grid (Bento Style) */}
+            <div className="lg:w-3/5 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {features.map((feature, i) => (
+                <div
+                  key={i}
+                  className={`group relative p-8 rounded-[2rem] transition-all duration-500 hover:-translate-y-2
+                    ${i === 0 ? 'md:col-span-2 bg-[#060606] text-white' : 'bg-[#F8FAFC] border border-gray-100 text-[#060606]'}
+                    ${i === 1 ? 'hover:shadow-2xl hover:shadow-[#144A92]/10' : 'hover:shadow-2xl hover:shadow-[#6EC1E4]/10'}
+                  `}
+                >
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-6
+                    ${i === 0 ? 'bg-white/10 text-[#6EC1E4]' : 'bg-white shadow-sm text-[#144A92]'}
+                  `}>
+                    <feature.icon className="w-6 h-6" />
+                  </div>
+
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-4xl font-heading font-bold tracking-tight">{feature.stat}</span>
+                    <span className={`text-[10px] font-bold uppercase tracking-widest ${i === 0 ? 'text-white/40' : 'text-[#7A7A7A]'}`}>
+                      {feature.statLabel}
+                    </span>
+                  </div>
+
+                  <h3 className={`text-xl font-heading mb-3 ${i === 0 ? 'text-white' : 'text-[#060606]'}`}>
+                    {feature.title}
+                  </h3>
+                  
+                  <p className={`text-sm leading-relaxed ${i === 0 ? 'text-white/60' : 'text-[#7A7A7A]'}`}>
+                    {feature.description}
+                  </p>
+
+                  {/* Decorative element for the dark card */}
+                  {i === 0 && (
+                    <div className="absolute top-0 right-0 p-8 opacity-20">
+                      <div className="w-24 h-24 border-r-2 border-t-2 border-[#6EC1E4] rounded-tr-3xl" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+
+      {/* MISSION & VISION */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Image Side */}
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop"
                   alt="Company site"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-8 -right-8 bg-primary text-white p-8 rounded-2xl shadow-xl max-w-xs hidden md:block">
-                <p className="text-4xl font-display font-bold mb-2">65+</p>
-                <p className="text-sm font-medium opacity-90">Years of delivering excellence across global markets</p>
+            </div>
+
+            {/* Content Side */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-heading text-[#060606] mb-6">
+                Our Mission & Vision
+              </h2>
+              <div className="w-16 h-1 bg-gradient-to-r from-[#6EC1E4] to-[#144A92] rounded-full mb-8" />
+
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-heading text-[#144A92] mb-3"></h3>
+                  <p className="text-[#7A7A7A] font-body leading-relaxed">
+
+                  </p>
+                </div>
+                <SectionHeaderSmall
+                  title="Our Mission"
+                  subtitle="We offer Workplace and Personal Productivity solutions and services that exceed
+                    customer expectations, whilst providing our staff the opportunity for personal
+                    advancement with performance-based recognition and rewards."
+                  className="mb-6"
+                />
+                <SectionHeaderSmall
+                  title="Our Vision"
+                  subtitle="To be the leading provider of innovative and sustainable solutions that empower businesses and individuals to thrive in a rapidly evolving world."
+                  className="mb-6"
+                />
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Trusted Customers */}
-          <div className="mt-32 opacity-0 animate-fadeInUp delay-300">
+
+      {/* TESTIMONIALS */}
+      {testimonialsData && testimonialsData.length > 0 && (
+        <section className="py-24 bg-[#FAFAFA]">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight mb-6">
-                Our Trusted Customers
-              </h3>
-              <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-                We proudly collaborate with industry leaders worldwide
+              <h2 className="text-3xl md:text-4xl font-heading text-[#060606] mb-4">
+                What Our Clients Say
+              </h2>
+              <div className="w-16 h-1 bg-gradient-to-r from-[#6EC1E4] to-[#144A92] mx-auto rounded-full mb-6" />
+              <p className="text-[#7A7A7A] text-lg font-body max-w-2xl mx-auto">
+                Trusted by industry leaders across multiple sectors
               </p>
             </div>
 
-            <div className="relative overflow-hidden">
-              {/* Decorative background element for a "tech" feel */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(27, 59, 110, 0.05)_0%,transparent_70%)] pointer-events-none" />
-
-              <div className="relative flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-5xl mx-auto ">
-                {customerLogos.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`
-          group relative flex items-center justify-center
-          p-4 rounded-2xl border border-gray-100 bg-white/80 backdrop-blur-sm
-          shadow-[0_2px_10px_-3px_rgba(0,0,0,0.07)]
-          hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]
-          hover:-translate-y-2 transition-all duration-500
-          ${index % 2 === 0 ? 'mt-12' : 'mb-12'} // This creates the staggered "floating" effect
-        `}
-                  >
-                    {/* Subtle border highlight on hover */}
-                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/10 transition-colors duration-500" />
-
-                    <img
-                      src={item.logo}
-                      alt="Customer Logo"
-                      className="h-16 w-auto object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                    />
-
-                    {/* A tiny "verified" dot that appears on hover */}
-                    <span className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-blue-500 scale-0 group-hover:scale-100 transition-transform duration-300 delay-100" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* OUR PLATFORMS */}
-<section className="pb-24">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Header Section */}
-    <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight mb-6">
-        Our Platforms
-      </h2>
-      <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-    </div>
-
-    <div className="relative overflow-hidden pt-12 pb-12">
-      {/* Decorative background glow for a "new" tech feel */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)] pointer-events-none" />
-
-      {/* Staggered Floating Grid */}
-      <div className="relative flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-0 animate-fadeInUp delay-100">
-        {[
-          { img: "https://www.metrocorpgroup.com/web/image/website/6/logo?unique=e6d8511", alt: "Metrocorp", href: "https://www.metrocorp.net/" },
-          { img: "https://media.licdn.com/dms/image/v2/C560BAQFCM7g-fP9IzQ/company-logo_200_200/company-logo_200_200/0/1630664045240?e=2147483647&v=beta&t=PNaC8Yed1qrnA1Il8cFyRzyLJWE3eSaAuCx0WUEsNP8", alt: "mCentre", href: "https://mcentre.lk/" },
-          { img: "https://www.metropolitan.lk/img/metrologo.png", alt: "Metrocorp", href: "https://www.metropolitan.lk/" },
-        ].map((platform, i) => (
-          <a
-            key={i}
-            href={platform.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`
-              group relative flex items-center justify-center
-              w-64 h-40 md:w-80 md:h-48
-              p-6 rounded-3xl border border-gray-100 bg-white/90 backdrop-blur-md
-              shadow-[0_8px_30px_rgb(0,0,0,0.04)]
-              hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]
-              hover:-translate-y-4 transition-all duration-500 ease-out
-              ${i % 2 === 0 ? 'mt-12' : 'mb-12'} 
-            `}
-          >
-            {/* Inner hover glow */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            {/* Animated corner accent */}
-            <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary group-hover:scale-150 transition-all duration-300" />
-
-            <img
-              src={platform.img}
-              alt={platform.alt}
-              className="relative h-24 md:h-28 w-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
-            />
-          </a>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-
-      {/* WHY CHOOSE US - MODERN BENTO VERSION WITH IMAGES */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div className="flex-1">
-              <SectionHeader title="Why Metropolitan?" subtitle="" />
-            </div>
-            <p className="text-lg text-muted-foreground max-w-md border-l-4 border-primary pl-6 py-2">
-              We combine industrial-grade power with surgical precision to deliver results that redefine standards.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-[240px]">
-            {[
-              {
-                icon: Zap,
-                title: "Advanced Equipment",
-                desc: "Harnessing state-of-the-art tools and AI-driven tech for superior results.",
-                span: "md:col-span-3 lg:col-span-4",
-                gradient: "from-amber-600/20 to-orange-600/20",
-                img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop"
-              },
-              {
-                icon: Users,
-                title: "Trained Staff",
-                desc: "Expert professionals undergo 200+ hours of specialized training yearly.",
-                span: "md:col-span-3 lg:col-span-4",
-                gradient: "from-blue-600/20 to-indigo-600/20",
-                img: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop"
-              },
-              {
-                icon: Award,
-                title: "Quality Assurance",
-                desc: "Every project passes a 50-point inspection protocol before delivery.",
-                span: "md:col-span-6 lg:col-span-4 row-span-1 md:row-span-2",
-                gradient: "from-emerald-600/20 to-teal-600/20",
-                isLarge: true,
-                img: "https://www.smallbizdaily.com/wp-content/uploads/2021/10/shutterstock_1155561991.jpg"
-              },
-              {
-                icon: Clock,
-                title: "24/7 Priority Support",
-                desc: "Round-the-clock emergency response units always on standby.",
-                span: "md:col-span-6 lg:col-span-8",
-                gradient: "from-purple-600/20 to-fuchsia-600/20",
-                img: "https://media.istockphoto.com/id/1494073880/photo/a-man-holding-icon-virtual-24-7-support-services-for-worldwide-nonstop-and-full-time.jpg?s=170667a&w=0&k=20&c=HoMXtrk5Js-aKnhIfceYqFKvWuFZjgATmWbcVkb1fuQ="
-              }
-            ].map((feature, idx) => (
-              <div
-                key={idx}
-                className={`group relative overflow-hidden rounded-3xl border border-slate-200 p-8 transition-all duration-500 hover:shadow-2xl ${feature.span}`}
-              >
-                {/* 1. Background Image with Zoom Effect */}
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src={feature.img}
-                    alt={feature.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Base Overlay for text legibility */}
-                  <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-70" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/20 to-transparent" />
-                </div>
-
-                {/* 2. Color Tint Overlay (Fades in on hover) */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10`} />
-
-                {/* 3. Content */}
-                <div className="relative z-20 h-full flex flex-col">
-                  <div className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center mb-auto text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                    <feature.icon className="w-6 h-6" />
-                  </div>
-
-                  <div className={feature.isLarge ? "mt-auto" : "mt-8"}>
-                    <h3 className="text-2xl font-bold text-white mb-2">{feature.title}</h3>
-                    <p className="text-white/80 leading-relaxed group-hover:text-white transition-colors duration-300">
-                      {feature.desc}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* TESTIMONIALS */}
-      {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SectionHeader title="What Our Clients Say" subtitle="Trusted by industry leaders across multiple sectors." />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {testimonialsData.slice(0, 6).map((testimonial, i) => (
-                <Card key={testimonial.id} className={`border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 opacity-0 animate-fadeInUp delay-${Math.min(i + 1, 5)}00`}>
-                  <div className="p-8">
-                    <Quote className="w-10 h-10 text-primary/20 mb-4" />
-                    <p className="text-muted-foreground italic mb-6 leading-relaxed">
+                <Card
+                  key={testimonial.id}
+                  className="border-none shadow-md hover:shadow-lg transition-all duration-300 bg-white"
+                >
+                  <div className="p-6">
+                    <Quote className="w-8 h-8 text-[#6EC1E4]/30 mb-4" />
+                    <p className="text-[#7A7A7A] font-body italic mb-6 leading-relaxed">
                       "{testimonial.content}"
                     </p>
-                    <div className="flex items-center gap-3 pt-4 border-t">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
+                    <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                      <div className="w-12 h-12 rounded-full bg-[#6EC1E4]/10 flex items-center justify-center text-[#6EC1E4] font-heading font-bold text-lg">
                         {testimonial.author[0]}
                       </div>
                       <div>
-                        <p className="font-bold text-secondary">{testimonial.author}</p>
-                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                        <p className="font-heading font-semibold text-[#060606]">{testimonial.author}</p>
+                        <p className="text-sm text-[#7A7A7A] font-body">{testimonial.role}</p>
                       </div>
                     </div>
                   </div>
@@ -476,64 +462,77 @@ export default function Home() {
         </section>
       )}
 
+
       {/* LATEST PROJECTS */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Featured Projects" subtitle="Highlighting our recent contributions to the urban landscape" />
-          <Link href="/case-studies" className="hidden lg:flex items-center text-primary font-bold text-lg hover:gap-3 transition-all mb-3">
-            View All Projects
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-heading text-[#060606] mb-2">
+                Featured Projects
+              </h2>
+              <div className="w-16 h-1 bg-gradient-to-r from-[#6EC1E4] to-[#144A92] rounded-full" />
+            </div>
+            <Link href="/case-studies" className="flex items-center text-[#6EC1E4] font-heading font-semibold hover:gap-2 transition-all">
+              View All Projects
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {latestProjects?.data?.map((project, i) => (
-              <div key={project.id} className={`opacity-0 animate-fadeInUp delay-${Math.min(i + 1, 3)}00`}>
-                <CaseStudyCard item={project} />
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {latestProjects?.data?.map((project) => (
+              <CaseStudyCard key={project.id} item={project} />
             )) || (
                 Array(3).fill(0).map((_, i) => (
-                  <div key={i} className="h-[400px] bg-muted animate-pulse rounded-2xl" />
+                  <div key={i} className="h-[350px] bg-gray-100 animate-pulse rounded-xl" />
                 ))
               )}
           </div>
 
-          <div className="mt-12 text-center lg:hidden">
-            <Link href="/case-studies">
-              <Button variant="outline" className="w-full max-w-md h-14 text-lg rounded-full border-2">
-                View All Projects
-              </Button>
-            </Link>
+          <div className="mt-12 text-center md:hidden">
+            <ButtonTemplate href="/case-studies">
+              View All Projects
+            </ButtonTemplate>
           </div>
         </div>
       </section>
 
 
       {/* INQUIRY SECTION */}
-      <section className="py-24 bg-secondary relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
+      <section className="py-24 bg-[#060606] relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#6EC1E4]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#144A92]/5 rounded-full blur-3xl" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="text-white">
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight text-white">
-                Let's Build Something Extraordinary Together
+            <div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-white mb-6">
+                Let's Build Something <span className="text-[#6EC1E4]">Extraordinary</span> Together
               </h2>
-              <p className="text-white/80 text-lg mb-8 leading-relaxed">
-                Whether you have a complex infrastructure project or a sustainable residential development in mind, our team is ready to bring your vision to life.
+              <p className="text-white/70 text-lg font-body mb-8 leading-relaxed">
+                Whether you have a complex infrastructure project or a sustainable development in mind,
+                our team is ready to bring your vision to life.
               </p>
-              <ul className="space-y-4 mb-10">
-                {["Free consultation and project estimation", "Comprehensive feasibility studies", "End-to-end project management"].map((item, i) => (
+
+              <ul className="space-y-4 mb-8">
+                {[
+                  "Free consultation and project estimation",
+                  "Comprehensive feasibility studies",
+                  "End-to-end project management"
+                ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
-                      <ArrowRight className="w-3 h-3" />
+                    <div className="w-6 h-6 rounded-full bg-[#144A92] flex items-center justify-center shrink-0">
+                      <CheckCircle className="w-3 h-3 text-white" />
                     </div>
-                    <span className="font-medium">{item}</span>
+                    <span className="text-white/80 font-body">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <h3 className="text-xl font-heading text-[#060606] mb-6">Send Us an Inquiry</h3>
               <InquiryForm />
             </div>
           </div>
@@ -542,57 +541,51 @@ export default function Home() {
 
 
       {/* BLOG & CONTACT SECTIONS */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <section className="py-24 bg-[#FAFAFA]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-8">
           {/* Blog Section */}
-          <div className="flex flex-col lg:flex-row items-center gap-12 bg-muted/30 rounded-3xl p-12 shadow-lg">
+          <div className="flex flex-col lg:flex-row items-center gap-12 bg-white rounded-2xl p-8 lg:p-12 shadow-sm">
             <div className="flex-1 space-y-6 text-center lg:text-left">
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight">
+              <h3 className="text-2xl md:text-3xl font-heading text-[#060606]">
                 What Have We Done?
               </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed pb-4">
+              <p className="text-[#7A7A7A] font-body leading-relaxed">
                 Showcasing our projects and engineering achievements across diverse industries
               </p>
-              <Link href="/blog">
-                <Button size="lg" className="h-14 px-8  rounded-full bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 transition-transform hover:scale-105 hover:bg-primary/90">
-                  Our Blog
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
+              <ButtonTemplate href="/news" isArrow={true}>
+                Our Blog
+              </ButtonTemplate>
             </div>
             <div className="flex-1 w-full">
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+              <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
                 <img
                   src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop"
                   alt="Engineering project"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
           </div>
 
           {/* Contact Section */}
-          <div className="flex flex-col lg:flex-row-reverse items-center gap-12 bg-muted/30 rounded-3xl p-12 shadow-lg">
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-12 bg-white rounded-2xl p-8 lg:p-12 shadow-sm">
             <div className="flex-1 space-y-6 text-center lg:text-left">
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight">
+              <h3 className="text-2xl md:text-3xl font-heading text-[#060606]">
                 Get in Touch
               </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed pb-4">
+              <p className="text-[#7A7A7A] font-body leading-relaxed">
                 Have questions or projects? Let's talk and build something extraordinary together
               </p>
-              <Link href="/contact">
-                <Button size="lg" className="h-14 px-8 rounded-full bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 transition-transform hover:scale-105 hover:bg-primary/90">
-                  Talk to Us
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
+              <ButtonTemplate href="/contact" isArrow={true}>
+                Talk to Us
+              </ButtonTemplate>
             </div>
             <div className="flex-1 w-full">
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+              <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
                 <img
                   src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2070&auto=format&fit=crop"
                   alt="Contact us"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>

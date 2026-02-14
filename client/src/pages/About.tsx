@@ -260,21 +260,6 @@ export default function About() {
             </motion.div>
           ))}
         </div>
-
-        <div className="bg-[#144C94] text-white rounded-3xl py-10 p-12 text-center">
-          <h2 className="text-3xl font-bold font-display mb-10 text-white">Our Core Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white ">
-            {["Safety First", "Sustainability", "Integrity"].map((v, i) => (
-              <div key={i} className="flex flex-col items-center">
-                {/* Icon Container with White Background and Red Icon */}
-                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg">
-                  <CheckCircle className="w-8 h-8 text-[#C90815]" />
-                </div>
-                <h3 className="text-xl font-bold text-white">{v}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       <section className="bg-slate-50 py-4">
