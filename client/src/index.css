@@ -5,10 +5,15 @@
 @tailwind utilities;
 
 :root {
-  /* Corporate Metropolitan Palette */
+  /* ── Corporate Metropolitan Brand Colors ── */
   /* Primary Red: #CB0816 -> hsl(356, 92%, 41%) */
   /* Secondary Blue: #144A92 -> hsl(214, 76%, 33%) */
-  
+  /* Brand White: #FFFFFF */
+  --metro-blue: #144A92;
+  --metro-red: #CB0816;
+  --metro-white: #ffffff;
+  --metro-light-blue: #6EC1E4;
+
   --background: 0 0% 100%;
   --foreground: 215 28% 17%; /* Dark Blue-Grey for text */
 
@@ -96,6 +101,27 @@
 
 .container-width {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* ── Reusable Brand Button ── */
+.btn-metro {
+  @apply relative inline-flex items-center gap-2 px-6 py-2.5 bg-secondary text-white font-bold text-sm rounded-full border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden;
+}
+.btn-metro .btn-hover-fill {
+  @apply absolute inset-0 bg-primary translate-x-full group-hover:translate-x-0 transition-transform duration-300;
+}
+
+/* ── Section Header Divider ── */
+.section-divider {
+  @apply flex items-center gap-2 justify-center mt-1;
+}
+.section-divider::before {
+  content: '';
+  @apply block h-[3px] w-12 bg-secondary rounded-full;
+}
+.section-divider::after {
+  content: '';
+  @apply block h-[3px] w-3 bg-primary rounded-full;
 }
 
 /* Animation utilities */
