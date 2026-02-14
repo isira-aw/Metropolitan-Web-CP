@@ -479,7 +479,7 @@ export default function Home() {
 
 
       {/* WHY CHOOSE US - MODERN BENTO VERSION WITH IMAGES */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-12 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -606,7 +606,7 @@ export default function Home() {
       )}
 
       {/* LATEST PROJECTS */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
           <div className="text-center">
@@ -644,7 +644,7 @@ export default function Home() {
 
 
       {/* INQUIRY SECTION */}
-      <section className="py-24 bg-secondary relative overflow-hidden">
+      <section className="py-12 bg-secondary relative overflow-hidden">
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
 
@@ -677,7 +677,7 @@ export default function Home() {
 
       <section>
         {/* Trusted Customers */}
-        <div className="mt-24 opacity-0 animate-fadeInUp delay-300">
+        <div className="pb-12 pt-24 opacity-0 animate-fadeInUp delay-300">
           {/* Header Section */}
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight ">
