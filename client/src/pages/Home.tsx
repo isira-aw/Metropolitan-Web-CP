@@ -1,6 +1,6 @@
 import { Link } from "wouter";
-import { ArrowRight, Zap, Users, Award, Clock, Quote } from "lucide-react";
-
+import { ArrowRight, Zap, Users, Award, Clock, Quote, Eye, Target } from "lucide-react";
+import { motion } from "framer-motion";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
@@ -12,29 +12,77 @@ import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
+const customerLogos = [
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/1.png', link: 'https://www.google.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/2.png', link: 'https://www.microsoft.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/3.png', link: 'https://www.amazon.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/4.png', link: 'https://www.netflix.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/5.png', link: 'https://www.google.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/7.png', link: 'https://www.amazon.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/8.png', link: 'https://www.netflix.com' },
+  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
+
+
+];
+
+const divisions = [
+  {
+    name: "ELV Systems",
+    slug: "elv",
+    image: "https://vallect.com/wp-content/uploads/2024/05/elv-systems-1024x576.webp",
+    description: "Advanced Extra Low Voltage systems for smart building integration and security."
+  },
+  {
+    name: "Central AC",
+    slug: "central-ac",
+    image: "https://airexpert.com/wp-content/uploads/2019/05/Does-the-location-of-your-Central-AC-Unit-Matter-in-Houston.jpg",
+    description: "Efficient climate control solutions designed for large-scale industrial and commercial spaces."
+  },
+  {
+    name: "Fire Detection & Protection",
+    slug: "fire-detection-and-protection",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpkJhZSArPiBB38xNktZdQJUTdm6SSfu95Fg&s",
+    description: "State-of-the-art suppression and detection systems to safeguard lives and assets."
+  },
+  {
+    name: "Elevators Division",
+    slug: "elevators-and-travelators",
+    image: "https://www.kyodolift.com/images/Travelator-Consultant.webp",
+    description: "Modern vertical transportation systems focusing on speed, safety, and smooth operation."
+  },
+  {
+    name: "Generator Division",
+    slug: "generator",
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Modern_Steam_Turbine_Generator.jpg",
+    description: "Sustainable energy solutions combining heavy-duty generators with high-efficiency solar tech."
+  },
+  {
+    name: "Solar Division",
+    slug: "solar",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZZk7CdkbvNxCiULOXlImwUqiiiYmL_fihFQ&s",
+    description: "Sustainable energy solutions combining heavy-duty generators with high-efficiency solar tech."
+  }
+];
+
 export default function Home() {
   const { data: latestProjects } = useCaseStudies({ limit: 3 });
   const [scrollY, setScrollY] = useState(0);
 
   const { data: testimonialsData } = useTestimonials({ limit: 6 });
+  const [activeTab, setActiveTab] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % divisions.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const customerLogos = [
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/1.png', link: 'https://www.google.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/2.png', link: 'https://www.microsoft.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/3.png', link: 'https://www.amazon.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/4.png', link: 'https://www.netflix.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/5.png', link: 'https://www.google.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/7.png', link: 'https://www.amazon.com' },
-    { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/8.png', link: 'https://www.netflix.com' },
-      { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
-  ];
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden scroll-smooth">
@@ -130,7 +178,7 @@ export default function Home() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')`,
+            backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPE0nJP6lljVQqlH-etWyDBE50Yo1Z41eFA&s')`,
             transform: `scale(1.1) translateY(${scrollY * 0.5}px)`
           }}
         />
@@ -141,13 +189,45 @@ export default function Home() {
         <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
-          <div className="opacity-0 animate-fadeInUp">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight tracking-tight">
-              <span className="text-primary">Metropolitan</span>
-              <br />
-              <span className="text-white">Technologies</span>
-            </h1>
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
+          <div className="relative">
+            <motion.h1
+              className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 leading-[1.2] tracking-tight"
+            >
+              {/* LINE 1 */}
+              <div className="overflow-hidden">
+                <motion.span
+                  initial={{ y: "105%" }}
+                  animate={{ y: "0%" }}
+                  transition={{
+                    duration: 1,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.2,
+                  }}
+                  className="block leading-[1.2]"
+                  style={{ display: "inline-block" }}
+                >
+                  Metropolitan
+                </motion.span>
+              </div>
+
+              {/* LINE 2 */}
+              <div className="overflow-hidden">
+                <motion.span
+                  initial={{ y: "105%" }}
+                  animate={{ y: "0%" }}
+                  transition={{
+                    duration: 1,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.4,
+                  }}
+                  className="block leading-[1.2] text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#6EC1E4]"
+                  style={{ display: "inline-block" }}
+                >
+                  Technologies
+                </motion.span>
+              </div>
+            </motion.h1>
           </div>
 
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12 opacity-0 animate-fadeInUp delay-200 leading-relaxed">
@@ -155,49 +235,82 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-fadeInUp delay-300">
-            <Link href="/case-studies">
-              <Button size="lg" className="h-14 px-8 rounded-full bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 transition-transform hover:scale-105 hover:bg-primary/90">
-                Explore Projects
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="h-14 px-8 rounded-full border-2 border-white text-white hover:bg-white hover:text-secondary backdrop-blur-sm bg-white/10 transition-transform hover:scale-105 font-bold text-lg">
-                Contact Us
-              </Button>
-            </Link>
-          </div>
 
-          {/* Stats banner */}
-          {/* <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto opacity-0 animate-fadeInUp delay-400">
-            {[
-              { num: "65+", label: "Years Experience" },
-              { num: "500+", label: "Projects Completed" },
-              { num: "24/7", label: "Support Available" }
-            ].map((stat, i) => (
-              <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2">{stat.num}</div>
-                <div className="text-white/80 text-sm md:text-base">{stat.label}</div>
-              </div>
-            ))}
-          </div> */}
+            <Link href="/case-studies">
+              <button className="relative flex items-center gap-2 px-6 py-2.5 bg-[#144C94] text-white font-bold text-sm rounded-full border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
+                <span className="relative z-10">Explore Projects</span>
+                <ArrowRight className="relative z-10 w-5 h-5" />
+                <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+              </button>
+            </Link>
+            <Link href="/case-studies">
+              <button className="relative flex items-center gap-2 px-6 py-2.5 bg-[#144C94] Contact Us text-white font-bold text-sm rounded-full border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
+                <span className="relative z-10">Contact Us</span>
+              </button>
+            </Link>
+
+          </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 opacity-0 animate-fadeInUp delay-500">
+        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 opacity-0 animate-fadeInUp delay-500">
           <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce" />
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 w-full z-30 pointer-events-none rotate-180">
+          <svg
+            viewBox="0 0 1440 120"
+            className="w-full h-[120px]"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="#ffffff"
+              d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,42.7C840,32,960,32,1080,48C1200,64,1320,96,1380,112L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+            />
+          </svg>
+        </div>
+
       </section>
 
       {/* MISSION & VISION */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Our Mission & Vision" subtitle="" />
+          <div className="max-w-7xl mx-auto px-6 text-center">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div className="opacity-0 animate-fadeInLeft delay-100">
+            {/* Top Kicker */}
+            <span className="block text-[#144A92] font-heading text-xl md:text-2xl mb-2 font-medium">
+              Our,
+            </span>
+
+            {/* Masked Image Text */}
+            <div className="relative inline-block">
+              <h2
+                className="text-[12vw] md:text-[7vw] font-black leading-none tracking-tighter uppercase select-none"
+                style={{
+                  backgroundImage: `url('https://ceylontoday.lk/wp-content/uploads/2025/11/Metropolitan-MCentre-opens-modern-showroom-in-Kandy.jpg')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Mission & Vision
+              </h2>
+
+              {/* Subtle Shadow/Depth Overlay (Optional) */}
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-white/10" />
+            </div>
+
+            {/* Optional: Add a subtle animated underline or subtext here */}
+            <div className="mt-8 flex justify-center">
+              <div className="h-1 w-24 bg-gradient-to-r from-[#144A92] to-[#6EC1E4] rounded-full" />
+            </div>
+          </div>
+
+          <div className="items-center mb-20 gap-12 mt-12 lg:mt-20 lg:flex">
+            <div className="opacity-0 animate-fadeInLeft delay-100 text-center">
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 We offer Work Place and Personal Productivity solutions and services that exceed customer expectations and unparalleled marketing capabilities to our business partners whilst providing our Staff the opportunity for personal advancement with performance based recognition and rewards.
               </p>
@@ -205,7 +318,7 @@ export default function Home() {
                 Our vision is to build infrastructure that not only meets the needs of today but anticipates the challenges of tomorrow, fostering communities that are resilient, connected, and vibrant.
               </p>
 
-              <div className="grid gap-4 mb-10">
+              <div className="grid gap-4 mb-10 text-center md:grid-cols-3 max-w-4xl mx-auto">
                 {[
                   { icon: "", text: "Powering Progress with Precision" },
                   { icon: "", text: "Electrical Engineering Excellence" },
@@ -213,7 +326,7 @@ export default function Home() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
+                    className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md  transition-all duration-300"
                   >
                     {/* Icon Container with Primary/Accent Interaction */}
                     <div className="flex h-1 w-5 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-xl group-hover:bg-primary group-hover:text-white transition-colors">
@@ -235,67 +348,69 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="relative opacity-0 animate-fadeInRight delay-200">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                <img
-                  src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop"
-                  alt="Company site"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-8 -right-8 bg-primary text-white p-8 rounded-2xl shadow-xl max-w-xs hidden md:block">
-                <p className="text-4xl font-display font-bold mb-2">65+</p>
-                <p className="text-sm font-medium opacity-90">Years of delivering excellence across global markets</p>
-              </div>
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+          {/* Header Section */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight ">
+              Our Divisions
+            </h2>
+            <div className=
+              "flex items-center gap-2 justify-center">
+              <div className="h-[3px] w-12 bg-[#144A92] rounded-full" />
+              <div className="h-[3px] w-3 bg-[#C90815] rounded-full" />
             </div>
           </div>
 
-          {/* Trusted Customers */}
-          <div className="mt-32 opacity-0 animate-fadeInUp delay-300">
-            <div className="text-center mb-16">
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight mb-6">
-                Our Trusted Customers
+          {/* Navigation Tabs - Added for manual change */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {divisions.map((div, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveTab(idx)}
+                className={`px-4 py-1 text-xs font-bold uppercase tracking-widest rounded-full transition-all border ${activeTab === idx
+                  ? "bg-[#144A92] text-white border-[#144A92]"
+                  : "bg-transparent text-gray-400 border-gray-200 hover:border-[#144A92]"
+                  }`}
+              >
+                {div.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Dynamic Blog Section */}
+          <div className="flex flex-col lg:flex-row items-center gap-12 bg-muted/30 rounded-3xl p-4 shadow-lg transition-all duration-500">
+
+            <div className="flex-1 space-y-6 text-center lg:text-left">
+              <h3 className="text-3xl md:text-4xl   font-display font-bold text-black tracking-tight">
+                {divisions[activeTab].name}
               </h3>
-              <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-                We proudly collaborate with industry leaders worldwide
+              <p className="text-lg text-muted-foreground leading-relaxed pb-4 h-[80px] lg:h-auto">
+                {divisions[activeTab].description}
               </p>
+
+              <Link href={`/divisions/${divisions[activeTab].slug}`}>
+                <button className="relative flex items-center gap-2 px-6 py-2.5 mt-4 bg-[#144C94] text-white font-bold text-sm rounded-full border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
+                  <span className="relative z-10">Explore Division</span>
+                  <ArrowRight className="relative z-10 w-5 h-5" />
+                  <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                </button>
+              </Link>
             </div>
 
-            <div className="relative overflow-hidden">
-              {/* Decorative background element for a "tech" feel */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(27, 59, 110, 0.05)_0%,transparent_70%)] pointer-events-none" />
-
-              <div className="relative flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-5xl mx-auto ">
-                {customerLogos.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`
-          group relative flex items-center justify-center
-          p-4 rounded-2xl border border-gray-100 bg-white/80 backdrop-blur-sm
-          shadow-[0_2px_10px_-3px_rgba(0,0,0,0.07)]
-          hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]
-          hover:-translate-y-2 transition-all duration-500
-          ${index % 2 === 0 ? 'mt-12' : 'mb-12'} // This creates the staggered "floating" effect
-        `}
-                  >
-                    {/* Subtle border highlight on hover */}
-                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/10 transition-colors duration-500" />
-
-                    <img
-                      src={item.logo}
-                      alt="Customer Logo"
-                      className="h-16 w-auto object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                    />
-
-                    {/* A tiny "verified" dot that appears on hover */}
-                    <span className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-blue-500 scale-0 group-hover:scale-100 transition-transform duration-300 delay-100" />
-                  </a>
-                ))}
+            <div className="flex-1 w-full">
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                <img
+                  key={activeTab}
+                  src={divisions[activeTab].image}
+                  alt={divisions[activeTab].name}
+                  className="w-full h-full object-cover animate-in fade-in zoom-in duration-700"
+                />
               </div>
             </div>
           </div>
@@ -304,59 +419,63 @@ export default function Home() {
 
 
       {/* OUR PLATFORMS */}
-<section className="pb-24">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Header Section */}
-    <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight mb-6">
-        Our Platforms
-      </h2>
-      <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-    </div>
+      <section className="py-12 pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header Section */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight ">
+              Our Platforms
+            </h2>
+            <div className=
+              "flex items-center gap-2 justify-center">
+              <div className="h-[3px] w-12 bg-[#144A92] rounded-full" />
+              <div className="h-[3px] w-3 bg-[#C90815] rounded-full" />
+            </div>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Our platforms are designed to empower businesses with cutting-edge technology and seamless integration.
+            </p>
+          </div>
 
-    <div className="relative overflow-hidden pt-12 pb-12">
-      {/* Decorative background glow for a "new" tech feel */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)] pointer-events-none" />
+          <div className="relative overflow-hidden mt-12">
+            {/* Decorative background glow for a "new" tech feel */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)] pointer-events-none" />
 
-      {/* Staggered Floating Grid */}
-      <div className="relative flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-0 animate-fadeInUp delay-100">
-        {[
-          { img: "https://www.metrocorpgroup.com/web/image/website/6/logo?unique=e6d8511", alt: "Metrocorp", href: "https://www.metrocorp.net/" },
-          { img: "https://media.licdn.com/dms/image/v2/C560BAQFCM7g-fP9IzQ/company-logo_200_200/company-logo_200_200/0/1630664045240?e=2147483647&v=beta&t=PNaC8Yed1qrnA1Il8cFyRzyLJWE3eSaAuCx0WUEsNP8", alt: "mCentre", href: "https://mcentre.lk/" },
-          { img: "https://www.metropolitan.lk/img/metrologo.png", alt: "Metrocorp", href: "https://www.metropolitan.lk/" },
-        ].map((platform, i) => (
-          <a
-            key={i}
-            href={platform.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`
+            {/* Staggered Floating Grid */}
+            <div className="relative flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-0 animate-fadeInUp delay-100">
+              {[
+                { img: "https://www.metrocorpgroup.com/web/image/website/6/logo?unique=e6d8511", alt: "Metrocorp", href: "https://www.metrocorp.net/" },
+                { img: "https://media.licdn.com/dms/image/v2/C560BAQFCM7g-fP9IzQ/company-logo_200_200/company-logo_200_200/0/1630664045240?e=2147483647&v=beta&t=PNaC8Yed1qrnA1Il8cFyRzyLJWE3eSaAuCx0WUEsNP8", alt: "mCentre", href: "https://mcentre.lk/" },
+                { img: "https://www.metropolitan.lk/img/metrologo.png", alt: "Metrocorp", href: "https://www.metropolitan.lk/" },
+              ].map((platform, i) => (
+                <a
+                  key={i}
+                  href={platform.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`
               group relative flex items-center justify-center
               w-64 h-40 md:w-80 md:h-48
               p-6 rounded-3xl border border-gray-100 bg-white/90 backdrop-blur-md
               shadow-[0_8px_30px_rgb(0,0,0,0.04)]
               hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]
               hover:-translate-y-4 transition-all duration-500 ease-out
-              ${i % 2 === 0 ? 'mt-12' : 'mb-12'} 
             `}
-          >
-            {/* Inner hover glow */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            {/* Animated corner accent */}
-            <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary group-hover:scale-150 transition-all duration-300" />
+                >
+                  {/* Inner hover glow */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            <img
-              src={platform.img}
-              alt={platform.alt}
-              className="relative h-24 md:h-28 w-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
-            />
-          </a>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+
+                  <img
+                    src={platform.img}
+                    alt={platform.alt}
+                    className="relative h-24 md:h-28 w-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       {/* WHY CHOOSE US - MODERN BENTO VERSION WITH IMAGES */}
@@ -429,9 +548,6 @@ export default function Home() {
 
                 {/* 3. Content */}
                 <div className="relative z-20 h-full flex flex-col">
-                  <div className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center mb-auto text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                    <feature.icon className="w-6 h-6" />
-                  </div>
 
                   <div className={feature.isLarge ? "mt-auto" : "mt-8"}>
                     <h3 className="text-2xl font-bold text-white mb-2">{feature.title}</h3>
@@ -447,9 +563,22 @@ export default function Home() {
       </section>
       {/* TESTIMONIALS */}
       {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-24 bg-white">
+        <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SectionHeader title="What Our Clients Say" subtitle="Trusted by industry leaders across multiple sectors." />
+            {/* Header Section */}
+            <div className="text-center">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight ">
+                What Our Clients Say
+              </h2>
+              <div className=
+                "flex items-center gap-2 justify-center">
+                <div className="h-[3px] w-12 bg-[#144A92] rounded-full" />
+                <div className="h-[3px] w-3 bg-[#C90815] rounded-full" />
+              </div>
+              <p className="text-muted-foreground italic m-6 leading-relaxed">
+                "Trusted by industry leaders across multiple sectors."
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonialsData.slice(0, 6).map((testimonial, i) => (
@@ -479,7 +608,21 @@ export default function Home() {
       {/* LATEST PROJECTS */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Featured Projects" subtitle="Highlighting our recent contributions to the urban landscape" />
+          {/* Header Section */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight ">
+              Featured Projects
+            </h2>
+            <div className=
+              "flex items-center gap-2 justify-center">
+              <div className="h-[3px] w-12 bg-[#144A92] rounded-full" />
+              <div className="h-[3px] w-3 bg-[#C90815] rounded-full" />
+            </div>
+            <p className="text-muted-foreground italic m-6 leading-relaxed">
+              Highlighting our recent contributions to the urban landscape
+            </p>
+          </div>
+
           <Link href="/case-studies" className="hidden lg:flex items-center text-primary font-bold text-lg hover:gap-3 transition-all mb-3">
             View All Projects
             <ArrowRight className="ml-2 w-5 h-5" />
@@ -495,14 +638,6 @@ export default function Home() {
                   <div key={i} className="h-[400px] bg-muted animate-pulse rounded-2xl" />
                 ))
               )}
-          </div>
-
-          <div className="mt-12 text-center lg:hidden">
-            <Link href="/case-studies">
-              <Button variant="outline" className="w-full max-w-md h-14 text-lg rounded-full border-2">
-                View All Projects
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
@@ -540,51 +675,81 @@ export default function Home() {
         </div>
       </section>
 
-
-      {/* BLOG & CONTACT SECTIONS */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {/* Blog Section */}
-          <div className="flex flex-col lg:flex-row items-center gap-12 bg-muted/30 rounded-3xl p-12 shadow-lg">
-            <div className="flex-1 space-y-6 text-center lg:text-left">
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight">
-                What Have We Done?
-              </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed pb-4">
-                Showcasing our projects and engineering achievements across diverse industries
-              </p>
-              <Link href="/blog">
-                <Button size="lg" className="h-14 px-8  rounded-full bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 transition-transform hover:scale-105 hover:bg-primary/90">
-                  Our Blog
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
+      <section>
+        {/* Trusted Customers */}
+        <div className="mt-24 opacity-0 animate-fadeInUp delay-300">
+          {/* Header Section */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight ">
+              Our Trusted Customers
+            </h2>
+            <div className=
+              "flex items-center gap-2 justify-center">
+              <div className="h-[3px] w-12 bg-[#144A92] rounded-full" />
+              <div className="h-[3px] w-3 bg-[#C90815] rounded-full" />
             </div>
-            <div className="flex-1 w-full">
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                <img
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop"
-                  alt="Engineering project"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <p className="text-muted-foreground italic m-6 leading-relaxed">
+              We proudly collaborate with industry leaders worldwide
+            </p>
+          </div>
+
+          <div className="relative overflow-hidden">
+            {/* Decorative background element for a "tech" feel */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(27, 59, 110, 0.05)_0%,transparent_70%)] pointer-events-none" />
+
+            <div className="relative flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-5xl mx-auto ">
+              {customerLogos.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`
+          group relative flex items-center justify-center
+          rounded-2xl border border-gray-100 bg-white/80 backdrop-blur-sm
+          shadow-[0_2px_10px_-3px_rgba(0,0,0,0.07)]
+          hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]
+          hover:-translate-y-2 transition-all duration-500
+        `}
+                >
+                  {/* Subtle border highlight on hover */}
+                  <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/10 transition-colors duration-500" />
+
+                  <img
+                    src={item.logo}
+                    alt="Customer Logo"
+                    className="h-16 w-auto object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  />
+
+                  {/* A tiny "verified" dot that appears on hover */}
+                  <span className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-blue-500 scale-0 group-hover:scale-100 transition-transform duration-300 delay-100" />
+                </a>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
+
+
+      {/* news SECTIONS */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
           {/* Contact Section */}
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12 bg-muted/30 rounded-3xl p-12 shadow-lg">
             <div className="flex-1 space-y-6 text-center lg:text-left">
               <h3 className="text-3xl md:text-4xl font-display font-bold text-secondary tracking-tight">
-                Get in Touch
+                What Are The Latest Updates?
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed pb-4">
-                Have questions or projects? Let's talk and build something extraordinary together
+                Showcasing our projects and engineering achievements across diverse industries
               </p>
-              <Link href="/contact">
-                <Button size="lg" className="h-14 px-8 rounded-full bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 transition-transform hover:scale-105 hover:bg-primary/90">
-                  Talk to Us
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
+              <Link href="/news">
+                <button className="relative flex items-center gap-2 px-6 py-2.5 bg-[#144C94] text-white font-bold text-sm rounded-full border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group">
+                  <span className="relative z-10">Our Blog</span>
+                  <ArrowRight className="relative z-10 w-5 h-5" />
+                  <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                </button>
               </Link>
             </div>
             <div className="flex-1 w-full">
