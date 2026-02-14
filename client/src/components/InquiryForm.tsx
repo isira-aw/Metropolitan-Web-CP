@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, Send } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function InquiryForm({ division }: { division?: string }) {
   const mutation = useCreateInquiry();
@@ -111,21 +112,28 @@ export function InquiryForm({ division }: { division?: string }) {
                 </FormItem>
               )}
             />
-
             <Button
               type="submit"
-              className="w-full h-12 text-base font-medium bg-[#144A92] hover:bg-[#CB0816] shadow-md rounded-lg transition-colors duration-200"
               disabled={mutation.isPending}
+              className="relative w-full h-12 px-6 bg-[#144C94] text-white font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group"
             >
-              {mutation.isPending ? (
-                <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" /> Sending...
-                </>
-              ) : (
-                <>
-                  Submit Inquiry <Send className="w-4 h-4 ml-2" />
-                </>
-              )}
+              {/* Sliding background */}
+              <span className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
+
+              {/* Content */}
+              <span className="relative z-10 flex items-center justify-center">
+                {mutation.isPending ? (
+                  <>
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Submit Inquiry
+                    <Send className="w-4 h-4 ml-2" />
+                  </>
+                )}
+              </span>
             </Button>
           </form>
         </Form>
