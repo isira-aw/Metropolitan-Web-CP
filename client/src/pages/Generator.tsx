@@ -625,7 +625,7 @@ export default function Generator() {
         </div>
       </section>
 
-      
+
 
       {/* ═══ OUR DIVISIONS ═══ */}
       <section className="py-10 md:py-16 bg-[#144A92]/[0.02]">
@@ -677,78 +677,8 @@ export default function Generator() {
       {/* ═══ WHY CHOOSE US ═══ */}
       <section className="py-10 md:py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4 md:gap-6">
-            <div className="flex-1">
-              <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
-                Why Choose Us?
-              </h2>
-              <div className="section-divider !justify-start" />
-            </div>
-            <p className="text-base md:text-lg text-[#424242] max-w-md border-l-2 border-[#144A92]/30 pl-4 md:pl-6 py-2">
-              Leading generator solutions backed by years of expertise and commitment to excellence.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {whyChooseUs.map((feature, idx) => (
-              <div
-                key={idx}
-                className={`group relative overflow-hidden rounded-xl border border-gray-100 p-6 md:p-8 transition-all duration-300 hover:shadow-lg min-h-[200px] md:min-h-[240px] animate-scroll-reveal delay-${Math.min(idx + 1, 4)}00`}
-              >
-                <div className="absolute inset-0 z-0">
-                  <img src={feature.img} alt={feature.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 group-hover:bg-black/40" />
-                </div>
-                <div className="relative z-20 h-full flex flex-col">
-                  <div className="mt-auto">
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{feature.title}</h3>
-                    <p className="text-white/80 text-sm md:text-base leading-relaxed group-hover:text-white/90 transition-colors duration-300">
-                      {feature.desc}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {/* ═══ TESTIMONIALS ═══ */}
-      {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-10 md:py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
-                Client Testimonials
-              </h2>
-              <div className="section-divider" />
-              <p className="text-[#424242] mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
-                Hear what our clients have to say about our reliable solutions and exceptional service.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-8 md:mt-12">
-              {testimonialsData.slice(0, 6).map((t, i) => (
-                <Card key={t.id} className={`border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-scroll-reveal delay-${Math.min(i + 1, 5)}00`}>
-                  <div className="p-5 md:p-8">
-                    <Quote className="w-8 h-8 md:w-10 md:h-10 text-[#144A92]/15 mb-3 md:mb-4" />
-                    <p className="text-[#424242] italic mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
-                      "{t.content}"
-                    </p>
-                    <div className="flex items-center gap-3 pt-3 md:pt-4 border-t border-gray-100">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#144A92]/5 flex items-center justify-center text-[#144A92] font-bold text-base md:text-lg">
-                        {t.author[0]}
-                      </div>
-                      <div>
-                        <p className="font-bold text-black text-sm md:text-base">{t.author}</p>
-                        <p className="text-xs md:text-sm text-[#424242]">{t.role}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
           {/* Additional features row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-4 md:mt-6">
@@ -769,6 +699,45 @@ export default function Generator() {
               );
             })}
           </div>
+
+          {/* ═══ TESTIMONIALS ═══ */}
+          {testimonialsData && testimonialsData.length > 0 && (
+            <section className="py-10 md:py-16 bg-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center">
+                  <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
+                    Client Testimonials
+                  </h2>
+                  <div className="section-divider" />
+                  <p className="text-[#424242] mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
+                    Hear what our clients have to say about our reliable solutions and exceptional service.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-8 md:mt-12">
+                  {testimonialsData.slice(0, 6).map((t, i) => (
+                    <Card key={t.id} className={`border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-scroll-reveal delay-${Math.min(i + 1, 5)}00`}>
+                      <div className="p-5 md:p-8">
+                        <Quote className="w-8 h-8 md:w-10 md:h-10 text-[#144A92]/15 mb-3 md:mb-4" />
+                        <p className="text-[#424242] italic mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
+                          "{t.content}"
+                        </p>
+                        <div className="flex items-center gap-3 pt-3 md:pt-4 border-t border-gray-100">
+                          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#144A92]/5 flex items-center justify-center text-[#144A92] font-bold text-base md:text-lg">
+                            {t.author[0]}
+                          </div>
+                          <div>
+                            <p className="font-bold text-black text-sm md:text-base">{t.author}</p>
+                            <p className="text-xs md:text-sm text-[#424242]">{t.role}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
         </div>
       </section>
 
