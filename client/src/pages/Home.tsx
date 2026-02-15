@@ -93,13 +93,13 @@ export default function Home() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
           style={{
-            backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPE0nJP6lljVQqlH-etWyDBE50Yo1Z41eFA&s')`,
+            backgroundImage: `url('https://github.com/isira-aw/image-_and-_videos/blob/main/metro_team.jpeg?raw=true')`,
             transform: `scale(1.1) translateY(${scrollY * 0.5}px)`
           }}
         />
 
         {/* Blue Overlay */}
-        <div className="absolute inset-0 z-10 bg-blue-900/40" />
+        <div className="absolute inset-0 z-10 bg-[#0a264a]/70" />
 
         {/* Gradient Depth */}
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-800/40 via-transparent to-blue-900/60" />
@@ -316,12 +316,12 @@ export default function Home() {
                   href={platform.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="card-hover flex items-center justify-center w-full sm:w-56 md:w-64 lg:w-80 h-28 sm:h-32 md:h-40 lg:h-48 p-4 md:p-6 rounded-xl border border-gray-100 bg-white shadow-sm"
+                  className="group flex items-center justify-center w-full sm:w-56 md:w-64 lg:w-80 h-28 sm:h-32 md:h-40 lg:h-48 p-4 md:p-6 rounded-xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
                 >
                   <img
                     src={platform.img}
                     alt={platform.alt}
-                    className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                    className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain transition-all duration-500 group-hover:scale-110"
                   />
                 </a>
               ))}
@@ -384,7 +384,7 @@ export default function Home() {
                     alt={feature.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40" />
+                  <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 group-hover:bg-black/40" />
                 </div>
                 <div className="relative z-20 h-full flex flex-col">
                   <div className={feature.isLarge ? "mt-auto" : "mt-auto sm:mt-8"}>
@@ -519,23 +519,35 @@ export default function Home() {
           </div>
 
           <div className="mt-8 md:mt-12">
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
-              {customerLogos.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-2"
-                >
-                  <img
-                    src={item.logo}
-                    alt="Customer Logo"
-                    className="h-10 sm:h-12 md:h-16 w-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                  />
-                </a>
-              ))}
+            <div className="relative overflow-hidden mt-8 md:mt-12">
+
+              {/* Left Blur */}
+              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-r from-white via-white/80 to-transparent" />
+
+              {/* Right Blur */}
+              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-l from-white via-white/80 to-transparent" />
+
+              {/* Marquee */}
+              <div className="flex w-max animate-marquee gap-6 md:gap-10">
+                {[...customerLogos, ...customerLogos].map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-center rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-3"
+                  >
+                    <img
+                      src={item.logo}
+                      alt="Customer Logo"
+                      className="h-10 sm:h-12 md:h-16 w-auto object-contain transition-all duration-500 group-hover:scale-110"
+                    />
+                  </a>
+                ))}
+              </div>
+
             </div>
+
           </div>
         </div>
       </section>
