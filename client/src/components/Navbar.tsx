@@ -53,7 +53,7 @@ export function Navbar() {
           "fixed w-full z-50 transition-all duration-300",
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-black/[0.06]"
-            : "bg-transparent"
+            : "bg-transparent  bg-black/50 px-2 rounded-t-none rounded-b-md"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

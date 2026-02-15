@@ -315,19 +315,24 @@ export default function About() {
         </div>
 
         {/* Core Values */}
-        <div className="bg-[#0f0f0f] text-white rounded-xl py-10 p-12 text-center">
-          <h2 className="text-3xl font-bold font-display mb-10 text-white">Our Core Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white ">
-            {["Safety First", "Sustainability", "Integrity"].map((v, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-lg bg-white/10 flex items-center justify-center mb-4">
-                  <CheckCircle className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white">{v}</h3>
-              </div>
-            ))}
-          </div>
+
+<div className="bg-gray-50 text-gray-900 rounded-xl py-10 p-12 text-center border border-gray-200">
+  <h2 className="text-3xl font-bold font-display mb-10 text-gray-900">
+    Our Core Values
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {["Safety First", "Sustainability", "Integrity"].map((v, i) => (
+      <div key={i} className="flex flex-col items-center">
+        <div className="w-16 h-16 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
+          <CheckCircle className="w-8 h-8 text-blue-600" />
         </div>
+        <h3 className="text-xl font-bold text-gray-800">{v}</h3>
+      </div>
+    ))}
+  </div>
+</div>
+
       </div>
 
       {/* Tabbed Section */}

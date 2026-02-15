@@ -88,6 +88,8 @@ export default function Home() {
 
       {/* ═══ HERO SECTION ═══ */}
       <section className="relative h-screen min-h-[500px] md:min-h-[700px] flex items-center justify-center overflow-hidden">
+
+        {/* Background Image */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
           style={{
@@ -95,9 +97,14 @@ export default function Home() {
             transform: `scale(1.1) translateY(${scrollY * 0.5}px)`
           }}
         />
-        <div className="absolute inset-0 z-10 bg-black/60" />
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
+        {/* Blue Overlay */}
+        <div className="absolute inset-0 z-10 bg-blue-900/40" />
+
+        {/* Gradient Depth */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-800/40 via-transparent to-blue-900/60" />
+
+        {/* Content */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
           <div className="relative">
             <motion.h1
@@ -147,12 +154,29 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-16 md:bottom-20 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in delay-500">
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in delay-500">
           <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
           </div>
         </div>
+
+        {/* Bottom Wave */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+          <svg
+            viewBox="0 0 1440 150"
+            className="w-full h-[100px]"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="#ffffff"
+              d="M0,64L80,80C160,96,320,128,480,122.7C640,117,800,75,960,69.3C1120,64,1280,96,1360,112L1440,128L1440,160L1360,160C1280,160,1120,160,960,160C800,160,640,160,480,160C320,160,160,160,80,160L0,160Z"
+            />
+          </svg>
+        </div>
+
       </section>
+
 
       {/* ═══ MISSION & VISION ═══ */}
       <section className="py-10 md:py-16 bg-white">
