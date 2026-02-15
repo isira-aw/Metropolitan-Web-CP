@@ -96,9 +96,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        display: ["var(--font-display)"],
-        serif: ["var(--font-serif)"],
+        sans: ["Nunito Sans", "var(--font-sans)"],
+        display: ["Nunito Sans", "var(--font-display)"],
+        serif: ["Nunito Sans", "var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },
       keyframes: {

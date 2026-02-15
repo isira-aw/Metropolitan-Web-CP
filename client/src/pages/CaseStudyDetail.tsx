@@ -12,22 +12,23 @@ export default function CaseStudyDetail() {
   const id = parseInt(params?.id || "0");
   const { data: project, isLoading, error } = useCaseStudy(id);
 
-  if (isLoading) return <div className="min-h-screen bg-white flex items-center justify-center"><div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"/></div>;
+  if (isLoading) return <div className="min-h-screen bg-white flex items-center justify-center"><div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
   if (error || !project) return <div className="min-h-screen bg-white flex items-center justify-center">Project not found</div>;
 
   return (
     <div className="min-h-screen bg-background font-sans">
-      <Navbar />
 
+      <Navbar />
+<br /><br /><br />
       {/* Hero Image */}
       <div className="relative h-[60vh] min-h-[500px]">
-        <img 
-          src={project.image} 
-          alt={project.title} 
+        <img
+          src={project.image}
+          alt={project.title}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        
+
         <div className="absolute bottom-0 left-0 w-full p-8 md:p-16">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-4">{project.title}</h1>
@@ -41,19 +42,19 @@ export default function CaseStudyDetail() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                    <div className="flex flex-wrap gap-3 mb-4">
-              <Badge className="bg-primary text-white hover:bg-primary border-none text-sm py-1 px-3">{project.division}</Badge>
-              {project.completionDate && (
-                <Badge variant="outline" className="text-white border-white/30 bg-black/30 backdrop-blur-sm">
-                  <Calendar className="w-3 h-3 mr-1" /> {project.completionDate}
-                </Badge>
-              )}
-            </div>
-            <Link href="/case-studies">
-              <Button variant="ghost" className="text-blue pl-0 mb-4 hover:text-primary">
-                <ArrowLeft className="mr-2 w-4 h-4" /> Back to Projects
-              </Button>
-            </Link>
+        <div className="flex flex-wrap gap-3 mb-4">
+          <Badge className="bg-primary text-black/30  hover:bg-primary border-none text-sm py-1 px-3">{project.division}</Badge>
+          {project.completionDate && (
+            <Badge variant="outline" className="text-white border-white/30 bg-black/30 backdrop-blur-sm">
+              <Calendar className="w-3 h-3 mr-1" /> {project.completionDate}
+            </Badge>
+          )}
+        </div>
+        <Link href="/case-studies">
+          <Button variant="ghost" className="text-blue pl-0 mb-4 hover:text-primary border border-primary rounded-full pl-4">
+            <ArrowLeft className="mr-2 w-4 h-4" /> Back to Projects
+          </Button>
+        </Link>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
           <div className="lg:col-span-2">
@@ -69,7 +70,7 @@ export default function CaseStudyDetail() {
           <div>
             <div className="bg-muted/30 border border-border rounded-2xl p-8 sticky top-24">
               <h3 className="text-xl font-bold text-secondary mb-6">Project Details</h3>
-              
+
               <div className="space-y-6">
                 {project.client && (
                   <div>
@@ -79,15 +80,15 @@ export default function CaseStudyDetail() {
                     </p>
                   </div>
                 )}
-                
+
                 <div>
-                   <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Status</p>
-                   <p className="text-lg font-medium text-foreground">Completed</p>
+                  <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Status</p>
+                  <p className="text-lg font-medium text-foreground">Completed</p>
                 </div>
 
                 <div className="pt-6 border-t border-border">
                   <Link href="/contact">
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg">
+                    <Button className="w-full  text-white shadow-lg">
                       Discuss Similar Project
                     </Button>
                   </Link>

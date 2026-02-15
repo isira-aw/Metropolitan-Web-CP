@@ -105,7 +105,7 @@ export function Navbar() {
                 </Link>
               );
             })}
-            <Button className="bg-gray-900 hover:bg-gray-800 text-white button-hover">
+            <Button className=" text-white button-hover">
               Get in Touch
             </Button>
           </div>
@@ -184,7 +184,7 @@ export function Navbar() {
                 </nav>
 
                 <div className="mt-8">
-                  <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white button-hover">
+                  <Button className="w-full text-white button-hover">
                     Get in Touch
                   </Button>
                 </div>

@@ -9,7 +9,7 @@ interface CaseStudyCardProps {
 }
 
 export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
-  if (!caseStudy) {
+  if (!caseStudy || !caseStudy.id) {
     return (
       <Card className="overflow-hidden border-gray-200">
         <div className="relative h-48 overflow-hidden bg-gray-100" />
@@ -41,7 +41,7 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
       <div className="relative h-48 overflow-hidden">
         <img
           src={caseStudy.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80"}
-          alt={caseStudy.title}
+          alt={caseStudy.title || "Case Study"}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -49,14 +49,14 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
           <Badge variant="outline" className="bg-white/90 text-color-text border-gray-300">
-            {caseStudy.division}
+            {caseStudy.division || "Engineering"}
           </Badge>
         </div>
-        <CardTitle className="mt-3">{caseStudy.title}</CardTitle>
+        <CardTitle className="mt-3">{caseStudy.title || "Untitled Project"}</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-color-text/70 text-sm line-clamp-3">
-          {caseStudy.description}
+          {caseStudy.description || "No description available"}
         </p>
       </CardContent>
       <CardFooter className="pt-0">

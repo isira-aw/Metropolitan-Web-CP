@@ -1,5 +1,32 @@
 :root {
-  --font-primary: "SN Pro",
+  --font-primary: "Nunito Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  
+  --font-sans: "Nunito Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  
+  --font-display: "Nunito Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  
+  --font-serif: "Nunito Sans",
     system-ui,
     -apple-system,
     "Segoe UI",
@@ -9,10 +36,10 @@
     sans-serif;
 
   --color-text: #424242;
-  --color-heading: #000000;
+  --color-heading: #1F3D89;
   --color-bg: #FFFFFF;
-  --color-accent-primary: rgba(20, 74, 146, 0.08);
-  --color-accent-secondary: rgba(203, 8, 22, 0.05);
+  --color-accent-primary: #1f3d8928;
+  --color-accent-secondary: rgba(203, 8, 21, 0.637);
   
   /* Primary brand colors */
   --color-blue: #144A92;

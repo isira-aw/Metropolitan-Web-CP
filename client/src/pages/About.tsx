@@ -66,7 +66,7 @@ export default function AboutPage() {
               With over 25 years of experience, we deliver innovative, high-performance systems for modern buildings worldwide.
             </p>
             <Link href="/contact">
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white button-hover">
+              <Button className=" text-white button-hover">
                 Get in Touch
               </Button>
             </Link>
@@ -329,7 +329,7 @@ export default function AboutPage() {
               className="mb-8"
             />
             <Link href="/contact">
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white button-hover px-8 py-6 text-base">
+              <Button className="text-white button-hover px-8 py-6 text-base">
                 Contact Our Team
               </Button>
             </Link>

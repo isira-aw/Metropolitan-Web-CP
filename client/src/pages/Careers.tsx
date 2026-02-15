@@ -97,22 +97,22 @@ export default function Careers() {
             </div> */}
             <div className="space-y-6">
               {POLICIES.map((policy, i) => (
-                <Card
-                  key={i}
-                  className="group hover:shadow-xl transition-all duration-300 cursor-default border-l-8 border-[#144C94] hover:border-[#C90815] shadow-md bg-white overflow-hidden"
-                >
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
-                      <div className="flex items-center gap-3">
-                        {/* Red Circle Icon Bullet */}
-                        <div className="w-2 h-2 rounded-full bg-[#C90815]" />
-                        <h3 className="text-xl font-bold text-[#144C94] group-hover:text-black transition-colors">
-                          {policy.title}
-                        </h3>
-                      </div>
-                      <span className="text-[10px] uppercase tracking-widest font-black text-white bg-[#C90815] px-3 py-1 rounded-full">
-                        {policy.category}
-                      </span>
+                  <Card
+                    key={i}
+                    className="group hover:shadow-xl transition-all duration-300 cursor-default border-l-8 border-blue hover:border-red shadow-md bg-white overflow-hidden"
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
+                        <div className="flex items-center gap-3">
+                          {/* Red Circle Icon Bullet */}
+                          <div className="w-2 h-2 rounded-full bg-red" />
+                          <h3 className="text-xl font-bold text-blue group-hover:text-black transition-colors">
+                            {policy.title}
+                          </h3>
+                        </div>
+                        <span className="text-[10px] uppercase tracking-widest font-black text-white bg-red px-3 py-1 rounded-full">
+                          {policy.category}
+                        </span>
                     </div>
 
                     <p className="text-gray-600 leading-relaxed mb-4 border-b border-gray-100 pb-4">
@@ -231,7 +231,7 @@ export default function Careers() {
                     />
                     <Button
                       type="submit"
-                      className="w-full h-12 text-lg bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-full font-semibold"
+                      className="w-full h-12 text-lg shadow-lg shadow-primary/20 rounded-full font-semibold"
                       disabled={mutation.isPending}
                     >
                       {mutation.isPending ? <Loader2 className="animate-spin" /> : "Submit Application"}

@@ -28,7 +28,7 @@ export default function CaseStudies() {
           <Button
             variant={!selectedDivision ? "default" : "outline"}
             onClick={() => setSelectedDivision(undefined)}
-            className={cn("rounded-full", !selectedDivision && "bg-primary hover:bg-primary/90")}
+            className={cn("rounded-full", !selectedDivision )}
           >
             All Projects
           </Button>
@@ -37,7 +37,7 @@ export default function CaseStudies() {
               key={div}
               variant={selectedDivision === div ? "default" : "outline"}
               onClick={() => setSelectedDivision(div)}
-              className={cn("rounded-full", selectedDivision === div && "bg-primary hover:bg-primary/90")}
+              className={cn("rounded-full", selectedDivision === div )}
             >
               {getDivisionDisplayName(div)}
             </Button>
@@ -51,9 +51,9 @@ export default function CaseStudies() {
               <div key={i} className="h-[400px] bg-muted animate-pulse rounded-2xl" />
             ))
           ) : data?.data && data.data.length > 0 ? (
-            data.data.map(item => (
-              <CaseStudyCard key={item.id} caseStudy={item} />
-            ))
+            data.data.filter(item => item && item.id).map(item => (
+                <CaseStudyCard key={item.id} caseStudy={item} />
+              ))
           ) : (
             <div className="col-span-full text-center py-20">
               <p className="text-xl text-muted-foreground">No projects found in this category.</p>

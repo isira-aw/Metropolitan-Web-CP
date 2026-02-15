@@ -159,7 +159,7 @@ export default function DivisionPage() {
             {isLoading ? (
                Array(3).fill(0).map((_, i) => <div key={i} className="h-[400px] bg-muted animate-pulse rounded-2xl" />)
             ) : projects?.data && projects.data.length > 0 ? (
-               projects.data.map(p => <CaseStudyCard key={p.id} item={p} />)
+                projects.data.filter(p => p && p.id).map(p => <CaseStudyCard key={p.id} caseStudy={p} />)
             ) : (
                <div className="col-span-3 text-center py-12 text-muted-foreground">
                  No projects found for this division yet.

@@ -7,12 +7,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { DIVISIONS } from "@shared/schema";
 
-export function InquiryForm() {
+interface InquiryFormProps {
+  division?: string;
+}
+
+export function InquiryForm({ division = "" }: InquiryFormProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    division: "",
+    division,
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -128,7 +132,7 @@ export function InquiryForm() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gray-900 hover:bg-gray-800 text-white button-hover"
+            className="w-full text-white button-hover"
           >
             {isSubmitting ? "Sending..." : "Send Inquiry"}
           </Button>
