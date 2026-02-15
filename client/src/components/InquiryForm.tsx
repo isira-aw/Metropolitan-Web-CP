@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SectionHeaderSmall } from "./SectionHeaderSmall";
 
 export function InquiryForm({ division }: { division?: string }) {
   const mutation = useCreateInquiry();
@@ -34,7 +35,9 @@ export function InquiryForm({ division }: { division?: string }) {
   return (
     <Card className="shadow-lg border border-gray-100 rounded-lg overflow-hidden">
       <CardContent className="p-8">
-        <h3 className="text-xl font-bold text-[#212529] mb-6">Send us a Message</h3>
+        <SectionHeaderSmall
+          title="Send us a Message"
+        />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

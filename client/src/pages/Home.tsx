@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { useTestimonials } from "@/hooks/use-testimonials";
+import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
 
 const customerLogos = [
   { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/1.png', link: 'https://www.google.com' },
@@ -175,6 +176,7 @@ export default function Home() {
                 <span className="relative z-10">Explore Projects</span>
                 <ArrowRight className="relative z-10 w-5 h-5" />
                 <span className="btn-hover-fill" />
+                <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
               </button>
             </Link>
             <Link href="/contact">
@@ -314,6 +316,7 @@ export default function Home() {
                   <span className="relative z-10">Explore Division</span>
                   <ArrowRight className="relative z-10 w-5 h-5" />
                   <span className="btn-hover-fill" />
+                  <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                 </button>
               </Link>
             </div>
@@ -376,13 +379,18 @@ export default function Home() {
       <section className="py-10 md:py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4 md:gap-6">
-            <div className="flex-1">
-              <SectionHeader title="Why Metropolitan?" subtitle="" />
+            {/* LEFT: Heading */}
+            <div className="text-left">
+              <h2 className="text-2xl md:text-4xl font-display font-bold text-secondary tracking-tight">
+                Why Metropolitan?
+              </h2>
+              <div className="section-divider" />
             </div>
             <p className="text-base md:text-lg text-muted-foreground max-w-md border-l-4 border-primary pl-4 md:pl-6 py-2">
               We combine industrial-grade power with surgical precision to deliver results that redefine standards.
             </p>
           </div>
+
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6 auto-rows-[200px] md:auto-rows-[240px]">
             {[
@@ -599,17 +607,18 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row-reverse items-center gap-6 md:gap-12 bg-muted/30 rounded-2xl md:rounded-3xl p-4 md:p-8 lg:p-12 shadow-lg">
             <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-secondary tracking-tight">
-                What Are The Latest Updates?
-              </h3>
+                      <SectionHeaderSmall
+          title="What Are The Latest Updates?"
+        />
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed pb-2 md:pb-4">
                 Showcasing our projects and engineering achievements across diverse industries
               </p>
               <Link href="/news">
                 <button className="btn-metro group">
-                  <span className="relative z-10">Our Blog</span>
+                  <span className="relative z-10">Our News</span>
                   <ArrowRight className="relative z-10 w-5 h-5" />
                   <span className="btn-hover-fill" />
+                  <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                 </button>
               </Link>
             </div>

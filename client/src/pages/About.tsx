@@ -1,8 +1,8 @@
 
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
-import { Card } from "@/components/ui/card";
 import { ArrowRight, BriefcaseBusiness, CheckCircle, CheckCircle2, Clock, Handshake, Lightbulb, PhoneCall, Rocket, Settings, ShieldCheck, Sparkles, TrendingUp, Users } from "lucide-react";
+import { Link } from "wouter";
 import { useState } from "react";
 import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
 import { motion } from "framer-motion";
@@ -130,8 +130,15 @@ export default function About() {
             </div>
           </div>
 
-          <SectionHeader title="Our Journey of Excellence" subtitle="One of the most respected engineering firms in Sri Lanka." />
-
+          <div className="text-center">
+            <h2 className="text-2xl md:text-4xl font-display font-bold text-secondary tracking-tight">
+              Our Journey of Excellence
+            </h2>
+            <div className="section-divider" />
+            <p className="text-muted-foreground italic mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
+              One of the most respected engineering firms in Sri Lanka.
+            </p>
+          </div>
           {/* Timeline Content */}
           <div className="relative">
             {/* Vertical line for desktop */}
@@ -198,65 +205,76 @@ export default function About() {
 
           {/* CTA Button */}
           <div className="mt-10 text-center">
-            <a href="/divisions" className="inline-flex items-center gap-3 bg-slate-900 text-white px-8 py-5 rounded-full font-bold hover:bg-blue-600 transition-all transform hover:-translate-y-1 shadow-lg">
-              Explore Our Services
-              <Rocket size={20} />
-              <ArrowRight size={18} className="opacity-50" />
-            </a>
+            <Link href="/divisions">
+              <button className="btn-metro group" >
+                <span className="relative z-10">Explore Our Services</span>
+                <Rocket className="relative z-10 w-5 h-5" />
+                <span className="btn-hover-fill" />
+                <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+              </button>
+            </Link>
           </div>
-
         </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <SectionHeader title="Leadership Team" subtitle=" Meet the visionary leaders driving Innovatech Solutions forward.
-                Our executive team brings a wealth of experience and a shared
-                commitment to innovation and excellence.
-              " />
+        <div className="text-center">
+          <h2 className="text-2xl md:text-4xl font-display font-bold text-secondary tracking-tight">
+            Leadership Team
+          </h2>
+          <div className="section-divider" />
+          <p className="text-muted-foreground italic mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
+            Meet the visionary leaders driving Innovatech Solutions forward.
+            Our executive team brings a wealth of experience and a shared
+            commitment to innovation and excellence.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 mb-16 pt-10">
           {leaders.map((leader, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              whileHover={{ y: -15 }}
-              className="relative group bg-white rounded-3xl p-8 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_50px_-12px_rgba(20,76,148,0.2)] transition-all duration-500 overflow-hidden"
+              whileHover={{ y: -10 }}
+              className="group relative bg-white rounded-3xl p-6 pt-12 shadow-sm border border-gray-100 hover:shadow-2xl hover:shadow-[#144A92]/10 transition-all duration-500"
             >
-              <div className="flex flex-col items-center relative z-10">
-                {/* Large Image Container */}
-                <div className="relative w-48 h-48 mb-6">
-                  {/* Subtle Red Rotating Ring on Hover */}
-                  <div className="absolute -inset-2 border-2 border-dashed border-[#C90815] rounded-full scale-0 group-hover:scale-100 group-hover:rotate-180 transition-all duration-700 opacity-40" />
+              <div className="flex flex-col items-center">
+                {/* Larger Image with Top Overlap */}
+                <div className="absolute -top-12 w-32 h-32">
+                  {/* Animated Glow behind image */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#C90815] to-[#144A92] rounded-full blur-md opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
 
-                  <div className="w-full h-full rounded-full overflow-hidden border-8 border-white shadow-md">
+                  <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
                     <img
-                      className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       src={leader.img || "/Assets/Images/People/default-person.png"}
                       alt={leader.name}
                     />
                   </div>
+
+                  {/* Subtle Ring */}
+                  <div className="absolute -inset-1 border border-dashed border-[#C90815]/30 rounded-full animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Identity Section */}
-                <div className="text-center space-y-2">
-                  <h3 className="text-2xl font-display font-bold text-black group-hover:text-[#144C94] transition-colors duration-300">
+                <div className="text-center mt-10">
+                  <h3 className="text-xl font-heading font-bold text-[#060606] group-hover:text-[#144A92] transition-colors duration-300 leading-tight">
                     {leader.name}
                   </h3>
 
-                  {/* Red Growing Accent Line */}
-                  <div className="flex justify-center">
-                    <div className="h-1 w-8 bg-[#C90815] rounded-full group-hover:w-24 transition-all duration-500" />
-                  </div>
+                  <div className="flex flex-col items-center gap-2 mt-2">
+                    <span className="text-[#144A92] font-bold text-[10px] uppercase tracking-[0.2em] bg-[#144A92]/5 px-3 py-1 rounded-full">
+                      {leader.role}
+                    </span>
 
-                  <p className="text-[#144C94] font-semibold text-sm uppercase tracking-widest pt-2">
-                    {leader.role}
-                  </p>
+                    {/* Minimalist Accent */}
+                    <div className="h-1 w-6 bg-[#C90815] rounded-full group-hover:w-16 transition-all duration-500 mt-2" />
+                  </div>
                 </div>
               </div>
-
-              {/* Blue bottom bar has been removed from here */}
             </motion.div>
           ))}
         </div>
@@ -424,14 +442,18 @@ export default function About() {
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* Using our New Small Header with Red Line */}
-          <SectionHeaderSmall
-            title="Story of Our Company"
-            subtitle="A legacy of quality and entrepreneurship since 1958"
-            className="mb-6"
-          />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="text-center">
+            <h2 className="text-2xl md:text-4xl font-display font-bold text-secondary tracking-tight">
+              Story of Our Company
+            </h2>
+            <div className="section-divider" />
+            <p className="text-muted-foreground italic mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
+              A legacy of quality and entrepreneurship since 1958
+            </p>
+          </div>
+
+          <div className="m-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: The Founder's Origin */}
             <div className="lg:col-span-7 space-y-6 text-gray-700 leading-relaxed text-lg">
               <p >
