@@ -1,145 +1,138 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertInquirySchema, type InsertInquiry } from "@shared/schema";
+import { useState } from "react";
 import { useCreateInquiry } from "@/hooks/use-inquiries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Card, CardContent } from "@/components/ui/card";
-import { Loader2, Send } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { SectionHeaderSmall } from "./SectionHeaderSmall";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { DIVISIONS } from "@shared/schema";
 
-export function InquiryForm({ division }: { division?: string }) {
-  const mutation = useCreateInquiry();
-
-  const form = useForm<InsertInquiry>({
-    resolver: zodResolver(insertInquirySchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-      division: division || "",
-    },
+export function InquiryForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    division: "",
+    message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function onSubmit(data: InsertInquiry) {
-    mutation.mutate(data, {
-      onSuccess: () => form.reset(),
+  const { mutate, isPending } = useCreateInquiry();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    mutate(formData, {
+      onSuccess: () => {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          division: "",
+          message: "",
+        });
+      },
     });
-  }
+
+    setIsSubmitting(false);
+  };
 
   return (
-    <Card className="shadow-lg border border-gray-100 rounded-lg overflow-hidden">
-      <CardContent className="p-8">
-        <SectionHeaderSmall
-          title="Send us a Message"
-        />
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="John Doe" {...field} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address</FormLabel>
-                    <FormControl>
-                      <Input placeholder="john@company.com" {...field} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone (Optional)</FormLabel>
-                    <FormControl>
-                      <Input placeholder="+1 (555) 000-0000" {...field} value={field.value || ''} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="subject"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Subject</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Project Inquiry" {...field} value={field.value || ''} className="h-12 bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Tell us about your project requirements..."
-                      className="min-h-[120px] bg-gray-50 border-gray-200 focus:border-[#144A92] focus:ring-[#144A92]/10 resize-none"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+    <Card className="border-gray-200">
+      <CardHeader className="bg-color-accent-primary/30">
+        <CardTitle className="text-xl">Send an Inquiry</CardTitle>
+        <CardDescription>
+          Fill out the form below and we'll get back to you within 24 hours
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="name">Full Name</Label>
+            <Input
+              id="name"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, name: e.target.value }))
+              }
+              placeholder="John Doe"
+              required
+              className="border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
             />
-            <Button
-              type="submit"
-              disabled={mutation.isPending}
-              className="relative w-full h-12 px-6 bg-[#144C94] text-white font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group"
-            >
-              {/* Sliding background */}
-              <span className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
+          </div>
 
-              {/* Content */}
-              <span className="relative z-10 flex items-center justify-center">
-                {mutation.isPending ? (
-                  <>
-                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Submit Inquiry
-                    <Send className="w-4 h-4 ml-2" />
-                  </>
-                )}
-              </span>
-            </Button>
-          </form>
-        </Form>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, email: e.target.value }))
+              }
+              placeholder="john@example.com"
+              required
+              className="border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input
+              id="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, phone: e.target.value }))
+              }
+              placeholder="+1 (555) 123-4567"
+              className="border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="division">Division</Label>
+            <select
+              id="division"
+              value={formData.division}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, division: e.target.value }))
+              }
+              className="w-full h-10 px-3 rounded-md border border-gray-300 bg-white text-color-text focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+            >
+              <option value="">Select a division</option>
+              {DIVISIONS.map((division) => (
+                <option key={division} value={division}>
+                  {division}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="message">Message</Label>
+            <Textarea
+              id="message"
+              value={formData.message}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, message: e.target.value }))
+              }
+              placeholder="Tell us about your project requirements..."
+              rows={5}
+              required
+              className="border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+            />
+          </div>
+
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-gray-900 hover:bg-gray-800 text-white button-hover"
+          >
+            {isSubmitting ? "Sending..." : "Send Inquiry"}
+          </Button>
+        </form>
       </CardContent>
     </Card>
   );

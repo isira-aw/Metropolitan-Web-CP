@@ -1,37 +1,28 @@
-import { cn } from "@/lib/utils";
+import React from "react";
 
 interface SectionHeaderProps {
   title: string;
-  subtitle?: string;
+  subtitle: string;
   align?: "left" | "center";
+  className?: string;
   light?: boolean;
 }
 
-export function SectionHeader({ title, subtitle, align = "center", light = false }: SectionHeaderProps) {
+export function SectionHeader({
+  title,
+  subtitle,
+  align = "left",
+  className,
+  light = false,
+}: SectionHeaderProps) {
   return (
-    <div className={cn(
-      "mb-12 max-w-3xl",
-      align === "center" ? "mx-auto text-center" : "text-left"
-    )}>
-      <h2 className={cn(
-        "text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4",
-        light ? "text-white" : "text-secondary"
-      )}>
+    <div className={className} style={{ textAlign: align }}>
+      <h2 className={`text-3xl md:text-4xl font-semibold mb-4 ${light ? 'text-white' : 'text-color-heading'}`}>
         {title}
       </h2>
-            <div className={cn(
-        "h-1.5 w-20 bg-primary mb-6 rounded-full",
-        align === "center" ? "mx-auto" : ""
-      )} />
-      {subtitle && (
-        <p className={cn(
-          "text-lg",
-          light ? "text-white/80" : "text-muted-foreground"
-        )}>
-          {subtitle}
-        </p>
-      )}
-
+      <p className={`text-lg max-w-3xl mx-auto ${light ? 'text-white/90' : 'text-color-text'}`}>
+        {subtitle}
+      </p>
     </div>
   );
 }

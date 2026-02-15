@@ -1,62 +1,70 @@
 import { Link } from "wouter";
-import { ArrowRight, Calendar, MapPin } from "lucide-react";
-import { type CaseStudy } from "@shared/schema";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { CaseStudy } from "@shared/schema";
 
 interface CaseStudyCardProps {
-  item: CaseStudy;
-  className?: string;
+  caseStudy: CaseStudy;
 }
 
-export function CaseStudyCard({ item, className }: CaseStudyCardProps) {
-  return (
-    <Link href={`/case-studies/${item.id}`} className={cn("group block h-full", className)}>
-      <div className="h-full bg-card rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
-        {/* Image */}
-        <div className="relative h-48 sm:h-60 overflow-hidden">
-          <img 
-            src={item.image} 
-            alt={item.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div className="absolute top-4 left-4">
-            <Badge className="bg-primary/90 text-white hover:bg-primary border-none text-xs font-semibold uppercase tracking-wider">
-              {item.division}
+export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
+  if (!caseStudy) {
+    return (
+      <Card className="overflow-hidden border-gray-200">
+        <div className="relative h-48 overflow-hidden bg-gray-100" />
+        <CardHeader className="pb-2">
+          <div className="flex justify-between items-start">
+            <Badge variant="outline" className="bg-white/90 text-color-text border-gray-300">
+              Loading...
             </Badge>
           </div>
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-
-        {/* Content */}
-        <div className="p-6 flex flex-col flex-grow">
-          <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-             {item.location && (
-               <div className="flex items-center gap-1">
-                 <MapPin className="w-3 h-3" /> {item.location}
-               </div>
-             )}
-             {item.completionDate && (
-               <div className="flex items-center gap-1">
-                 <Calendar className="w-3 h-3" /> {item.completionDate}
-               </div>
-             )}
-          </div>
-          
-          <h3 className="text-xl font-display font-bold text-secondary mb-2 group-hover:text-primary transition-colors">
-            {item.title}
-          </h3>
-          
-          <p className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-grow">
-            {item.description}
+          <CardTitle className="mt-3">Loading...</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-color-text/70 text-sm line-clamp-3">
+            Loading...
           </p>
+        </CardContent>
+        <CardFooter className="pt-0">
+          <span className="flex items-center gap-1 text-sm font-medium text-color-heading hover:text-color-text transition-colors group">
+            View Case Study
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </span>
+        </CardFooter>
+      </Card>
+    );
+  }
 
-          <div className="flex items-center text-primary font-semibold text-sm mt-auto group-hover:translate-x-1 transition-transform">
-            View Project <ArrowRight className="w-4 h-4 ml-2" />
-          </div>
-        </div>
+  return (
+    <Card className="overflow-hidden border-gray-200">
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={caseStudy.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80"}
+          alt={caseStudy.title}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
       </div>
-    </Link>
+      <CardHeader className="pb-2">
+        <div className="flex justify-between items-start">
+          <Badge variant="outline" className="bg-white/90 text-color-text border-gray-300">
+            {caseStudy.division}
+          </Badge>
+        </div>
+        <CardTitle className="mt-3">{caseStudy.title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-color-text/70 text-sm line-clamp-3">
+          {caseStudy.description}
+        </p>
+      </CardContent>
+      <CardFooter className="pt-0">
+        <Link href={`/case-studies/${caseStudy.id}`} className="flex items-center gap-1 text-sm font-medium text-color-heading hover:text-color-text transition-colors group">
+          View Case Study
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </CardFooter>
+    </Card>
   );
 }

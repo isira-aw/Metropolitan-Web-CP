@@ -52,7 +52,7 @@ export default function CaseStudies() {
             ))
           ) : data?.data && data.data.length > 0 ? (
             data.data.map(item => (
-              <CaseStudyCard key={item.id} item={item} />
+              <CaseStudyCard key={item.id} caseStudy={item} />
             ))
           ) : (
             <div className="col-span-full text-center py-20">

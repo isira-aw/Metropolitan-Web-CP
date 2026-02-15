@@ -1,34 +1,28 @@
-import { cn } from "@/lib/utils";
+import React from "react";
 
 interface SectionHeaderSmallProps {
   title: string;
   subtitle?: string;
+  align?: "left" | "center";
   className?: string;
 }
 
 export function SectionHeaderSmall({
   title,
   subtitle,
+  align = "left",
   className,
 }: SectionHeaderSmallProps) {
   return (
-    <div className={cn("flex flex-col gap-3 pb-6", className)}>
-      <div className="flex items-start gap-4">
-        {/* Red Decorative Line */}
-        <div className="mt-1 h-6 w-2 bg-[#C90815] rounded-full flex-shrink-0" />
-
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-display font-bold leading-tight text-secondary">
-            {title}
-          </h2>
-
-          {subtitle && (
-            <p className="text-base text-muted-foreground">
-              {subtitle}
-            </p>
-          )}
-        </div>
-      </div>
+    <div className={className} style={{ textAlign: align }}>
+      <h3 className="text-xl md:text-2xl font-semibold text-color-heading mb-3">
+        {title}
+      </h3>
+      {subtitle && (
+        <p className="text-base text-color-text max-w-2xl mx-auto">
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }

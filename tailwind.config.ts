@@ -81,6 +81,19 @@ export default {
           busy: "rgb(239 68 68)",
           offline: "rgb(156 163 175)",
         },
+        // Brand colors
+        blue: {
+          DEFAULT: "var(--color-blue)",
+          light: "var(--color-blue-light)",
+          medium: "var(--color-blue-medium)",
+          dark: "var(--color-blue-dark)",
+        },
+        red: {
+          DEFAULT: "var(--color-red)",
+          light: "var(--color-red-light)",
+          medium: "var(--color-red-medium)",
+          dark: "var(--color-red-dark)",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

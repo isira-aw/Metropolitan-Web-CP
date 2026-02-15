@@ -1,516 +1,339 @@
-
-import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
-import { ArrowRight, BriefcaseBusiness, CheckCircle, CheckCircle2, Clock, Handshake, Lightbulb, PhoneCall, Rocket, Settings, ShieldCheck, Sparkles, TrendingUp, Users } from "lucide-react";
-import { Link } from "wouter";
-import { useState } from "react";
 import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
-import { motion } from "framer-motion";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { Link } from "wouter";
+import { useRef, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Zap, Users, Award, Clock, Eye, Target } from "lucide-react";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 }
-  }
-};
+export default function AboutPage() {
+  const scrollReveal = (ref: React.RefObject<HTMLElement>, delay = 0) => {
+    const controls = useAnimation();
+    const isInView = useInView(ref, { once: true, amount: 0.1 });
 
-const cardVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1 }
-};
-const leaders = [
-  {
-    name: "Dinesh Ambani",
-    role: "Chairman",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/dinesh_ambani.jpg?updatedAt=1766599165369",
-  },
-  {
-    name: "Lalithkumar Ambani",
-    role: "Co-Chairman",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/lalithkumar_ambani.jpg",
-  },
-  {
-    name: "Ivor Maharoof",
-    role: "Deputy Chairman",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/ivor_maharoof.jpg",
-  },
-  {
-    name: "Michael Haglind",
-    role: "Director",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/michael_haglind.jpg",
-  },
-  {
-    name: "Dushanthi Roberts",
-    role: "Group Director Finance",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/dushanthi_roberts.jpg",
-  },
-  {
-    name: "Sanjiv Wijayasinghe",
-    role: "Group Director Human Resources",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/sanjiv_wijayasinghe.jpg",
-  },
-  {
-    name: "Charith Molligoda",
-    role: "Director/CEO - Engineering Cluster",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/charith_molligoda.jpg",
-  },
-  {
-    name: "Ali Asgar Roshanali",
-    role: "Director/CEO - Business Automation Cluster",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/ali_asgar_roshanali.jpg",
-  },
-  {
-    name: "Roshan Tissera",
-    role: "Director",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/roshan_tissera.jpg",
-  },
-  {
-    name: "Anil Gunawardana",
-    role: "Director/Chief Technology Officer",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/anil_gunawardana.jpg",
-  },
-  {
-    name: "Jagath Ravindra",
-    role: "Director",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/jagath_ravindra.jpg",
-  },
-  {
-    name: "Taslim Rahaman",
-    role: "Director",
-    img: "https://ik.imagekit.io/ayen/Metropolitan/People/board_of_directors/bg_rem/taslim_rahaman.jpg",
-  }
-];
+    useEffect(() => {
+      if (isInView) {
+        controls.start({
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }
+        });
+      }
+    }, [controls, isInView, delay]);
 
-export default function About() {
+    return {
+      opacity: 0,
+      y: 20,
+      animate: controls
+    };
+  };
 
-  const [activeTab, setActiveTab] = useState('policy');
+  const heroRef = useRef(null);
+  const heroAnimation = scrollReveal(heroRef, 0);
 
-  const tabs = [
-    { id: 'policy', label: 'Quality Policy', icon: ShieldCheck },
-    { id: 'services', label: 'Our Services', icon: Settings },
-    { id: 'promise', label: 'Our Promise', icon: Handshake },
-  ];
+  const valuesRef = useRef(null);
+  const valuesAnimation = scrollReveal(valuesRef, 0.2);
+
+  const teamRef = useRef(null);
+  const teamAnimation = scrollReveal(teamRef, 0.3);
+
+  const historyRef = useRef(null);
+  const historyAnimation = scrollReveal(historyRef, 0.4);
+
+  const contactRef = useRef(null);
+  const contactAnimation = scrollReveal(contactRef, 0.5);
+
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="min-h-screen bg-color-bg text-color-text">
       <Navbar />
 
-      <div className="bg-secondary text-white pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeader title="About Metropolitan" subtitle="Three decades of engineering excellence." light />
-        </div>
-      </div>
-
-      <section className="bg-white py-24 overflow-hidden">
-
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-
-            <div>
-              <SectionHeaderSmall
-                title="Our Legacy"
-              />
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                At Metropolitan Technologies (Pvt) Ltd, we are a leading electrical engineering company in Sri Lanka, delivering innovative and reliable solutions across six specialized divisions: Central AC, Elevators & Travelators, Fire Detection & Protection, Generators, Solar, and ELV systems. With a commitment to engineering excellence, safety, and sustainability, we provide end-to-end services that cater to both commercial and industrial projects.
-              </p>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Our team of skilled professionals leverages the latest technologies to ensure high-performance electrical solutions, energy efficiency, and seamless system integration, making us a trusted partner for businesses seeking cutting-edge electrical engineering services.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4 mt-8">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2070&auto=format&fit=crop" className="rounded-2xl shadow-lg w-full h-64 object-cover" alt="Construction" />
-                <img src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=2009&auto=format&fit=crop" className="rounded-2xl shadow-lg w-full h-40 object-cover" alt="Planning" />
-              </div>
-              <div className="space-y-4">
-                <img src="https://images.unsplash.com/photo-1428908728789-d2de25dbd4e2?q=80&w=2070&auto=format&fit=crop" className="rounded-2xl shadow-lg w-full h-40 object-cover" alt="Meeting" />
-                <img src="https://th.bing.com/th/id/OIP.PAlXM_ZSdC2mpGjCojqBPwHaE8?w=296&h=197&c=7&r=0&o=7&pid=1.7&rm=3" className="rounded-2xl shadow-lg w-full h-64 object-cover" alt="Workers" />
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <h2 className="text-2xl md:text-4xl font-display font-bold text-secondary tracking-tight">
-              Our Journey of Excellence
-            </h2>
-            <div className="section-divider" />
-            <p className="text-muted-foreground italic mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
-              One of the most respected engineering firms in Sri Lanka.
+      {/* Hero Section */}
+      <section className="pt-32 pb-24 md:pt-40 md:pb-32 bg-color-accent-primary/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            ref={heroRef}
+            initial={{ opacity: 0, y: 30 }}
+            animate={heroAnimation.animate}
+            className="max-w-3xl"
+          >
+            <h1 className="text-4xl md:text-5xl font-semibold text-color-heading mb-6">
+              About Metropolitan Engineering
+            </h1>
+            <p className="text-lg text-color-text mb-8 leading-relaxed">
+              We are a leading engineering solutions provider dedicated to building the future of sustainable infrastructure. 
+              With over 25 years of experience, we deliver innovative, high-performance systems for modern buildings worldwide.
             </p>
-          </div>
-          {/* Timeline Content */}
-          <div className="relative">
-            {/* Vertical line for desktop */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-slate-200 -translate-x-1/2"></div>
-
-            <div className="space-y-12 md:space-y-0">
-
-              {/* Item 1 - 63+ Years */}
-              <div className="relative flex flex-col md:flex-row items-center justify-between group">
-                <div className="md:w-[45%] text-right hidden md:block">
-                  <span className="text-6xl font-black text-slate-400 group-hover:text-blue-500 transition-colors">1961</span>
-                </div>
-
-                <div className="z-10 bg-blue-600 p-4 rounded-2xl text-white shadow-xl shadow-blue-200">
-                  <BriefcaseBusiness size={28} />
-                </div>
-
-                <div className="md:w-[45%] mt-6 md:mt-0 bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-lg transition-all">
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">63+ Years of Expertise</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    A legacy built on innovation, quality, and unwavering reliability in electrical engineering. We've powered Sri Lanka's growth for over six decades.
-                  </p>
-                </div>
-              </div>
-
-              {/* Item 2 - Pioneering Solutions (Reversed) */}
-              <div className="relative flex flex-col md:flex-row-reverse items-center justify-between group md:mt-[-20px]">
-                <div className="md:w-[45%] text-left hidden md:block">
-                  <span className="text-6xl font-black text-slate-400 group-hover:text-red-700 transition-colors">SOLUTIONS</span>
-                </div>
-
-                <div className="z-10 bg-blue-600 p-4 rounded-2xl text-white shadow-xl shadow-blue-200">
-                  <Lightbulb size={28} />
-                </div>
-
-                <div className="md:w-[45%] mt-6 md:mt-0 bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-lg transition-all">
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">Pioneering Solutions</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    Delivering cutting-edge solutions in Central AC, Elevators, Fire Protection, Generators, ELV, and Solar.
-                  </p>
-                </div>
-              </div>
-
-              {/* Item 3 - Sustainable Future */}
-              <div className="relative flex flex-col md:flex-row items-center justify-between group md:mt-[-20px]">
-                <div className="md:w-[45%] text-right hidden md:block">
-                  <span className="text-6xl font-black text-slate-400 group-hover:text-blue-500 transition-colors">FUTURE</span>
-                </div>
-
-                <div className="z-10 bg-blue-600 p-4 rounded-2xl text-white shadow-xl shadow-blue-200">
-                  <Sparkles size={28} />
-                </div>
-
-                <div className="md:w-[45%] mt-6 md:mt-0 bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-lg transition-all">
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">Sustainable Future</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    Focused on creating safe, sustainable, and future-ready infrastructure for Sri Lanka.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className="mt-10 text-center">
-            <Link href="/divisions">
-              <button className="btn-metro group" >
-                <span className="relative z-10">Explore Our Services</span>
-                <Rocket className="relative z-10 w-5 h-5" />
-                <span className="btn-hover-fill" />
-                <div className="absolute inset-0 bg-[#C90815] translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
-              </button>
+            <Link href="/contact">
+              <Button className="bg-gray-900 hover:bg-gray-800 text-white button-hover">
+                Get in Touch
+              </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center">
-          <h2 className="text-2xl md:text-4xl font-display font-bold text-secondary tracking-tight">
-            Leadership Team
-          </h2>
-          <div className="section-divider" />
-          <p className="text-muted-foreground italic mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
-            Meet the visionary leaders driving Innovatech Solutions forward.
-            Our executive team brings a wealth of experience and a shared
-            commitment to innovation and excellence.
-          </p>
-        </div>
-
-
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 mb-16 pt-10">
-          {leaders.map((leader, index) => (
+      {/* Mission & Vision */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              key={index}
+              ref={valuesRef}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="group relative bg-white rounded-3xl p-6 pt-12 shadow-sm border border-gray-100 hover:shadow-2xl hover:shadow-[#144A92]/10 transition-all duration-500"
+              animate={valuesAnimation.animate}
             >
-              <div className="flex flex-col items-center">
-                {/* Larger Image with Top Overlap */}
-                <div className="absolute -top-12 w-32 h-32">
-                  {/* Animated Glow behind image */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#C90815] to-[#144A92] rounded-full blur-md opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
-
-                  <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
-                    <img
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      src={leader.img || "/Assets/Images/People/default-person.png"}
-                      alt={leader.name}
-                    />
+              <SectionHeader
+                title="Our Mission & Vision"
+                subtitle="Driving innovation and excellence in every project we undertake"
+              />
+              <div className="mt-8 space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 rounded-full bg-color-accent-primary flex items-center justify-center flex-shrink-0">
+                    <Target className="w-6 h-6 text-color-text" />
                   </div>
-
-                  {/* Subtle Ring */}
-                  <div className="absolute -inset-1 border border-dashed border-[#C90815]/30 rounded-full animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div>
+                    <h3 className="text-lg font-medium text-color-heading mb-2">Our Mission</h3>
+                    <p className="text-color-text/70">
+                      To deliver innovative engineering solutions that enhance efficiency, safety, and sustainability while exceeding client expectations through our commitment to quality and excellence.
+                    </p>
+                  </div>
                 </div>
-
-                {/* Identity Section */}
-                <div className="text-center mt-10">
-                  <h3 className="text-xl font-heading font-bold text-[#060606] group-hover:text-[#144A92] transition-colors duration-300 leading-tight">
-                    {leader.name}
-                  </h3>
-
-                  <div className="flex flex-col items-center gap-2 mt-2">
-                    <span className="text-[#144A92] font-bold text-[10px] uppercase tracking-[0.2em] bg-[#144A92]/5 px-3 py-1 rounded-full">
-                      {leader.role}
-                    </span>
-
-                    {/* Minimalist Accent */}
-                    <div className="h-1 w-6 bg-[#C90815] rounded-full group-hover:w-16 transition-all duration-500 mt-2" />
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 rounded-full bg-color-accent-primary flex items-center justify-center flex-shrink-0">
+                    <Eye className="w-6 h-6 text-color-text" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-color-heading mb-2">Our Vision</h3>
+                    <p className="text-color-text/70">
+                      To be the leading global engineering partner, recognized for transforming visions into reality through cutting-edge technology, sustainable practices, and unwavering dedication.
+                    </p>
                   </div>
                 </div>
               </div>
             </motion.div>
-          ))}
-        </div>
-
-        <div className="bg-[#144C94] text-white rounded-3xl py-10 p-12 text-center">
-          <h2 className="text-3xl font-bold font-display mb-10 text-white">Our Core Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white ">
-            {["Safety First", "Sustainability", "Integrity"].map((v, i) => (
-              <div key={i} className="flex flex-col items-center">
-                {/* Icon Container with White Background and Red Icon */}
-                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg">
-                  <CheckCircle className="w-8 h-8 text-[#C90815]" />
-                </div>
-                <h3 className="text-xl font-bold text-white">{v}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <section className="bg-slate-50 py-4">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row gap-12">
-
-            {/* Sidebar Tabs */}
-            <div className="lg:w-1/4">
-              <div className="sticky top-24 space-y-2">
-                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 px-4">Navigation</h2>
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === tab.id
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 translate-x-2'
-                      : 'bg-white text-slate-500 hover:bg-slate-100'
-                      }`}
-                  >
-                    <tab.icon size={20} />
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Content Area */}
-            <div className="lg:w-3/4 bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-100">
-
-              {/* QUALITY POLICY */}
-              {activeTab === 'policy' && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <SectionHeaderSmall
-                    title="Quality Policy"
-                  />
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {[
-                      "Exceeding client expectations at affordable prices.",
-                      "Promoting creativity and innovation in engineering.",
-                      "Rigorous Quality Management Systems (QMS).",
-                      "Building lasting stakeholder relationships.",
-                      "Commitment to 100% continual improvement."
-                    ].map((text, i) => (
-                      <div key={i} className="flex gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                        <CheckCircle2 className="text-red-600 shrink-0" />
-                        <p className="text-slate-700 font-medium text-sm leading-relaxed">{text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* OUR SERVICES */}
-              {activeTab === 'services' && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <div className="flex justify-between items-end mb-8">
-                    <SectionHeaderSmall
-                      title="Our Services"
-                    />
-                  </div>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {[
-                      { title: "Expert Support", desc: "Engineers trained by global principals." },
-                      { title: "Speedy Response", desc: "Rapid mobile units for Colombo & suburbs." },
-                      { title: "24/7 Call Center", desc: "Technical assistance around the clock." },
-                      { title: "E-Maintenance", desc: "Automated alerts and proactive support." }
-                    ].map((service, i) => (
-                      <div key={i} className="group p-6 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all">
-                        <h4 className="font-bold text-slate-900 mb-1 group-hover:text-blue-600">{service.title}</h4>
-                        <p className="text-slate-500 text-sm leading-relaxed">{service.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* THE PROMISE */}
-              {activeTab === 'promise' && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <SectionHeaderSmall
-                    title="The Metropolitan Promise"
-                  />
-                  <p className="text-slate-500 mb-10 leading-relaxed">
-                    Reputation must be earned every day. We commit to measurable service levels across four key pillars.
-                  </p>
-
-                  <div className="grid md:grid-cols-2 gap-8">
-                    {/* Pillar 1 */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3 text-blue-600">
-                        <PhoneCall size={20} className="text-red-600 shrink-0" />
-                        <h3 className="font-bold text-slate-900">Accessibility</h3>
-                      </div>
-                      <ul className="text-sm text-slate-600 space-y-3 pl-8 list-disc">
-                        <li>24-hour phone & email response time.</li>
-                        <li>Direct access to senior management.</li>
-                        <li>Named contact person for every project.</li>
-                      </ul>
-                    </div>
-
-                    {/* Pillar 2 */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3 text-blue-600">
-                        <Clock size={20} className="text-red-600 shrink-0" />
-                        <h3 className="font-bold text-slate-900">Transparency</h3>
-                      </div>
-                      <ul className="text-sm text-slate-600 space-y-3 pl-8 list-disc">
-                        <li>Fact-based solutions over product sales.</li>
-                        <li>Advance notification of deadline changes.</li>
-                        <li>Regular updates on market trends.</li>
-                      </ul>
-                    </div>
-
-                    {/* Pillar 3 */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3 text-blue-600">
-                        <TrendingUp size={20} className="text-red-600 shrink-0" />
-                        <h3 className="font-bold text-slate-900">Efficiency</h3>
-                      </div>
-                      <ul className="text-sm text-slate-600 space-y-3 pl-8 list-disc">
-                        <li>Corporate payment structures.</li>
-                        <li>Genuine consumables & original spares.</li>
-                        <li>Principal-trained expert engineers.</li>
-                      </ul>
-                    </div>
-
-                    {/* Pillar 4 */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3 text-blue-600">
-                        <Users size={20} className="text-red-600 shrink-0" />
-                        <h3 className="font-bold text-slate-900">Partnership</h3>
-                      </div>
-                      <ul className="text-sm text-slate-600 space-y-3 pl-8 list-disc">
-                        <li>Investing time to learn your business.</li>
-                        <li>Anticipating needs before they arise.</li>
-                        <li>Immediate resolution of service issues.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-            </div>
+            <motion.div
+              ref={teamRef}
+              initial={{ opacity: 0, y: 20 }}
+              animate={teamAnimation.animate}
+              className="relative"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                alt="Engineering Team"
+                className="rounded-xl shadow-lg"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
+      {/* Core Values */}
+      <section className="section-padding bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            ref={historyRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={historyAnimation.animate}
+          >
+            <SectionHeader
+              title="Our Core Values"
+              subtitle="The principles that guide our work and shape our culture"
+              align="center"
+              className="mb-12"
+            />
 
-          <div className="text-center">
-            <h2 className="text-2xl md:text-4xl font-display font-bold text-secondary tracking-tight">
-              Story of Our Company
-            </h2>
-            <div className="section-divider" />
-            <p className="text-muted-foreground italic mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
-              A legacy of quality and entrepreneurship since 1958
-            </p>
-          </div>
-
-          <div className="m-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Column: The Founder's Origin */}
-            <div className="lg:col-span-7 space-y-6 text-gray-700 leading-relaxed text-lg">
-              <p >
-                <span className="text-5xl font-bold text-[#C90815] mr-3 float-left">
-                  Mr
-                </span>. J S Ambani, a young accountant by profession working for a large conglomerate,
-                was irked by the very hard touch of the typewriters in use. This prompted a search
-                for quality that would eventually change the landscape of Sri Lankan business.
-              </p>
-              <p>
-                He looked to the USA and discovered the <span className="text-[#144C94] font-bold">"Royal" typewriter</span>—the
-                Rolls Royce of its time. When local vendors refused to import them, he saw an
-                opportunity for those with the courage to choose quality. He quit his job and
-                founded Metropolitan on the 25th of August, 1958.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: Zap,
+                  title: "Innovation",
+                  description: "Constantly seeking new ways to improve and deliver cutting-edge solutions"
+                },
+                {
+                  icon: Users,
+                  title: "Integrity",
+                  description: "Upholding the highest ethical standards in all our dealings"
+                },
+                {
+                  icon: Award,
+                  title: "Excellence",
+                  description: "Striving for perfection in every project we undertake"
+                },
+                {
+                  icon: Target,
+                  title: "Client Focus",
+                  description: "Understanding and exceeding our clients' expectations"
+                },
+                {
+                  icon: Clock,
+                  title: "Reliability",
+                  description: "Delivering on our promises with consistency and dependability"
+                },
+                {
+                  icon: Eye,
+                  title: "Safety First",
+                  description: "Prioritizing the safety of our employees, clients, and communities"
+                }
+              ].map((value, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-white p-6 rounded-xl border border-gray-200 card-hover"
+                >
+                  <div className="w-12 h-12 rounded-full bg-color-accent-primary flex items-center justify-center mb-4">
+                    <value.icon className="w-6 h-6 text-color-text" />
+                  </div>
+                  <h3 className="text-lg font-medium text-color-heading mb-2">
+                    {value.title}
+                  </h3>
+                  <p className="text-color-text/70">
+                    {value.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
+          </motion.div>
+        </div>
+      </section>
 
-            {/* Right Column: Featured Historical Image */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden  border border-gray-100">
-                <img
-                  src="https://ik.imagekit.io/ayen/Metropolitan/company-history-founder.jpg"
-                  alt="Mr. J.S Ambani at the Launch of Royal Typewriters"
-                  className="w-full h-auto"
-                />
-                <div className="bg-[#144C94] p-4 text-white text-sm italic">
-                  Mr. J.S Ambani with the American Ambassador at the Launch of Royal Typewriters in Sri Lanka, 1958
-                </div>
-              </div>
-            </div>
-
-            {/* Full Width Bottom Section: The Evolution */}
-            <div className="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-600 border-t border-gray-100 ">
-              <div className="bg-[#F8F9FA] p-8 rounded-2xl border-l-4 border-[#144C94]">
-                <p className="italic font-medium text-[#144C94]">
-                  <span className="text-5xl font-bold text-[#C90815] mr-3 float-left">
-                    "
-                  </span>Today, six decades later, the legacy of quality and support is engrained in our DNA,
-                  providing state-of-the-art technology solutions across IT, Communications, and Imaging
-                  to empower the success of our customers.  <span className="text-5xl font-bold text-[#C90815] mr-3 float-right">
-                    "
-                  </span>
-                </p>
-              </div>
-              <div className="space-y-4">
-                <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-[#C90815] first-letter:mr-3 first-letter:float-left">
-                  Metropolitan soon represented world-renowned brands such as <span className="font-semibold">Facit Calculators</span> and
-                  <span className="font-semibold"> Ericsson switchboards</span>. His quest for quality didn’t stop at products;
-                  it was backed by superlative after-sales service that remains the bedrock of our trust today.
+      {/* History */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <motion.div
+              ref={historyRef}
+              initial={{ opacity: 0, y: 20 }}
+              animate={historyAnimation.animate}
+              className="relative"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1541870538888-f11b09991e13?w=800&q=80"
+                alt="Company History"
+                className="rounded-xl shadow-lg"
+              />
+            </motion.div>
+            <motion.div
+              ref={historyRef}
+              initial={{ opacity: 0, y: 20 }}
+              animate={historyAnimation.animate}
+              className="flex flex-col justify-center"
+            >
+              <SectionHeader
+                title="Our Journey"
+                subtitle="From humble beginnings to global engineering excellence"
+              />
+              <div className="mt-6 space-y-4 text-color-text/80">
+                <p>
+                  Founded in 1999, Metropolitan Engineering began as a small team of passionate engineers with a vision to transform the engineering landscape. Over the years, we have grown into a global leader in sustainable infrastructure solutions.
                 </p>
                 <p>
-                  With the support of his five sons—experts in Finance, Marketing, Engineering, and IT—the company
-                  pioneered electronic office products, becoming to the office what Unilever or Nestle is to the home.
+                  Our commitment to innovation, quality, and client satisfaction has driven our success, allowing us to deliver over 500 projects across 15 countries. Today, we continue to push the boundaries of what's possible in engineering.
+                </p>
+                <p>
+                  Looking ahead, we remain dedicated to building a sustainable future through smart engineering practices and cutting-edge technology, ensuring our clients benefit from the most advanced solutions available.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Leadership */}
+      <section className="section-padding bg-color-accent-primary/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            ref={teamRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={teamAnimation.animate}
+          >
+            <SectionHeader
+              title="Meet Our Leadership"
+              subtitle="Experienced professionals driving our vision forward"
+              align="center"
+              className="mb-12"
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  name: "John Smith",
+                  role: "CEO & Founder",
+                  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=faces",
+                  bio: "With over 30 years of experience in engineering, John founded Metropolitan Engineering with a vision to transform the industry."
+                },
+                {
+                  name: "Sarah Johnson",
+                  role: "COO",
+                  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=faces",
+                  bio: "Sarah oversees our operations and ensures that every project meets our rigorous quality standards."
+                },
+                {
+                  name: "Michael Chen",
+                  role: "CTO",
+                  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces",
+                  bio: "Michael leads our innovation efforts and ensures we stay at the forefront of engineering technology."
+                },
+                {
+                  name: "Emily Rodriguez",
+                  role: "CFO",
+                  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=faces",
+                  bio: "Emily manages our financial strategy and ensures the long-term sustainability of our organization."
+                }
+              ].map((member, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-white rounded-xl overflow-hidden border border-gray-200 card-hover"
+                >
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-medium text-color-heading mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-sm text-color-text/60 mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-sm text-color-text/70">
+                      {member.bio}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="section-padding bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            ref={contactRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={contactAnimation.animate}
+            className="text-center"
+          >
+            <SectionHeader
+              title="Ready to Work With Us?"
+              subtitle="Let's discuss your next engineering project"
+              align="center"
+              className="mb-8"
+            />
+            <Link href="/contact">
+              <Button className="bg-gray-900 hover:bg-gray-800 text-white button-hover px-8 py-6 text-base">
+                Contact Our Team
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
 

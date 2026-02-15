@@ -1,100 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+:root {
+  --font-primary: "SN Pro",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  --color-text: #424242;
+  --color-heading: #000000;
+  --color-bg: #FFFFFF;
+  --color-accent-primary: rgba(20, 74, 146, 0.08);
+  --color-accent-secondary: rgba(203, 8, 22, 0.05);
+  
+  /* Primary brand colors */
+  --color-blue: #144A92;
+  --color-blue-light: rgba(20, 74, 146, 0.05);
+  --color-blue-medium: rgba(20, 74, 146, 0.1);
+  --color-blue-dark: rgba(20, 74, 146, 0.9);
+  
+  --color-red: #CB0816;
+  --color-red-light: rgba(203, 8, 22, 0.05);
+  --color-red-medium: rgba(203, 8, 22, 0.1);
+  --color-red-dark: rgba(203, 8, 22, 0.9);
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* ── Corporate Metropolitan Brand Colors ── */
-  /* Primary Red: #CB0816 -> hsl(356, 92%, 41%) */
-  /* Secondary Blue: #144A92 -> hsl(214, 76%, 33%) */
-  /* Brand White: #FFFFFF */
-  --metro-blue: #144A92;
-  --metro-red: #CB0816;
-  --metro-white: #ffffff;
-  --metro-light-blue: #6EC1E4;
-
-  --background: 0 0% 100%;
-  --foreground: 215 28% 17%; /* Dark Blue-Grey for text */
-
-  --card: 0 0% 100%;
-  --card-foreground: 215 28% 17%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 215 28% 17%;
-
-  --primary: 356 92% 41%; /* #CB0816 */
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 214 76% 33%; /* #144A92 */
-  --secondary-foreground: 0 0% 100%;
-
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 356 92% 41%; /* Primary Red ring */
-
-  --radius: 0.5rem;
-
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Poppins', sans-serif;
-}
-
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-
-  --primary: 356 92% 41%;
-  --primary-foreground: 210 40% 98%;
-
-  --secondary: 214 76% 33%;
-  --secondary-foreground: 210 40% 98%;
-
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 @layer base {
   * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground antialiased font-sans;
+    @apply border-gray-200;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-secondary;
+    @apply text-black font-semibold;
   }
 }
 
-/* Custom Utilities */
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+/* Scroll Reveal Animation */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image Pop-Up Animation */
+.image-popup {
+  transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.image-popup.visible {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Hover Animation */
+.button-hover {
+  transition: all 0.3s ease;
+}
+
+.button-hover:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Hover Effect */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-accent-primary);
+}
+
+/* Section Padding */
 .section-padding {
   @apply py-16 md:py-24;
 }
