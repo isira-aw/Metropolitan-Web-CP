@@ -65,25 +65,25 @@ export default function Generator() {
       title: "Customized Solutions",
       description: "Design and Installation of Generator Systems",
       icon: Settings,
-      img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop"
+      img: "https://cloudester.com/wp-content/uploads/2024/02/CustomAISolutions.webp"
     },
     {
       title: "Maintenance & Repair",
       description: "Routine Maintenance and Emergency Repairs",
       icon: Wrench,
-      img: "https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=2070&auto=format&fit=crop"
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHKSpekt-KAvCUGVHF_P5D7HxZob_H0u3HJA&s"
     },
     {
       title: "System Upgrades",
       description: "Upgrades and Retrofits for Existing Systems",
       icon: Zap,
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=2070&auto=format&fit=crop"
+      img: "https://thumbs.dreamstime.com/b/ai-system-update-model-training-progress-bar-motif-machine-learning-loading-icons-showing-percentage-status-411072406.jpg"
     },
     {
       title: "Performance Testing",
       description: "Load Testing and Performance Analysis",
       icon: Battery,
-      img: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=2070&auto=format&fit=crop"
+      img: "https://www.nagarro.com/hubfs/Testing-AI-Article_F-min.jpg"
     }
   ];
 
@@ -525,7 +525,7 @@ export default function Generator() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=2070&auto=format&fit=crop')`,
+            backgroundImage: `url('https://www.danmik.co.za/wp-content/uploads/2024/09/How-AI-Will-Influence-the-Future-of-Power-Generators.webp')`,
             transform: `scale(1.1) translateY(${scrollY * 0.3}px)`
           }}
         />
@@ -567,19 +567,6 @@ export default function Generator() {
             engineers and technicians deliver reliable and efficient power for a wide range of applications.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 animate-scroll-reveal delay-300">
-            <a href="#our-services">
-              <button className="btn-metro">
-                Explore Services
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </a>
-            <a href="#contact-section">
-              <button className="btn-metro">
-                Contact Us
-              </button>
-            </a>
-          </div>
         </div>
 
         {/* Scroll Indicator */}
@@ -638,44 +625,7 @@ export default function Generator() {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS ═══ */}
-      {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-10 md:py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
-                Client Testimonials
-              </h2>
-              <div className="section-divider" />
-              <p className="text-[#424242] mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
-                Hear what our clients have to say about our reliable solutions and exceptional service.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-8 md:mt-12">
-              {testimonialsData.slice(0, 6).map((t, i) => (
-                <Card key={t.id} className={`border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-scroll-reveal delay-${Math.min(i + 1, 5)}00`}>
-                  <div className="p-5 md:p-8">
-                    <Quote className="w-8 h-8 md:w-10 md:h-10 text-[#144A92]/15 mb-3 md:mb-4" />
-                    <p className="text-[#424242] italic mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
-                      "{t.content}"
-                    </p>
-                    <div className="flex items-center gap-3 pt-3 md:pt-4 border-t border-gray-100">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#144A92]/5 flex items-center justify-center text-[#144A92] font-bold text-base md:text-lg">
-                        {t.author[0]}
-                      </div>
-                      <div>
-                        <p className="font-bold text-black text-sm md:text-base">{t.author}</p>
-                        <p className="text-xs md:text-sm text-[#424242]">{t.role}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      
 
       {/* ═══ OUR DIVISIONS ═══ */}
       <section className="py-10 md:py-16 bg-[#144A92]/[0.02]">
@@ -760,6 +710,45 @@ export default function Generator() {
               </div>
             ))}
           </div>
+
+          {/* ═══ TESTIMONIALS ═══ */}
+      {testimonialsData && testimonialsData.length > 0 && (
+        <section className="py-10 md:py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
+                Client Testimonials
+              </h2>
+              <div className="section-divider" />
+              <p className="text-[#424242] mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
+                Hear what our clients have to say about our reliable solutions and exceptional service.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-8 md:mt-12">
+              {testimonialsData.slice(0, 6).map((t, i) => (
+                <Card key={t.id} className={`border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-scroll-reveal delay-${Math.min(i + 1, 5)}00`}>
+                  <div className="p-5 md:p-8">
+                    <Quote className="w-8 h-8 md:w-10 md:h-10 text-[#144A92]/15 mb-3 md:mb-4" />
+                    <p className="text-[#424242] italic mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
+                      "{t.content}"
+                    </p>
+                    <div className="flex items-center gap-3 pt-3 md:pt-4 border-t border-gray-100">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#144A92]/5 flex items-center justify-center text-[#144A92] font-bold text-base md:text-lg">
+                        {t.author[0]}
+                      </div>
+                      <div>
+                        <p className="font-bold text-black text-sm md:text-base">{t.author}</p>
+                        <p className="text-xs md:text-sm text-[#424242]">{t.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
           {/* Additional features row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-4 md:mt-6">
