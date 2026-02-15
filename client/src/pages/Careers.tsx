@@ -62,12 +62,12 @@ export default function Careers() {
   }
 
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <Navbar />
 
-      <div className="bg-secondary text-white pt-32 pb-20">
+      <div className="bg-[#f8f8f8] pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeader title="Join Our Team" subtitle="Build your career with a global leader." light />
+          <SectionHeader title="Join Our Team" subtitle="Build your career with a global leader." />
         </div>
       </div>
 
@@ -99,28 +99,27 @@ export default function Careers() {
               {POLICIES.map((policy, i) => (
                 <Card
                   key={i}
-                  className="group hover:shadow-xl transition-all duration-300 cursor-default border-l-8 border-[#144C94] hover:border-[#C90815] shadow-md bg-white overflow-hidden"
+                  className="group rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all duration-300 cursor-default border-l-4 border-l-[#144A92]/20 bg-white overflow-hidden"
                 >
                   <CardContent className="p-6">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
                       <div className="flex items-center gap-3">
-                        {/* Red Circle Icon Bullet */}
-                        <div className="w-2 h-2 rounded-full bg-[#C90815]" />
-                        <h3 className="text-xl font-bold text-[#144C94] group-hover:text-black transition-colors">
+                        <div className="w-2 h-2 rounded-full bg-[#144A92]/40" />
+                        <h3 className="text-xl font-bold text-black group-hover:text-[#144A92] transition-colors">
                           {policy.title}
                         </h3>
                       </div>
-                      <span className="text-[10px] uppercase tracking-widest font-black text-white bg-[#C90815] px-3 py-1 rounded-full">
+                      <span className="text-[10px] uppercase tracking-widest font-semibold text-[#424242] bg-[#f8f8f8] px-3 py-1 rounded-full border border-black/[0.06]">
                         {policy.category}
                       </span>
                     </div>
 
-                    <p className="text-gray-600 leading-relaxed mb-4 border-b border-gray-100 pb-4">
+                    <p className="text-[#424242] leading-relaxed mb-4 border-b border-black/[0.04] pb-4">
                       {policy.detail}
                     </p>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex gap-4 text-sm font-medium text-gray-400">
+                      <div className="flex gap-4 text-sm font-medium text-[#424242]/60">
                         <span className="flex items-center italic">
                           Status: <span className="ml-1 text-black not-italic">{policy.status}</span>
                         </span>
@@ -135,12 +134,12 @@ export default function Careers() {
               ))}
             </div>
 
-            <div className="mt-12 p-8 bg-muted/30 rounded-2xl">
-              <h3 className="text-xl font-bold text-secondary mb-4">Why Metropolitan?</h3>
+            <div className="mt-12 p-8 bg-[#f8f8f8] rounded-xl">
+              <h3 className="text-xl font-bold text-black mb-4">Why Metropolitan?</h3>
               <ul className="space-y-3">
                 {["Competitive salary and benefits", "Global mobility opportunities", "Professional development programs", "Inclusive and diverse culture"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
+                  <li key={i} className="flex items-center gap-3 text-[#424242]">
+                    <div className="w-2 h-2 rounded-full bg-[#144A92]/40" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -153,7 +152,7 @@ export default function Careers() {
             <SectionHeaderSmall
               title="Apply Now"
             />
-            <Card className="shadow-xl">
+            <Card className="rounded-xl border border-black/[0.06] shadow-sm">
               <CardContent className="p-8">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -231,7 +230,7 @@ export default function Careers() {
                     />
                     <Button
                       type="submit"
-                      className="w-full h-12 text-lg bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-full font-semibold"
+                      className="w-full h-12 text-lg bg-[#144A92] text-white hover:shadow-md hover:scale-[1.03] rounded-lg font-semibold transition-all"
                       disabled={mutation.isPending}
                     >
                       {mutation.isPending ? <Loader2 className="animate-spin" /> : "Submit Application"}

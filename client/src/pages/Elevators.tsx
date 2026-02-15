@@ -58,38 +58,39 @@ export default function Elevators() {
   ];
 
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <Navbar />
 
-      <div className="bg-secondary text-white pt-2 pb-20">
+      <div className="bg-[#0f0f0f] text-white pt-2 pb-20">
 
       </div>
 
-      {/* HERO - Full Width with Overlay Stats */}
+      {/* HERO - Full Width with Overlay */}
       <section className="relative h-[70vh] min-h-[600px] flex items-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('https://static.vecteezy.com/system/resources/previews/041/449/599/non_2x/ai-generated-elevator-escalator-is-moving-staircase-used-as-transportation-between-floors-or-levels-building-professionalgraphy-photo.jpg')` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-transparent" />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="max-w-2xl animate-in slide-in-from-left-10 fade-in duration-700">
-            <Badge className="mb-4 bg-primary/20 text-white hover:bg-primary/30 border-primary/30">
+          <div className="max-w-2xl">
+            <Badge className="mb-4 bg-white/10 text-white hover:bg-white/20 border-white/20">
               <ArrowUp className="w-3 h-3 mr-1" />
               Vertical Transportation Experts
             </Badge>
             <h1 className="text-6xl md:text-7xl font-display font-bold text-white mb-6">
               Elevators &
-              <span className="text-primary"> Travelators</span>
+              <span className="text-[#144A92]"> Travelators</span>
             </h1>
             <p className="text-xl text-white/90 leading-relaxed mb-8">
               Safe, reliable, and efficient vertical transportation solutions engineered for
               seamless movement in modern urban environments.
             </p>
             <div className="flex gap-4">
-              <Button size="lg" variant="secondary">Explore Solutions</Button>
-              <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20">
+              <Button size="lg" className="bg-[#144A92] text-white rounded-lg hover:bg-[#144A92]/90">Explore Solutions</Button>
+              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 rounded-lg">
                 Modernize Existing
               </Button>
             </div>
@@ -97,12 +98,12 @@ export default function Elevators() {
 
           {/* Floating Stats Card */}
           <div className="absolute bottom-8 right-8 hidden lg:block">
-            <div className="bg-white p-6 rounded-2xl shadow-2xl border border-border w-80">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-black/[0.06] w-80">
               <div className="grid grid-cols-2 gap-4">
                 {stats.slice(0, 2).map((stat, i) => (
                   <div key={i}>
-                    <p className="text-3xl font-bold text-primary">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    <p className="text-3xl font-bold text-[#144A92]">{stat.value}</p>
+                    <p className="text-sm text-[#424242]">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -112,13 +113,13 @@ export default function Elevators() {
       </section>
 
       {/* STATS BAR */}
-      <section className="bg-primary text-white py-8">
+      <section className="bg-[#0f0f0f] text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, i) => (
-              <div key={i} className="animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${i * 100}ms` }}>
+              <div key={i}>
                 <p className="text-4xl font-bold mb-1">{stat.value}</p>
-                <p className="text-white/80 text-sm">{stat.label}</p>
+                <p className="text-white/70 text-sm">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -137,17 +138,17 @@ export default function Elevators() {
             {solutions.map((solution, i) => (
               <div
                 key={i}
-                className="group bg-gradient-to-br from-muted/50 to-muted/30 p-8 rounded-2xl border border-border hover:border-primary/50 hover:shadow-lg transition-all"
+                className="group bg-white p-8 rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all"
               >
-                <h3 className="text-2xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">
+                <h3 className="text-2xl font-bold text-black mb-3">
                   {solution.title}
                 </h3>
-                <p className="text-muted-foreground mb-6">{solution.description}</p>
+                <p className="text-[#424242] mb-6">{solution.description}</p>
                 <div className="grid grid-cols-2 gap-3">
                   {solution.features.map((feature, j) => (
                     <div key={j} className="flex items-center gap-2 text-sm">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      <span className="text-secondary/80">{feature}</span>
+                      <div className="w-1.5 h-1.5 bg-[#144A92] rounded-full" />
+                      <span className="text-[#424242]">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -157,18 +158,13 @@ export default function Elevators() {
         </div>
       </section>
 
-      {/* SAFETY FIRST - Unique Section */}
-      <section className="py-24 bg-gradient-to-br from-secondary to-secondary/90 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* SAFETY FIRST */}
+      <section className="py-24 bg-[#0f0f0f] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Award className="w-16 h-16 text-primary mx-auto mb-4" />
+            <Award className="w-16 h-16 text-[#144A92] mx-auto mb-4" />
             <h2 className="text-white text-4xl font-display font-bold mb-4">Safety is Our Priority</h2>
-            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
               Every elevator and escalator we install meets the highest international safety standards
             </p>
           </div>
@@ -177,8 +173,8 @@ export default function Elevators() {
             {safetyFeatures.map((feature, i) => {
               const Icon = feature.icon;
               return (
-                <div key={i} className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 text-center">
-                  <Icon className="w-12 h-12 text-primary mx-auto mb-4" />
+                <div key={i} className="bg-white/5 p-6 rounded-xl border border-white/10 text-center">
+                  <Icon className="w-12 h-12 text-[#144A92] mx-auto mb-4" />
                   <p className="text-white font-medium">{feature.text}</p>
                 </div>
               );
@@ -188,7 +184,7 @@ export default function Elevators() {
           <div className="mt-12 text-center">
             <div className="inline-flex flex-wrap gap-3 justify-center">
               {["EN 81-20/50 Certified", "ISO 9001 Quality", "CE Marked", "ASME A17.1 Compliant"].map((cert, i) => (
-                <Badge key={i} variant="outline" className="bg-white/10 border-white/30 text-white px-4 py-2">
+                <Badge key={i} variant="outline" className="bg-white/5 border-white/20 text-white px-4 py-2">
                   {cert}
                 </Badge>
               ))}
@@ -199,21 +195,21 @@ export default function Elevators() {
 
       {/* TESTIMONIALS */}
       {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-24 bg-muted/30">
+        <section className="py-24 bg-[#f8f8f8]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader title="What Our Clients Say" />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
               {testimonialsData.map((t) => (
-                <div key={t.id} className="bg-white p-8 rounded-2xl shadow-md border border-border">
-                  <Quote className="w-8 h-8 text-primary/30 mb-4" />
-                  <p className="text-muted-foreground italic mb-6">"{t.content}"</p>
+                <div key={t.id} className="bg-white p-8 rounded-xl shadow-sm border border-black/[0.06] hover:shadow-lg transition-shadow">
+                  <Quote className="w-8 h-8 text-[#144A92]/20 mb-4" />
+                  <p className="text-[#424242] italic mb-6">"{t.content}"</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                    <div className="w-10 h-10 rounded-full bg-[#144A92]/[0.06] flex items-center justify-center text-[#144A92] font-bold">
                       {t.author[0]}
                     </div>
                     <div>
-                      <p className="font-bold text-secondary text-sm">{t.author}</p>
-                      <p className="text-xs text-muted-foreground">{t.role}</p>
+                      <p className="font-bold text-black text-sm">{t.author}</p>
+                      <p className="text-xs text-[#424242]">{t.role}</p>
                     </div>
                   </div>
                 </div>
@@ -230,11 +226,11 @@ export default function Elevators() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {isLoading ? (
-              Array(3).fill(0).map((_, i) => <div key={i} className="h-[400px] bg-muted animate-pulse rounded-2xl" />)
+              Array(3).fill(0).map((_, i) => <div key={i} className="h-[400px] bg-[#f8f8f8] animate-pulse rounded-xl" />)
             ) : projects?.data && projects.data.length > 0 ? (
               projects.data.map(p => <CaseStudyCard key={p.id} item={p} />)
             ) : (
-              <div className="col-span-3 text-center py-12 text-muted-foreground">
+              <div className="col-span-3 text-center py-12 text-[#424242]">
                 No projects found for this division yet.
               </div>
             )}
@@ -251,30 +247,30 @@ export default function Elevators() {
       </section>
 
       {/* CONTACT */}
-      <section className="py-24 bg-muted/30">
+      <section className="py-24 bg-[#f8f8f8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-display font-bold text-secondary mb-6">
+              <h2 className="text-4xl font-display font-bold text-black mb-6">
                 Ready to Elevate Your Building?
               </h2>
-              <p className="text-muted-foreground text-lg mb-8">
+              <p className="text-[#424242] text-lg mb-8">
                 Whether you need new installations or want to modernize existing systems, our team of
                 certified engineers is ready to help. Get a free consultation and site assessment today.
               </p>
               <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-border">
-                  <Wrench className="w-8 h-8 text-primary" />
+                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-black/[0.06]">
+                  <Wrench className="w-8 h-8 text-[#144A92]" />
                   <div>
-                    <p className="font-semibold text-secondary">Maintenance Contracts</p>
-                    <p className="text-sm text-muted-foreground">Preventive care for maximum uptime</p>
+                    <p className="font-semibold text-black">Maintenance Contracts</p>
+                    <p className="text-sm text-[#424242]">Preventive care for maximum uptime</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-border">
-                  <ArrowUp className="w-8 h-8 text-primary" />
+                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-black/[0.06]">
+                  <ArrowUp className="w-8 h-8 text-[#144A92]" />
                   <div>
-                    <p className="font-semibold text-secondary">Modernization Services</p>
-                    <p className="text-sm text-muted-foreground">Upgrade old systems to modern standards</p>
+                    <p className="font-semibold text-black">Modernization Services</p>
+                    <p className="text-sm text-[#424242]">Upgrade old systems to modern standards</p>
                   </div>
                 </div>
               </div>

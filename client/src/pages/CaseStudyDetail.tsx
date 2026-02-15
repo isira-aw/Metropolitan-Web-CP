@@ -12,22 +12,22 @@ export default function CaseStudyDetail() {
   const id = parseInt(params?.id || "0");
   const { data: project, isLoading, error } = useCaseStudy(id);
 
-  if (isLoading) return <div className="min-h-screen bg-white flex items-center justify-center"><div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"/></div>;
-  if (error || !project) return <div className="min-h-screen bg-white flex items-center justify-center">Project not found</div>;
+  if (isLoading) return <div className="min-h-screen bg-white flex items-center justify-center"><div className="w-10 h-10 border-4 border-[#144A92] border-t-transparent rounded-full animate-spin"/></div>;
+  if (error || !project) return <div className="min-h-screen bg-white flex items-center justify-center text-[#424242]">Project not found</div>;
 
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <Navbar />
 
       {/* Hero Image */}
-      <div className="relative h-[60vh] min-h-[500px]">
-        <img 
-          src={project.image} 
-          alt={project.title} 
+      <div className="relative h-[50vh] min-h-[400px]">
+        <img
+          src={project.image}
+          alt={project.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
         <div className="absolute bottom-0 left-0 w-full p-8 md:p-16">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-4">{project.title}</h1>
@@ -41,24 +41,24 @@ export default function CaseStudyDetail() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                    <div className="flex flex-wrap gap-3 mb-4">
-              <Badge className="bg-primary text-white hover:bg-primary border-none text-sm py-1 px-3">{project.division}</Badge>
+            <div className="flex flex-wrap gap-3 mb-4">
+              <Badge className="bg-[#144A92]/10 text-[#144A92] hover:bg-[#144A92]/15 border border-[#144A92]/20 text-sm py-1 px-3">{project.division}</Badge>
               {project.completionDate && (
-                <Badge variant="outline" className="text-white border-white/30 bg-black/30 backdrop-blur-sm">
+                <Badge variant="outline" className="text-[#424242] border-black/[0.06] bg-[#f8f8f8]">
                   <Calendar className="w-3 h-3 mr-1" /> {project.completionDate}
                 </Badge>
               )}
             </div>
             <Link href="/case-studies">
-              <Button variant="ghost" className="text-blue pl-0 mb-4 hover:text-primary">
+              <Button variant="ghost" className="text-[#424242] pl-0 mb-4 hover:text-[#144A92] hover:bg-transparent">
                 <ArrowLeft className="mr-2 w-4 h-4" /> Back to Projects
               </Button>
             </Link>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-display font-bold text-secondary mb-6">Project Overview</h2>
-            <div className="prose prose-lg text-muted-foreground max-w-none leading-relaxed">
+            <h2 className="text-2xl font-display font-bold text-black mb-6">Project Overview</h2>
+            <div className="prose prose-lg text-[#424242] max-w-none leading-relaxed">
               {project.description.split('\n').map((paragraph, i) => (
                 <p key={i} className="mb-4">{paragraph}</p>
               ))}
@@ -67,27 +67,27 @@ export default function CaseStudyDetail() {
 
           {/* Sidebar */}
           <div>
-            <div className="bg-muted/30 border border-border rounded-2xl p-8 sticky top-24">
-              <h3 className="text-xl font-bold text-secondary mb-6">Project Details</h3>
-              
+            <div className="bg-[#f8f8f8] rounded-xl p-8 sticky top-24 border border-black/[0.06]">
+              <h3 className="text-xl font-bold text-black mb-6">Project Details</h3>
+
               <div className="space-y-6">
                 {project.client && (
                   <div>
-                    <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Client</p>
-                    <p className="text-lg font-medium text-foreground flex items-center">
-                      <Building className="w-4 h-4 mr-2 text-primary" /> {project.client}
+                    <p className="text-sm font-semibold text-[#424242]/60 uppercase tracking-wider mb-1">Client</p>
+                    <p className="text-lg font-medium text-black flex items-center">
+                      <Building className="w-4 h-4 mr-2 text-[#144A92]" /> {project.client}
                     </p>
                   </div>
                 )}
-                
+
                 <div>
-                   <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Status</p>
-                   <p className="text-lg font-medium text-foreground">Completed</p>
+                   <p className="text-sm font-semibold text-[#424242]/60 uppercase tracking-wider mb-1">Status</p>
+                   <p className="text-lg font-medium text-black">Completed</p>
                 </div>
 
-                <div className="pt-6 border-t border-border">
+                <div className="pt-6 border-t border-black/[0.06]">
                   <Link href="/contact">
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg">
+                    <Button className="w-full bg-[#144A92] text-white hover:shadow-md hover:scale-[1.03] rounded-lg transition-all">
                       Discuss Similar Project
                     </Button>
                   </Link>

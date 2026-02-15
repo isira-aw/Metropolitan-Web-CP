@@ -26,14 +26,14 @@ const DIVISION_SUMMARIES: Record<string, string> = {
 
 export default function DivisionsIntro() {
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <Navbar />
-      <div className="bg-secondary text-white pt-32 pb-20">
+      <div className="bg-[#f8f8f8] pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeader title="Our Divisions" subtitle="Three decades of engineering excellence." light />
+          <SectionHeader title="Our Divisions" subtitle="Three decades of engineering excellence." />
         </div>
       </div>
-      <div className=" pb-12">
+      <div className="pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
@@ -44,16 +44,16 @@ export default function DivisionsIntro() {
 
               return (
                 <Link key={div} href={path}>
-                  <Card className="group hover-elevate cursor-pointer overflow-hidden border-border/50 transition-all hover:border-primary/50">
+                  <Card className="group cursor-pointer overflow-hidden rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all duration-300">
                     <CardContent className="p-8">
-                      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                        <Icon className="w-8 h-8" />
+                      <div className="w-16 h-16 rounded-2xl bg-[#144A92]/[0.06] flex items-center justify-center mb-6 transition-colors">
+                        <Icon className="w-8 h-8 text-[#144A92]" />
                       </div>
-                      <h3 className="text-2xl font-display font-bold text-secondary mb-4">{div}</h3>
-                      <p className="text-muted-foreground mb-6 line-clamp-2">
+                      <h3 className="text-2xl font-display font-bold text-black mb-4">{div}</h3>
+                      <p className="text-[#424242] mb-6 line-clamp-2">
                         {summary}
                       </p>
-                      <div className="flex items-center text-primary font-bold group-hover:translate-x-2 transition-transform">
+                      <div className="flex items-center text-[#144A92] font-bold group-hover:translate-x-2 transition-transform">
                         Learn More <ArrowRight className="w-4 h-4 ml-2" />
                       </div>
                     </CardContent>

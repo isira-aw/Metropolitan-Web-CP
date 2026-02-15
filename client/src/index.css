@@ -5,132 +5,163 @@
 @tailwind utilities;
 
 :root {
-  /* ── Corporate Metropolitan Brand Colors ── */
-  /* Primary Red: #CB0816 -> hsl(356, 92%, 41%) */
-  /* Secondary Blue: #144A92 -> hsl(214, 76%, 33%) */
-  /* Brand White: #FFFFFF */
+  --font-primary: "SN Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-text: #424242;
+  --color-heading: #000000;
+  --color-bg: #FFFFFF;
+  --color-accent-primary: rgba(20, 74, 146, 0.08);
+  --color-accent-secondary: rgba(203, 8, 22, 0.05);
+
   --metro-blue: #144A92;
   --metro-red: #CB0816;
   --metro-white: #ffffff;
   --metro-light-blue: #6EC1E4;
 
   --background: 0 0% 100%;
-  --foreground: 215 28% 17%; /* Dark Blue-Grey for text */
+  --foreground: 0 0% 26%;
 
   --card: 0 0% 100%;
-  --card-foreground: 215 28% 17%;
+  --card-foreground: 0 0% 26%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 215 28% 17%;
-
-  --primary: 356 92% 41%; /* #CB0816 */
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 214 76% 33%; /* #144A92 */
-  --secondary-foreground: 0 0% 100%;
-
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 356 92% 41%; /* Primary Red ring */
-
-  --radius: 0.5rem;
-
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Poppins', sans-serif;
-}
-
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
+  --popover-foreground: 0 0% 26%;
 
   --primary: 356 92% 41%;
-  --primary-foreground: 210 40% 98%;
+  --primary-foreground: 0 0% 100%;
 
   --secondary: 214 76% 33%;
-  --secondary-foreground: 210 40% 98%;
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
+  --muted: 0 0% 97%;
+  --muted-foreground: 0 0% 45%;
 
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
+  --accent: 0 0% 97%;
+  --accent-foreground: 0 0% 9%;
 
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
 
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
+  --border: 0 0% 91%;
+  --input: 0 0% 91%;
+  --ring: 214 76% 33%;
+
+  --radius: 0.625rem;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   body {
-    @apply bg-background text-foreground antialiased font-sans;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-primary);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.7;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-secondary;
+    font-family: var(--font-display);
+    color: var(--color-heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 }
 
-/* Custom Utilities */
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+/* ── Scroll Reveal Animation ── */
+@keyframes scrollReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes imagePop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
 }
 
+.animate-scroll-reveal {
+  animation: scrollReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.animate-image-pop {
+  animation: imagePop 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* ── Custom Utilities ── */
 .section-padding {
-  @apply py-16 md:py-24;
+  @apply py-20 md:py-28;
 }
-
 .container-width {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
 /* ── Reusable Brand Button ── */
 .btn-metro {
-  @apply relative inline-flex items-center gap-2 px-6 py-2.5 bg-secondary text-white font-bold text-sm rounded-full border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden;
+  @apply relative inline-flex items-center gap-2 px-7 py-3 bg-[#144A92] text-white font-semibold text-sm rounded-lg shadow-sm transition-all duration-300 overflow-hidden;
 }
-.btn-metro .btn-hover-fill {
-  @apply absolute inset-0 bg-primary translate-x-full group-hover:translate-x-0 transition-transform duration-300;
+.btn-metro:hover {
+  @apply shadow-md;
+  transform: scale(1.03);
+}
+.btn-metro:active {
+  transform: scale(0.98);
 }
 
 /* ── Section Header Divider ── */
 .section-divider {
-  @apply flex items-center gap-2 justify-center mt-1;
+  @apply flex items-center gap-2 justify-center mt-3;
 }
 .section-divider::before {
   content: '';
-  @apply block h-[3px] w-12 bg-secondary rounded-full;
+  @apply block h-[2px] w-16 bg-[#144A92]/20 rounded-full;
 }
 .section-divider::after {
   content: '';
-  @apply block h-[3px] w-3 bg-primary rounded-full;
+  @apply block h-[2px] w-4 bg-[#CB0816]/30 rounded-full;
 }
 
-/* Animation utilities */
-.fade-up-enter {
-  opacity: 0;
-  transform: translateY(20px);
+/* ── Card Hover Effect ── */
+.card-hover {
+  @apply transition-all duration-300;
 }
-.fade-up-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 500ms, transform 500ms;
+.card-hover:hover {
+  @apply shadow-lg;
+  transform: translateY(-4px);
+  background-color: rgba(20, 74, 146, 0.02);
+}
+
+/* ── Selection Color ── */
+::selection {
+  background: rgba(20, 74, 146, 0.12);
+  color: #000000;
 }
