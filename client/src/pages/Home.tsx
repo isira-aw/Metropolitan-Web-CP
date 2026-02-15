@@ -349,14 +349,14 @@ export default function Home() {
                 title: "Advanced Equipment",
                 desc: "Harnessing state-of-the-art tools and AI-driven tech for superior results.",
                 span: "sm:col-span-1 lg:col-span-4",
-                img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop"
+                img: "https://img.freepik.com/free-photo/ai-robot-interacting-with-futuristic-data-interface_23-2152005489.jpg?semt=ais_hybrid&w=740&q=80"
               },
               {
                 icon: Users,
                 title: "Trained Staff",
                 desc: "Expert professionals undergo 200+ hours of specialized training yearly.",
                 span: "sm:col-span-1 lg:col-span-4",
-                img: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop"
+                img: "https://sixtysixten.com/wp-content/uploads/2024/12/ai-agent-for-employee-training.jpg"
               },
               {
                 icon: Award,
