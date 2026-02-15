@@ -535,12 +535,12 @@ export default function Home() {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-center rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-3"
+                    className="group flex items-center justify-center rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4"
                   >
                     <img
                       src={item.logo}
                       alt="Customer Logo"
-                      className="h-10 sm:h-12 md:h-16 w-auto object-contain transition-all duration-500 group-hover:scale-110"
+                      className="h-12 sm:h-14 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-110"
                     />
                   </a>
                 ))}
