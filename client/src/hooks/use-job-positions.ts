@@ -12,3 +12,29 @@ export function useJobPositions() {
     },
   });
 }
+
+interface UseJobPositionsPaginatedOptions {
+  limit: number;
+  page: number;
+}
+
+interface PaginatedResponse {
+  data: JobPosition[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+
+export function useJobPositionsPaginated(options: UseJobPositionsPaginatedOptions) {
+  return useQuery<PaginatedResponse>({
+    queryKey: ["job-positions-paginated", options.page, options.limit],
+    queryFn: async () => {
+      const params: Record<string, number> = {
+        limit: options.limit,
+        page: options.page,
+      };
+      const result = await apiClient.get(apiRoutes.jobPositions.list.path, params);
+      return apiRoutes.jobPositions.list.responses["200_paginated"].parse(result);
+    },
+  });
+}

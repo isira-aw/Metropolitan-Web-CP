@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
+import { Pagination } from "@/components/Pagination";
 import { useNews } from "@/hooks/use-news";
 import { Card } from "@/components/ui/card";
 import { Calendar, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
 
 export default function News() {
-  const { data, isLoading } = useNews();
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useNews({ limit: 6, page });
 
   return (
     <div className="min-h-screen bg-white">
@@ -59,6 +62,14 @@ export default function News() {
              <div className="col-span-full text-center py-20 text-[#424242]">No news articles found.</div>
           )}
         </div>
+
+        {data && data.totalPages > 1 && (
+          <Pagination
+            currentPage={page}
+            totalPages={data.totalPages}
+            onPageChange={setPage}
+          />
+        )}
       </div>
 
       <Footer />

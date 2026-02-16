@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { SectionHeader } from "@/components/SectionHeader";
+import { Pagination } from "@/components/Pagination";
 import { Button } from "@/components/ui/button";
 import { useCaseStudies } from "@/hooks/use-case-studies";
 import { DIVISIONS, getDivisionDisplayName, type DivisionKey } from "@shared/schema";
@@ -10,7 +11,13 @@ import { cn } from "@/lib/utils";
 
 export default function CaseStudies() {
   const [selectedDivision, setSelectedDivision] = useState<DivisionKey | undefined>();
-  const { data, isLoading } = useCaseStudies({ division: selectedDivision });
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useCaseStudies({ division: selectedDivision, limit: 6, page });
+
+  const handleDivisionChange = (division: DivisionKey | undefined) => {
+    setSelectedDivision(division);
+    setPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -27,7 +34,7 @@ export default function CaseStudies() {
         <div className="flex flex-wrap gap-2 justify-center mb-12">
           <Button
             variant="outline"
-            onClick={() => setSelectedDivision(undefined)}
+            onClick={() => handleDivisionChange(undefined)}
             className={cn(
               "rounded-lg border border-black/[0.06] transition-all",
               !selectedDivision
@@ -41,7 +48,7 @@ export default function CaseStudies() {
             <Button
               key={div}
               variant="outline"
-              onClick={() => setSelectedDivision(div)}
+              onClick={() => handleDivisionChange(div)}
               className={cn(
                 "rounded-lg border border-black/[0.06] transition-all",
                 selectedDivision === div
@@ -70,6 +77,14 @@ export default function CaseStudies() {
             </div>
           )}
         </div>
+
+        {data && data.totalPages > 1 && (
+          <Pagination
+            currentPage={page}
+            totalPages={data.totalPages}
+            onPageChange={setPage}
+          />
+        )}
       </div>
 
       <Footer />
