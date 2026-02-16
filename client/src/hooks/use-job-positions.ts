@@ -8,7 +8,8 @@ export function useJobPositions() {
     queryKey: ["job-positions"],
     queryFn: async () => {
       const result = await apiClient.get(apiRoutes.jobPositions.list.path);
-      return apiRoutes.jobPositions.list.responses[200].parse(result);
+      const parsed = apiRoutes.jobPositions.list.responses[200].parse(result);
+      return parsed.data;
     },
   });
 }
@@ -34,7 +35,7 @@ export function useJobPositionsPaginated(options: UseJobPositionsPaginatedOption
         page: options.page,
       };
       const result = await apiClient.get(apiRoutes.jobPositions.list.path, params);
-      return apiRoutes.jobPositions.list.responses["200_paginated"].parse(result);
+      return apiRoutes.jobPositions.list.responses[200].parse(result);
     },
   });
 }

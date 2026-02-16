@@ -99,8 +99,7 @@ export const api = {
         page: z.coerce.number().optional(),
       }).optional(),
       responses: {
-        200: z.array(z.custom<typeof jobPositions.$inferSelect>()),
-        200_paginated: z.object({
+        200: z.object({
           data: z.array(z.custom<typeof jobPositions.$inferSelect>()),
           total: z.number(),
           page: z.number(),
