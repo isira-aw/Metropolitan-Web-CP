@@ -141,13 +141,13 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 animate-scroll-reveal delay-300">
             <Link href="/case-studies">
-              <button className="btn-metro">
+              <button className="btn-metro border border-neutral-200">
                 Explore Projects
                 <ArrowRight className="w-5 h-5" />
               </button>
             </Link>
             <Link href="/contact">
-              <button className="btn-metro">
+              <button className="btn-metro border border-neutral-200 bg-transparent text-white hover:bg-white/10">
                 Contact Us
               </button>
             </Link>

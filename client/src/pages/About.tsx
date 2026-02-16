@@ -536,6 +536,17 @@ export default function About() {
 
             {/* Full Width Bottom Section: The Evolution */}
             <div className="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-12 text-[#424242] border-t border-gray-100 ">
+                            <div className="space-y-4">
+                <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-[#000000] first-letter:mr-3 first-letter:float-left">
+                  Metropolitan soon represented world-renowned brands such as <span className="font-semibold">Facit Calculators</span> and
+                  <span className="font-semibold"> Ericsson switchboards</span>. His quest for quality didn't stop at products;
+                  it was backed by superlative after-sales service that remains the bedrock of our trust today.
+                </p>
+                <p>
+                  With the support of his five sons--experts in Finance, Marketing, Engineering, and IT--the company
+                  pioneered electronic office products, becoming to the office what Unilever or Nestle is to the home.
+                </p>
+              </div>
               <div className="bg-[#f8f8f8] p-8 rounded-xl border-l-4 border-[#144A92]/30">
                 <p className="italic font-medium text-[#424242]">
                   <span className="text-5xl font-bold text-[#144A92]/40 mr-3 float-left">
@@ -545,17 +556,6 @@ export default function About() {
                   to empower the success of our customers.  <span className="text-5xl font-bold text-[#144A92]/40 mr-3 float-right">
                     "
                   </span>
-                </p>
-              </div>
-              <div className="space-y-4">
-                <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-[#000000] first-letter:mr-3 first-letter:float-left">
-                  Metropolitan soon represented world-renowned brands such as <span className="font-semibold">Facit Calculators</span> and
-                  <span className="font-semibold"> Ericsson switchboards</span>. His quest for quality didn't stop at products;
-                  it was backed by superlative after-sales service that remains the bedrock of our trust today.
-                </p>
-                <p>
-                  With the support of his five sons--experts in Finance, Marketing, Engineering, and IT--the company
-                  pioneered electronic office products, becoming to the office what Unilever or Nestle is to the home.
                 </p>
               </div>
             </div>
