@@ -94,8 +94,18 @@ export const api = {
     list: {
       method: 'GET' as const,
       path: '/api/job-positions',
+      input: z.object({
+        limit: z.coerce.number().optional(),
+        page: z.coerce.number().optional(),
+      }).optional(),
       responses: {
         200: z.array(z.custom<typeof jobPositions.$inferSelect>()),
+        200_paginated: z.object({
+          data: z.array(z.custom<typeof jobPositions.$inferSelect>()),
+          total: z.number(),
+          page: z.number(),
+          totalPages: z.number(),
+        }),
       },
     },
     get: {

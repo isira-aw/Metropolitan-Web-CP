@@ -2,8 +2,9 @@ import { useState, useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
+import { Pagination } from "@/components/Pagination";
 import { useApplyJob } from "@/hooks/use-careers";
-import { useJobPositions } from "@/hooks/use-job-positions";
+import { useJobPositionsPaginated } from "@/hooks/use-job-positions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,7 +20,8 @@ import type { JobPosition } from "@shared/schema";
 
 export default function Careers() {
   const mutation = useApplyJob();
-  const { data: jobPositions, isLoading: positionsLoading } = useJobPositions();
+  const [positionsPage, setPositionsPage] = useState(1);
+  const { data: positionsData, isLoading: positionsLoading } = useJobPositionsPaginated({ limit: 10, page: positionsPage });
   const [selectedPosition, setSelectedPosition] = useState<JobPosition | null>(null);
   const [resumeFile, setResumeFile] = useState<string>("");
   const [resumeFileName, setResumeFileName] = useState<string>("");
@@ -100,9 +102,9 @@ export default function Careers() {
               <div className="flex justify-center py-8">
                 <Loader2 className="animate-spin h-8 w-8 text-[#144A92]" />
               </div>
-            ) : jobPositions && jobPositions.length > 0 ? (
+            ) : positionsData?.data && positionsData.data.length > 0 ? (
               <div className="space-y-6">
-                {jobPositions.map((position) => (
+                {positionsData.data.map((position) => (
                   <Card
                     key={position.id}
                     className="group rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border-l-4 border-l-[#144A92]/20 bg-white overflow-hidden"
@@ -139,6 +141,14 @@ export default function Careers() {
                     </CardContent>
                   </Card>
                 ))}
+
+                {positionsData.totalPages > 1 && (
+                  <Pagination
+                    currentPage={positionsPage}
+                    totalPages={positionsData.totalPages}
+                    onPageChange={setPositionsPage}
+                  />
+                )}
               </div>
             ) : (
               <div className="text-center py-12 text-[#424242]">
