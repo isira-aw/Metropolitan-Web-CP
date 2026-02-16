@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { insertJobApplicationSchema, type InsertJobApplication, DIVISION_VALUES, type DivisionKey } from "@shared/schema";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Loader2, FileUp, X } from "lucide-react";
+import { Loader2, FileUp, X, Download } from "lucide-react";
 import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
 import type { JobPosition } from "@shared/schema";
 
@@ -94,9 +94,7 @@ export default function Careers() {
 
           {/* Job Listings */}
           <div>
-            <SectionHeaderSmall
-              title="Open Positions"
-            />
+            <SectionHeaderSmall title="Open Positions" />
 
             {positionsLoading ? (
               <div className="flex justify-center py-8">
@@ -163,9 +161,7 @@ export default function Careers() {
 
           {/* Application Form */}
           <div>
-            <SectionHeaderSmall
-              title="Apply Now"
-            />
+            <SectionHeaderSmall title="Apply Now" />
             <Card className="rounded-xl border border-black/[0.06] shadow-sm">
               <CardContent className="p-8">
                 <Form {...form}>
@@ -299,52 +295,65 @@ export default function Careers() {
 
       {/* Job Position Detail Popup */}
       <Dialog open={selectedPosition !== null} onOpenChange={(open) => !open && setSelectedPosition(null)}>
-        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-          {selectedPosition && (
-            <>
-              <DialogHeader>
-                <DialogTitle className="text-2xl">{selectedPosition.title}</DialogTitle>
-              </DialogHeader>
-              <div className="space-y-4 mt-4">
-                <div className="flex items-center gap-3">
+        {selectedPosition && (
+          <DialogContent className="w-full max-w-5xl p-0 bg-white h-auto lg:h-[80vh] overflow-hidden">
+            <div className="flex flex-col lg:flex-row h-auto lg:h-full">
+
+              {/* Left Side - Content */}
+              <div className="w-full lg:w-1/2 p-6 lg:p-8 overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl">{selectedPosition.title}</DialogTitle>
+                </DialogHeader>
+
+                <div className="flex items-center gap-2 mt-4 mb-4 flex-wrap">
                   <span className="text-xs uppercase tracking-widest font-semibold text-[#424242] bg-[#f8f8f8] px-3 py-1 rounded-full border border-black/[0.06]">
                     {DIVISION_VALUES[selectedPosition.category as DivisionKey] || selectedPosition.category}
                   </span>
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    selectedPosition.status === "Active"
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${selectedPosition.status === "Active"
                       ? "bg-green-100 text-green-800"
                       : "bg-gray-100 text-gray-800"
-                  }`}>
+                    }`}>
                     {selectedPosition.status}
                   </span>
                 </div>
 
-                {selectedPosition.image && (
-                  <div className="rounded-lg overflow-hidden border border-black/[0.06]">
-                    <img
-                      src={selectedPosition.image}
-                      alt={selectedPosition.title}
-                      className="w-full max-h-64 object-cover"
-                    />
-                  </div>
-                )}
-
-                <div>
-                  <h4 className="font-semibold text-sm mb-1 text-[#424242]">Details</h4>
-                  <p className="text-[#424242] leading-relaxed whitespace-pre-wrap">{selectedPosition.detail}</p>
-                </div>
-
-                {selectedPosition.information && (
+                <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-sm mb-1 text-[#424242]">Additional Information</h4>
-                    <p className="text-[#424242] leading-relaxed whitespace-pre-wrap">{selectedPosition.information}</p>
+                    <h4 className="font-semibold text-sm mb-1 text-[#424242]">Details</h4>
+                    <p className="text-[#424242] leading-relaxed whitespace-pre-wrap">{selectedPosition.detail}</p>
                   </div>
-                )}
+
+                  {selectedPosition.information && (
+                    <div>
+                      <h4 className="font-semibold text-sm mb-1 text-[#424242]">Additional Information</h4>
+                      <p className="text-[#424242] leading-relaxed whitespace-pre-wrap">{selectedPosition.information}</p>
+                    </div>
+                  )}
+                </div>
               </div>
-            </>
-          )}
-        </DialogContent>
+
+              {/* Right Side - Image */}
+              {selectedPosition.image && (
+                <div className="w-full lg:w-1/2 bg-gray-100 relative flex items-center justify-center p-4 lg:p-0">
+                  <img
+                    src={selectedPosition.image}
+                    alt={selectedPosition.title}
+                    className="object-contain w-full max-h-[40vh] lg:max-h-full rounded-lg"
+                  />
+                  <a
+                    href={selectedPosition.image}
+                    download={`${selectedPosition.title}.jpg`}
+                    className="absolute top-4 right-12 bg-white shadow px-3 py-1 rounded flex items-center gap-1 hover:bg-gray-50 transition text-xs lg:text-sm"
+                  >
+                    <Download className="h-4 w-4" /> Download
+                  </a>
+                </div>
+              )}
+            </div>
+          </DialogContent>
+        )}
       </Dialog>
+
 
       <Footer />
     </div>
