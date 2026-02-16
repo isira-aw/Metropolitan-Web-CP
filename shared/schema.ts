@@ -44,6 +44,18 @@ export const jobApplications = pgTable("job_applications", {
   position: text("position").notNull(),
   portfolioUrl: text("portfolio_url"),
   coverLetter: text("cover_letter"),
+  resumePdf: text("resume_pdf"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const jobPositions = pgTable("job_positions", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  detail: text("detail").notNull(),
+  category: varchar("category", { length: 50 }).notNull(),
+  information: text("information"),
+  status: varchar("status", { length: 50 }).notNull(),
+  image: text("image"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -62,6 +74,7 @@ export const insertCaseStudySchema = createInsertSchema(caseStudies).omit({ id: 
 export const insertNewsSchema = createInsertSchema(news).omit({ id: true, createdAt: true });
 export const insertInquirySchema = createInsertSchema(inquiries).omit({ id: true, createdAt: true });
 export const insertJobApplicationSchema = createInsertSchema(jobApplications).omit({ id: true, createdAt: true });
+export const insertJobPositionSchema = createInsertSchema(jobPositions).omit({ id: true, createdAt: true });
 export const insertTestimonialSchema = createInsertSchema(testimonials).omit({ id: true, createdAt: true });
 
 // === EXPLICIT API TYPES ===
@@ -77,6 +90,9 @@ export type InsertInquiry = z.infer<typeof insertInquirySchema>;
 
 export type JobApplication = typeof jobApplications.$inferSelect;
 export type InsertJobApplication = z.infer<typeof insertJobApplicationSchema>;
+
+export type JobPosition = typeof jobPositions.$inferSelect;
+export type InsertJobPosition = z.infer<typeof insertJobPositionSchema>;
 
 export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = z.infer<typeof insertTestimonialSchema>;
