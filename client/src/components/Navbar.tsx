@@ -144,7 +144,7 @@ export function Navbar() {
               </div>
 
               <Link href="/contact">
-                <button className="ml-4 px-6 py-2.5 bg-[#144A92] text-white font-medium text-[13px] rounded-lg transition-all duration-300 hover:shadow-md hover:scale-[1.03] active:scale-[0.98]">
+                <button className="ml-4 px-6 py-2.5 bg-[#144A92] text-white font-medium text-[13px] rounded-lg transition-all duration-300 hover:shadow-md hover:scale-[1.03] active:scale-[0.98]  border border-neutral-200">
                   Get a Quote
                 </button>
               </Link>

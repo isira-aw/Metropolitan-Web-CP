@@ -108,7 +108,7 @@ export default function Home() {
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
           <div className="relative">
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white mb-4 md:mb-6 leading-[1.2] tracking-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-display font-bold text-white mb-4 md:mb-6 leading-[1.1] tracking-tight"
             >
               <div className="overflow-hidden">
                 <motion.span
