@@ -141,15 +141,23 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 animate-scroll-reveal delay-300">
             <Link href="/case-studies">
-              <button className="btn-metro border border-neutral-200">
-                Explore Projects
-                <ArrowRight className="w-5 h-5" />
+              <button className="btn-metro relative group overflow-hidden border border-neutral-200">
+                {/* Hover Slide Background */}
+                <div className="absolute inset-0 bg-[#C90815] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
+                {/* Button Content */}
+                <span className="relative z-10 flex items-center gap-2">
+                  Explore Projects
+                  <ArrowRight className="w-5 h-5" />
+                </span>
+
               </button>
             </Link>
+
             <Link href="/contact">
-              <button className="btn-metro border border-neutral-200 bg-transparent text-white hover:bg-white/10">
-                Contact Us
-              </button>
+              <button className="relative group px-6 py-2.5 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md text-white font-medium overflow-hidden transition-all duration-300 hover:border-white/40 hover:bg-white/10 hover:shadow-lg">
+  <span className="relative z-10">Contact Us</span>
+</button>
+
             </Link>
           </div>
         </div>
