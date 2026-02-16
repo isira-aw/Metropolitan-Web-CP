@@ -93,10 +93,11 @@ export default function Home() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
           style={{
-            backgroundImage: `url('https://github.com/isira-aw/image-_and-_videos/blob/main/metro_team.jpeg?raw=true')`,
+            backgroundImage: `url('/metroteam.jpeg')`,
             transform: `scale(1.1) translateY(${scrollY * 0.5}px)`
           }}
         />
+
 
         {/* Blue Overlay */}
         <div className="absolute inset-0 z-10 bg-[#0a264a]/70" />
