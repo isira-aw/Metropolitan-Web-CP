@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertCaseStudySchema, insertInquirySchema, insertJobApplicationSchema, insertNewsSchema, caseStudies, news, inquiries, jobApplications, testimonials } from './schema';
+import { insertCaseStudySchema, insertInquirySchema, insertJobApplicationSchema, insertNewsSchema, caseStudies, news, inquiries, jobApplications, jobPositions, testimonials } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
@@ -87,6 +87,23 @@ export const api = {
       responses: {
         201: z.custom<typeof jobApplications.$inferSelect>(),
         400: errorSchemas.validation,
+      },
+    },
+  },
+  jobPositions: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/job-positions',
+      responses: {
+        200: z.array(z.custom<typeof jobPositions.$inferSelect>()),
+      },
+    },
+    get: {
+      method: 'GET' as const,
+      path: '/api/job-positions/:id',
+      responses: {
+        200: z.custom<typeof jobPositions.$inferSelect>(),
+        404: errorSchemas.notFound,
       },
     },
   },

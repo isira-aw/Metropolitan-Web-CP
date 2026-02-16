@@ -1,48 +1,29 @@
+import { useState, useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
 import { useApplyJob } from "@/hooks/use-careers";
+import { useJobPositions } from "@/hooks/use-job-positions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertJobApplicationSchema, type InsertJobApplication } from "@shared/schema";
+import { insertJobApplicationSchema, type InsertJobApplication, DIVISION_VALUES, type DivisionKey } from "@shared/schema";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Loader2, Briefcase, MapPin, Clock } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Loader2, FileUp, X } from "lucide-react";
 import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
-
-// // Hardcoded jobs for UI
-// const JOBS = [
-//   { title: "Senior Structural Engineer", location: "New York, NY", type: "Full-time", dept: "Infrastructure" },
-//   { title: "Project Manager", location: "London, UK", type: "Full-time", dept: "Commercial" },
-//   { title: "Sustainability Consultant", location: "Berlin, DE", type: "Full-time", dept: "Energy" },
-// ];
-
-const POLICIES = [
-  {
-    title: "Daily Attendance & Check-in",
-    detail: "Employees must log their attendance via the portal before 9:00 AM daily.",
-    category: "Operations",
-    status: "Required"
-  },
-  {
-    title: "Sustainability Protocol",
-    detail: "Adhere to the 2026 Zero-Waste office policy for all physical documentation.",
-    category: "Environment",
-    status: "Active"
-  },
-  {
-    title: "Remote Work Application",
-    detail: "Submit remote requests at least 48 hours in advance for manager approval.",
-    category: "HR Policy",
-    status: "Process"
-  },
-];
+import type { JobPosition } from "@shared/schema";
 
 export default function Careers() {
   const mutation = useApplyJob();
+  const { data: jobPositions, isLoading: positionsLoading } = useJobPositions();
+  const [selectedPosition, setSelectedPosition] = useState<JobPosition | null>(null);
+  const [resumeFile, setResumeFile] = useState<string>("");
+  const [resumeFileName, setResumeFileName] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<InsertJobApplication>({
     resolver: zodResolver(insertJobApplicationSchema),
@@ -52,12 +33,49 @@ export default function Careers() {
       position: "",
       portfolioUrl: "",
       coverLetter: "",
+      resumePdf: "",
     },
   });
 
+  const handleResumeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== "application/pdf") {
+      alert("Please upload a PDF file");
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      alert("File size must be less than 10MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result as string;
+      setResumeFile(base64);
+      setResumeFileName(file.name);
+      form.setValue("resumePdf", base64);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeResume = () => {
+    setResumeFile("");
+    setResumeFileName("");
+    form.setValue("resumePdf", "");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   function onSubmit(data: InsertJobApplication) {
     mutation.mutate(data, {
-      onSuccess: () => form.reset(),
+      onSuccess: () => {
+        form.reset();
+        removeResume();
+      },
     });
   }
 
@@ -79,60 +97,56 @@ export default function Careers() {
             <SectionHeaderSmall
               title="Open Positions"
             />
-            {/* <div className="space-y-6">
-              {JOBS.map((job, i) => (
-                <Card key={i} className="hover:shadow-lg transition-all cursor-pointer border-l-4  shadow-2xl   hover:border-l-primary">
-                  <CardContent className="p-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-bold text-secondary">{job.title}</h3>
-                      <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">{job.dept}</span>
-                    </div>
-                    <div className="flex gap-4 text-sm text-muted-foreground">
-                      <span className="flex items-center"><MapPin className="w-4 h-4 mr-1" /> {job.location}</span>
-                      <span className="flex items-center"><Clock className="w-4 h-4 mr-1" /> {job.type}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div> */}
-            <div className="space-y-6">
-              {POLICIES.map((policy, i) => (
-                <Card
-                  key={i}
-                  className="group rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all duration-300 cursor-default border-l-4 border-l-[#144A92]/20 bg-white overflow-hidden"
-                >
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-[#144A92]/40" />
-                        <h3 className="text-xl font-bold text-black group-hover:text-[#144A92] transition-colors">
-                          {policy.title}
-                        </h3>
-                      </div>
-                      <span className="text-[10px] uppercase tracking-widest font-semibold text-[#424242] bg-[#f8f8f8] px-3 py-1 rounded-full border border-black/[0.06]">
-                        {policy.category}
-                      </span>
-                    </div>
 
-                    <p className="text-[#424242] leading-relaxed mb-4 border-b border-black/[0.04] pb-4">
-                      {policy.detail}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex gap-4 text-sm font-medium text-[#424242]/60">
-                        <span className="flex items-center italic">
-                          Status: <span className="ml-1 text-black not-italic">{policy.status}</span>
+            {positionsLoading ? (
+              <div className="flex justify-center py-8">
+                <Loader2 className="animate-spin h-8 w-8 text-[#144A92]" />
+              </div>
+            ) : jobPositions && jobPositions.length > 0 ? (
+              <div className="space-y-6">
+                {jobPositions.map((position) => (
+                  <Card
+                    key={position.id}
+                    className="group rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border-l-4 border-l-[#144A92]/20 bg-white overflow-hidden"
+                    onClick={() => setSelectedPosition(position)}
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-[#144A92]/40" />
+                          <h3 className="text-xl font-bold text-black group-hover:text-[#144A92] transition-colors">
+                            {position.title}
+                          </h3>
+                        </div>
+                        <span className="text-[10px] uppercase tracking-widest font-semibold text-[#424242] bg-[#f8f8f8] px-3 py-1 rounded-full border border-black/[0.06]">
+                          {DIVISION_VALUES[position.category as DivisionKey] || position.category}
                         </span>
                       </div>
 
-                      {/* <button className="text-[#144C94] text-sm font-bold flex items-center group-hover:underline">
-                        Read Full Policy <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
-                      </button> */}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                      <p className="text-[#424242] leading-relaxed mb-4 border-b border-black/[0.04] pb-4">
+                        {position.detail}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-4 text-sm font-medium text-[#424242]/60">
+                          <span className="flex items-center italic">
+                            Status: <span className="ml-1 text-black not-italic">{position.status}</span>
+                          </span>
+                        </div>
+
+                        <button className="text-[#144C94] text-sm font-bold flex items-center group-hover:underline">
+                          View Details <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                        </button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 text-[#424242]">
+                <p>No open positions at the moment. Check back soon!</p>
+              </div>
+            )}
 
             <div className="mt-12 p-8 bg-[#f8f8f8] rounded-xl">
               <h3 className="text-xl font-bold text-black mb-4">Why Metropolitan?</h3>
@@ -228,6 +242,45 @@ export default function Careers() {
                         </FormItem>
                       )}
                     />
+
+                    {/* Resume PDF Upload */}
+                    <div className="space-y-2">
+                      <FormLabel>Upload CV / Resume (PDF)</FormLabel>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="application/pdf"
+                        onChange={handleResumeUpload}
+                        className="hidden"
+                      />
+                      {!resumeFile ? (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="w-full"
+                        >
+                          <FileUp className="mr-2 h-4 w-4" />
+                          Upload PDF
+                        </Button>
+                      ) : (
+                        <div className="flex items-center justify-between p-3 bg-[#f8f8f8] rounded-lg border border-black/[0.06]">
+                          <div className="flex items-center gap-2 text-sm">
+                            <FileUp className="h-4 w-4 text-[#144A92]" />
+                            <span className="font-medium truncate max-w-[200px]">{resumeFileName}</span>
+                          </div>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={removeResume}
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+
                     <Button
                       type="submit"
                       className="w-full h-12 text-lg bg-[#144A92] text-white hover:shadow-md hover:scale-[1.03] rounded-lg font-semibold transition-all"
@@ -243,6 +296,56 @@ export default function Careers() {
 
         </div>
       </div>
+
+      {/* Job Position Detail Popup */}
+      <Dialog open={selectedPosition !== null} onOpenChange={(open) => !open && setSelectedPosition(null)}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          {selectedPosition && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl">{selectedPosition.title}</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4 mt-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs uppercase tracking-widest font-semibold text-[#424242] bg-[#f8f8f8] px-3 py-1 rounded-full border border-black/[0.06]">
+                    {DIVISION_VALUES[selectedPosition.category as DivisionKey] || selectedPosition.category}
+                  </span>
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    selectedPosition.status === "Active"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-gray-100 text-gray-800"
+                  }`}>
+                    {selectedPosition.status}
+                  </span>
+                </div>
+
+                {selectedPosition.image && (
+                  <div className="rounded-lg overflow-hidden border border-black/[0.06]">
+                    <img
+                      src={selectedPosition.image}
+                      alt={selectedPosition.title}
+                      className="w-full max-h-64 object-cover"
+                    />
+                  </div>
+                )}
+
+                <div>
+                  <h4 className="font-semibold text-sm mb-1 text-[#424242]">Details</h4>
+                  <p className="text-[#424242] leading-relaxed whitespace-pre-wrap">{selectedPosition.detail}</p>
+                </div>
+
+                {selectedPosition.information && (
+                  <div>
+                    <h4 className="font-semibold text-sm mb-1 text-[#424242]">Additional Information</h4>
+                    <p className="text-[#424242] leading-relaxed whitespace-pre-wrap">{selectedPosition.information}</p>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <Footer />
     </div>
   );
