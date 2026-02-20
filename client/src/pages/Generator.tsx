@@ -610,9 +610,9 @@ export default function Generator() {
                     <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 group-hover:bg-black/50" />
                   </div>
                   <div className="relative z-20 h-full flex flex-col min-h-[160px]">
-                    <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4">
+                    {/* <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4">
                       <Icon className="w-6 h-6 text-white" />
-                    </div>
+                    </div> */}
                     <div className="mt-auto">
                       <h3 className="text-xl font-bold text-white mb-1">{service.title}</h3>
                       <p className="text-white/80 text-sm leading-relaxed">{service.description}</p>
