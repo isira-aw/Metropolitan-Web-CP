@@ -19,6 +19,7 @@ import NewsDetail from "@/pages/NewsDetail";
 import Careers from "@/pages/Careers";
 import Contact from "@/pages/Contact";
 import About from "@/pages/About";
+import { ChatbotWidget } from "@/components/ChatbotWidget";
 
 function Router() {
   return (
@@ -49,6 +50,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <ChatbotWidget />
       </TooltipProvider>
     </QueryClientProvider>
   );
