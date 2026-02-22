@@ -38,6 +38,7 @@ export function ChatbotWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [showAskMe, setShowAskMe] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -45,6 +46,18 @@ export function ChatbotWidget() {
       inputRef.current?.focus();
     }
   }, [isOpen, messages]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowAskMe(true);
+
+      setTimeout(() => {
+        setShowAskMe(false);
+      }, 2000); // show for 2 seconds
+    }, 7000); // trigger every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Reset fullscreen when chat is closed
   useEffect(() => {
@@ -120,7 +133,6 @@ export function ChatbotWidget() {
               </div>
               <div>
                 <p className="text-white font-semibold text-sm">Metropolitan Assistant</p>
-                <p className="text-blue-200 text-xs">Online</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
@@ -151,17 +163,15 @@ export function ChatbotWidget() {
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`flex items-end gap-2 ${
-                  msg.sender === "user" ? "flex-row-reverse" : "flex-row"
-                }`}
+                className={`flex items-end gap-2 ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"
+                  }`}
               >
                 {/* Avatar */}
                 <div
-                  className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
-                    msg.sender === "bot"
-                      ? "bg-blue-700"
-                      : "bg-gray-400"
-                  }`}
+                  className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${msg.sender === "bot"
+                    ? "bg-blue-700"
+                    : "bg-gray-400"
+                    }`}
                 >
                   {msg.sender === "bot" ? (
                     <Bot className="w-3.5 h-3.5 text-white" />
@@ -171,11 +181,10 @@ export function ChatbotWidget() {
                 </div>
                 {/* Bubble */}
                 <div
-                  className={`max-w-[75%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
-                    msg.sender === "user"
-                      ? "bg-blue-700 text-white rounded-br-sm"
-                      : "bg-white text-gray-800 shadow-sm border border-gray-100 rounded-bl-sm"
-                  }`}
+                  className={`max-w-[75%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${msg.sender === "user"
+                    ? "bg-blue-700 text-white rounded-br-sm"
+                    : "bg-white text-gray-800 shadow-sm border border-gray-100 rounded-bl-sm"
+                    }`}
                 >
                   {msg.text}
                 </div>
@@ -228,14 +237,41 @@ export function ChatbotWidget() {
       {!isFullscreen && (
         <button
           onClick={() => setIsOpen((v) => !v)}
-          className="w-14 h-14 rounded-full bg-blue-700 hover:bg-blue-800 shadow-lg hover:shadow-xl transition-all flex items-center justify-center text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+          className={`
+      flex items-center
+      h-14
+      rounded-full
+      bg-blue-700 hover:bg-blue-800
+      shadow-lg hover:shadow-xl
+      text-white
+      ring-4 ring-white
+      overflow-hidden
+      transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+      ${showAskMe ? "max-w-[180px] px-4" : "max-w-[56px] px-0"}
+    `}
           aria-label={isOpen ? "Close chat" : "Open chat"}
         >
-          {isOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <MessageCircle className="w-6 h-6" />
-          )}
+          {/* ICON */}
+          <div className="flex items-center justify-center w-14 h-14 shrink-0">
+            {isOpen ? (
+              <X className="w-6 h-6 transition-all duration-300" />
+            ) : (
+              <Bot className="w-6 h-6 transition-all duration-300" />
+            )}
+          </div>
+
+          {/* TEXT */}
+          <span
+            className={`
+        whitespace-nowrap text-sm font-semibold
+        transition-all duration-500
+        ${showAskMe
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-2"}
+      `}
+          >
+            Ask Me 🟢
+          </span>
         </button>
       )}
     </div>
