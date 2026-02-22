@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, Maximize2, Minimize2 } from "lucide-react";
 
 interface Message {
   id: string;
@@ -32,6 +32,7 @@ const WELCOME_MESSAGE: Message = {
 
 export function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +45,16 @@ export function ChatbotWidget() {
       inputRef.current?.focus();
     }
   }, [isOpen, messages]);
+
+  // Reset fullscreen when chat is closed
+  useEffect(() => {
+    if (!isOpen) setIsFullscreen(false);
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setIsFullscreen(false);
+  };
 
   const handleSend = async () => {
     const text = input.trim();
@@ -93,8 +104,14 @@ export function ChatbotWidget() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {/* Chat window */}
       {isOpen && (
-        <div className="w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
-          style={{ height: "480px" }}>
+        <div
+          className={
+            isFullscreen
+              ? "fixed inset-0 z-50 bg-white flex flex-col overflow-hidden"
+              : "w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
+          }
+          style={isFullscreen ? undefined : { height: "480px" }}
+        >
           {/* Header */}
           <div className="bg-blue-700 px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -106,13 +123,27 @@ export function ChatbotWidget() {
                 <p className="text-blue-200 text-xs">Online</p>
               </div>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
-              aria-label="Close chat"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-1">
+              {/* Fullscreen toggle — mobile only */}
+              <button
+                onClick={() => setIsFullscreen((v) => !v)}
+                className="sm:hidden text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+              >
+                {isFullscreen ? (
+                  <Minimize2 className="w-5 h-5" />
+                ) : (
+                  <Maximize2 className="w-5 h-5" />
+                )}
+              </button>
+              <button
+                onClick={handleClose}
+                className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                aria-label="Close chat"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
@@ -193,18 +224,20 @@ export function ChatbotWidget() {
         </div>
       )}
 
-      {/* Toggle button */}
-      <button
-        onClick={() => setIsOpen((v) => !v)}
-        className="w-14 h-14 rounded-full bg-blue-700 hover:bg-blue-800 shadow-lg hover:shadow-xl transition-all flex items-center justify-center text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-        aria-label={isOpen ? "Close chat" : "Open chat"}
-      >
-        {isOpen ? (
-          <X className="w-6 h-6" />
-        ) : (
-          <MessageCircle className="w-6 h-6" />
-        )}
-      </button>
+      {/* Toggle button — hidden when chat is fullscreen */}
+      {!isFullscreen && (
+        <button
+          onClick={() => setIsOpen((v) => !v)}
+          className="w-14 h-14 rounded-full bg-blue-700 hover:bg-blue-800 shadow-lg hover:shadow-xl transition-all flex items-center justify-center text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+          aria-label={isOpen ? "Close chat" : "Open chat"}
+        >
+          {isOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <MessageCircle className="w-6 h-6" />
+          )}
+        </button>
+      )}
     </div>
   );
 }
