@@ -123,7 +123,7 @@ export function ChatbotWidget() {
               ? "fixed inset-0 z-50 bg-white flex flex-col overflow-hidden"
               : "w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
           }
-          style={isFullscreen ? undefined : { height: "580px" }}
+          style={isFullscreen ? undefined : { height: "66.66vh" }}
         >
           {/* Header */}
           <div className=" px-4 py-3 flex items-center justify-between border-b border-blue-800 ">
@@ -261,17 +261,23 @@ export function ChatbotWidget() {
           </div>
 
           {/* TEXT */}
-          <span
-            className={`
+          <div>
+            {isOpen ? (
+              null
+            ) : (
+              <span
+                className={`
         whitespace-nowrap text-sm font-semibold
         transition-all duration-500
         ${showAskMe
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-2"}
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-2"}
       `}
-          >
-            Ask Me 🟢
-          </span>
+              >
+                Ask Me "
+              </span>
+            )}
+          </div>
         </button>
       )}
     </div>
