@@ -123,23 +123,23 @@ export function ChatbotWidget() {
               ? "fixed inset-0 z-50 bg-white flex flex-col overflow-hidden"
               : "w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
           }
-          style={isFullscreen ? undefined : { height: "480px" }}
+          style={isFullscreen ? undefined : { height: "580px" }}
         >
           {/* Header */}
-          <div className="bg-blue-700 px-4 py-3 flex items-center justify-between">
+          <div className=" px-4 py-3 flex items-center justify-between border-b border-blue-800 ">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
+                <Bot className="w-5 h-5 text-blue-800" />
               </div>
               <div>
-                <p className="text-white font-semibold text-sm">Metropolitan Assistant</p>
+                <p className="text-blue-800 font-semibold text-sm">Metropolitan Assistant</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
               {/* Fullscreen toggle — mobile only */}
               <button
                 onClick={() => setIsFullscreen((v) => !v)}
-                className="sm:hidden text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                className="sm:hidden text-blue-800 hover:text-red-500 transition-colors p-1 rounded-full hover:bg-white/10"
                 aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
               >
                 {isFullscreen ? (
@@ -150,7 +150,7 @@ export function ChatbotWidget() {
               </button>
               <button
                 onClick={handleClose}
-                className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                className="text-blue-800  hover:text-red-500 transition-colors p-1 rounded-full hover:bg-white/10"
                 aria-label="Close chat"
               >
                 <X className="w-5 h-5" />

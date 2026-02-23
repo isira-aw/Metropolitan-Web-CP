@@ -93,7 +93,7 @@ export default function Home() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
           style={{
-            backgroundImage: `url('/metroteam.jpeg')`,
+            backgroundImage: `url('/metroteam.jpg')`,
             transform: `scale(1.1) translateY(${scrollY * 0.5}px)`
           }}
         />
@@ -215,7 +215,7 @@ export default function Home() {
                     key={i}
                     className="card-hover flex items-center gap-3 p-3 md:p-4 rounded-xl bg-white border border-gray-100 shadow-sm"
                   >
-                    <div className="flex h-1 w-5 shrink-0 items-center justify-center rounded-lg bg-[#144A92]/5 text-xl">
+                    <div className="flex h-1 w-5 shrink-0 items-center justify-center rounded-lg bg-[#144A92]/50 hover:bg-[#D0122B] text-xl">
                       {item.icon}
                     </div>
                     <span className="text-sm md:text-lg font-medium text-[#424242]">

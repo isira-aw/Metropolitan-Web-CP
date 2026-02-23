@@ -525,11 +525,11 @@ export default function Generator() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
           style={{
-            backgroundImage: `url('https://www.danmik.co.za/wp-content/uploads/2024/09/How-AI-Will-Influence-the-Future-of-Power-Generators.webp')`,
-            transform: `scale(1.1) translateY(${scrollY * 0.3}px)`
+            backgroundImage: `url('/workshop_Department_of_gen.jpg')`,
+            transform: `scale(1.1) translateY(${scrollY * 0.5}px)`
           }}
         />
-        <div className="absolute inset-0 z-10 bg-[#0a264a]/70" />
+        <div className="absolute inset-0 z-10 bg-[#0a264a]/60" />
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-800/40 via-transparent to-blue-900/60" />
 
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
