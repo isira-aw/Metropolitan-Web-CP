@@ -12,8 +12,34 @@ export default function CaseStudyDetail() {
   const id = parseInt(params?.id || "0");
   const { data: project, isLoading, error } = useCaseStudy(id);
 
-  if (isLoading) return <div className="min-h-screen bg-white flex items-center justify-center"><div className="w-10 h-10 border-4 border-[#144A92] border-t-transparent rounded-full animate-spin"/></div>;
-  if (error || !project) return <div className="min-h-screen bg-white flex items-center justify-center text-[#424242]">Project not found</div>;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <div className="flex items-center justify-center py-32">
+          <div className="w-10 h-10 border-4 border-[#144A92] border-t-transparent rounded-full animate-spin" />
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !project) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-4 py-32">
+          <p className="text-lg font-semibold text-black mb-2">Project not found</p>
+          <p className="text-[#424242] text-sm mb-6">This project may have been moved or no longer exists.</p>
+          <Link href="/case-studies">
+            <Button variant="outline" className="rounded-lg">
+              <ArrowLeft className="mr-2 w-4 h-4" /> Back to Projects
+            </Button>
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -40,8 +66,13 @@ export default function CaseStudyDetail() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="flex flex-wrap gap-3 mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-padding">
+            <Link href="/case-studies">
+              <Button variant="ghost" className="text-[#424242] pl-0 mb-6 hover:text-[#144A92] hover:bg-transparent">
+                <ArrowLeft className="mr-2 w-4 h-4" /> Back to Projects
+              </Button>
+            </Link>
+            <div className="flex flex-wrap gap-3 mb-10">
               <Badge className="bg-[#144A92]/10 text-[#144A92] hover:bg-[#144A92]/15 border border-[#144A92]/20 text-sm py-1 px-3">{project.division}</Badge>
               {project.completionDate && (
                 <Badge variant="outline" className="text-[#424242] border-black/[0.06] bg-[#f8f8f8]">
@@ -49,12 +80,7 @@ export default function CaseStudyDetail() {
                 </Badge>
               )}
             </div>
-            <Link href="/case-studies">
-              <Button variant="ghost" className="text-[#424242] pl-0 mb-4 hover:text-[#144A92] hover:bg-transparent">
-                <ArrowLeft className="mr-2 w-4 h-4" /> Back to Projects
-              </Button>
-            </Link>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           {/* Main Content */}
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-display font-bold text-black mb-6">Project Overview</h2>

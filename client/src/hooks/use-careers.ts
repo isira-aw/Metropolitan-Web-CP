@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { api, type InsertJobApplication } from "@shared/routes";
+import { api } from "@shared/routes";
+import type { InsertJobApplication } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { api as apiClient } from "@/lib/api-client";
 

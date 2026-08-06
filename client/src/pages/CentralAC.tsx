@@ -1,303 +1,91 @@
-import { useEffect } from "react";
-import { Link } from "wouter";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { SectionHeader } from "@/components/SectionHeader";
-import { CaseStudyCard } from "@/components/CaseStudyCard";
-import { InquiryForm } from "@/components/InquiryForm";
-import { useCaseStudies } from "@/hooks/use-case-studies";
-import { Snowflake, Thermometer, Wind, Gauge, CheckCircle2, Quote, TrendingDown, Building2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { useTestimonials } from "@/hooks/use-testimonials";
+import { DivisionPageLayout } from "@/components/DivisionPageLayout";
+import { Snowflake, Thermometer, Wind, Gauge, TrendingDown, Building2 } from "lucide-react";
 
 export default function CentralAC() {
-  const { data: projects, isLoading } = useCaseStudies({ division: "CENTRAL_AC", limit: 3 });
-  const { data: testimonialsData } = useTestimonials({ division: "CENTRAL_AC" });
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const services = [
     {
       icon: Snowflake,
       title: "Chiller Systems",
-      description: "Advanced water-cooled and air-cooled chiller installations for maximum efficiency"
+      description: "Advanced water-cooled and air-cooled chiller installations for maximum efficiency",
     },
     {
       icon: Wind,
       title: "VRV/VRF Systems",
-      description: "Variable refrigerant flow technology for precise temperature control"
+      description: "Variable refrigerant flow technology for precise temperature control",
     },
     {
       icon: Thermometer,
       title: "Ducting & Ventilation",
-      description: "Custom-designed ductwork ensuring optimal air distribution"
+      description: "Custom-designed ductwork ensuring optimal air distribution",
     },
     {
       icon: Gauge,
       title: "Building Management Systems",
-      description: "Automated climate control with real-time monitoring and adjustments"
-    }
+      description: "Automated climate control with real-time monitoring and adjustments",
+    },
   ];
 
-  const features = [
+  const specs = [
     { label: "Energy Efficiency", value: "Up to 40% savings" },
     { label: "Temperature Control", value: "±0.5°C precision" },
     { label: "Air Quality", value: "HEPA filtration" },
-    { label: "Noise Level", value: "<45dB operation" }
+    { label: "Noise Level", value: "<45dB operation" },
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans">
-      <Navbar />
-
-      <div className="bg-[#0f0f0f] text-white pt-2 pb-20">
-
-      </div>
-
-      {/* HERO - Dual Column Layout */}
-      <section className="relative bg-[#f8f8f8] py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-[#144A92]/[0.06] px-4 py-2 rounded-full mb-6">
-                <Snowflake className="w-5 h-5 text-[#144A92]" />
-                <span className="text-sm font-semibold text-[#144A92]">Climate Control Excellence</span>
-              </div>
-              <h1 className="text-5xl md:text-6xl font-display font-bold text-black mb-6">
-                Central Air Conditioning Solutions
-              </h1>
-              <p className="text-xl text-[#424242] leading-relaxed mb-8">
-                Engineered climate control systems that combine energy efficiency, precision temperature management,
-                and sustainable operation for commercial and industrial spaces.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-[#144A92] text-white rounded-lg hover:bg-[#144A92]/90">
-                  Request Consultation
-                  <Thermometer className="ml-2 w-4 h-4" />
-                </Button>
-                <Button size="lg" variant="outline" className="rounded-lg">View Projects</Button>
-              </div>
-            </div>
-
-            <div className="relative">
-              <img
-                src="https://tse3.mm.bing.net/th/id/OIP.5M8l_SianRfJk98U-IqBFQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="Central AC System"
-                className="rounded-xl shadow-sm w-full h-[500px] object-cover"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-sm border border-black/[0.06]">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#144A92]/[0.06] rounded-full flex items-center justify-center">
-                    <TrendingDown className="w-6 h-6 text-[#144A92]" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-[#424242]">Energy Savings</p>
-                    <p className="text-2xl font-bold text-black">40%</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TECHNICAL SPECIFICATIONS */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {features.map((feature, i) => (
-              <Card key={i} className="rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <p className="text-sm text-[#424242] mb-2">{feature.label}</p>
-                  <p className="text-2xl font-bold text-[#144A92]">{feature.value}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES - Icon Grid Layout */}
-      <section className="py-24 bg-[#f8f8f8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Comprehensive HVAC Services"
-            subtitle="From design to installation and maintenance, we deliver complete climate control solutions"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            {services.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={i}
-                  className="group bg-white p-8 rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex items-start gap-6">
-                    <div className="w-14 h-14 bg-[#144A92]/[0.06] rounded-xl flex items-center justify-center transition-all">
-                      <Icon className="w-7 h-7 text-[#144A92]" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-black mb-2">{service.title}</h3>
-                      <p className="text-[#424242]">{service.description}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* WHY CHOOSE US */}
-      <section className="py-24 bg-[#0f0f0f] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-white text-4xl font-display font-bold mb-6">
-                Why Choose Our Central AC Solutions?
-              </h2>
-              <div className="space-y-4">
-                {[
-                  "Energy-efficient systems reducing operational costs by up to 40%",
-                  "Precision temperature control within ±0.5°C tolerance",
-                  "Advanced air filtration for improved indoor air quality",
-                  "Smart BMS integration for automated climate management",
-                  "Comprehensive maintenance contracts with 24/7 support",
-                  "Eco-friendly refrigerants compliant with environmental standards"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-[#144A92] shrink-0 mt-0.5" />
-                    <p className="text-white/90 text-lg">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white/10 p-8 rounded-xl border border-white/10">
-              <Building2 className="w-12 h-12 text-[#144A92] mb-6" />
-              <h3 className="text-2xl font-bold mb-4">Ideal for:</h3>
-              <ul className="space-y-3 text-white/90">
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-[#144A92] rounded-full" />
-                  <span>Commercial Office Buildings</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-[#144A92] rounded-full" />
-                  <span>Shopping Malls & Retail Spaces</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-[#144A92] rounded-full" />
-                  <span>Hotels & Hospitality</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-[#144A92] rounded-full" />
-                  <span>Industrial Facilities</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-[#144A92] rounded-full" />
-                  <span>Healthcare Facilities</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-24 bg-[#f8f8f8]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SectionHeader title="Client Testimonials" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-              {testimonialsData.map((t) => (
-                <Card key={t.id} className="rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-shadow">
-                  <CardContent className="p-8">
-                    <Quote className="w-10 h-10 text-[#144A92]/20 mb-4" />
-                    <p className="text-lg italic text-[#424242] mb-6">"{t.content}"</p>
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[#144A92]/[0.06] flex items-center justify-center text-[#144A92] font-bold text-lg">
-                        {t.author[0]}
-                      </div>
-                      <div>
-                        <p className="font-bold text-black">{t.author}</p>
-                        <p className="text-sm text-[#424242]">{t.role}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* PROJECTS */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Featured Central AC Projects" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {isLoading ? (
-              Array(3).fill(0).map((_, i) => <div key={i} className="h-[400px] bg-[#f8f8f8] animate-pulse rounded-xl" />)
-            ) : projects?.data && projects.data.length > 0 ? (
-              projects.data.map(p => <CaseStudyCard key={p.id} item={p} />)
-            ) : (
-              <div className="col-span-3 text-center py-12 text-[#424242]">
-                No projects found for this division yet.
-              </div>
-            )}
-          </div>
-
-          {projects?.data && projects.data.length > 0 && (
-            <div className="text-center mt-12">
-              <Link href="/case-studies?division=Central AC">
-                <Button variant="outline" size="lg">View All Central AC Projects</Button>
-              </Link>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section className="py-24 bg-[#f8f8f8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-display font-bold text-black mb-6">
-                Get Expert Climate Control Consultation
-              </h2>
-              <p className="text-[#424242] text-lg mb-8">
-                Our certified HVAC engineers are ready to design the perfect cooling solution
-                for your facility. From load calculations to system selection, we ensure optimal
-                comfort and efficiency.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-black/[0.06]">
-                  <Thermometer className="w-8 h-8 text-[#144A92]" />
-                  <div>
-                    <p className="font-semibold text-black">Free Energy Audit</p>
-                    <p className="text-sm text-[#424242]">Evaluate your current system efficiency</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-black/[0.06]">
-                  <Gauge className="w-8 h-8 text-[#144A92]" />
-                  <div>
-                    <p className="font-semibold text-black">24/7 Emergency Support</p>
-                    <p className="text-sm text-[#424242]">Round-the-clock technical assistance</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <InquiryForm division="Central AC" />
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+    <DivisionPageLayout
+      divisionKey="CENTRAL_AC"
+      divisionLabel="Central AC"
+      eyebrowIcon={Snowflake}
+      eyebrowText="Climate Control Excellence"
+      title="Central Air Conditioning Solutions"
+      description="Engineered climate control systems that combine energy efficiency, precision temperature management, and sustainable operation for commercial and industrial spaces."
+      ctaPrimaryLabel="Request Consultation"
+      ctaPrimaryIcon={Thermometer}
+      ctaSecondaryLabel="View Projects"
+      heroImage="https://images.unsplash.com/photo-1631545806609-cf50a5ef82d7?q=80&w=1200&auto=format&fit=crop"
+      heroImageAlt="Central air conditioning outdoor units on a commercial rooftop"
+      heroStat={{ icon: TrendingDown, label: "Energy Savings", value: "40%" }}
+      specs={specs}
+      servicesTitle="Comprehensive HVAC Services"
+      servicesSubtitle="From design to installation and maintenance, we deliver complete climate control solutions"
+      services={services}
+      whyChooseUs={{
+        layout: "checklist",
+        heading: "Why Choose Our Central AC Solutions?",
+        blocks: [
+          {
+            items: [
+              "Energy-efficient systems reducing operational costs by up to 40%",
+              "Precision temperature control within ±0.5°C tolerance",
+              "Advanced air filtration for improved indoor air quality",
+              "Smart BMS integration for automated climate management",
+              "Comprehensive maintenance contracts with 24/7 support",
+              "Eco-friendly refrigerants compliant with environmental standards",
+            ],
+          },
+        ],
+        sideCard: {
+          icon: Building2,
+          heading: "Ideal for:",
+          items: [
+            { label: "Commercial Office Buildings" },
+            { label: "Shopping Malls & Retail Spaces" },
+            { label: "Hotels & Hospitality" },
+            { label: "Industrial Facilities" },
+            { label: "Healthcare Facilities" },
+          ],
+        },
+      }}
+      projectsTitle="Featured Central AC Projects"
+      viewAllLabel="View All Central AC Projects"
+      caseStudiesQueryValue="Central AC"
+      contactHeading="Get Expert Climate Control Consultation"
+      contactDescription="Our certified HVAC engineers are ready to design the perfect cooling solution for your facility. From load calculations to system selection, we ensure optimal comfort and efficiency."
+      contactHighlights={[
+        { icon: Thermometer, title: "Free Energy Audit", desc: "Evaluate your current system efficiency" },
+        { icon: Gauge, title: "24/7 Emergency Support", desc: "Round-the-clock technical assistance" },
+      ]}
+    />
   );
 }

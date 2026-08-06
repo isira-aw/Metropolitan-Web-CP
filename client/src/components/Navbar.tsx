@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -29,12 +29,24 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [divisionsOpen, setDivisionsOpen] = useState(false);
   const [location] = useLocation();
+  const divisionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!divisionsOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (divisionsRef.current && !divisionsRef.current.contains(e.target as Node)) {
+        setDivisionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [divisionsOpen]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -53,7 +65,7 @@ export function Navbar() {
           "fixed w-full z-50 transition-all duration-300",
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-black/[0.06]"
-            : "bg-transparent  bg-black/50 px-2 rounded-t-none rounded-b-md"
+            : "bg-gradient-to-b from-black/60 to-black/10"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,7 +107,7 @@ export function Navbar() {
               ))}
 
               {/* Divisions Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={divisionsRef}>
                 <button
                   onClick={() => setDivisionsOpen(!divisionsOpen)}
                   className={cn(
@@ -124,6 +136,16 @@ export function Navbar() {
                     ? "opacity-100 scale-100 translate-y-0"
                     : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
                 )}>
+                  <div className="flex items-center justify-between px-4 py-2 border-b border-black/[0.06]">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-[#424242]/60">Divisions</span>
+                    <button
+                      onClick={() => setDivisionsOpen(false)}
+                      aria-label="Close divisions menu"
+                      className="p-1 rounded-md text-[#424242]/60 hover:text-black hover:bg-black/5 transition-colors"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                   <div className="py-2">
                     {DIVISIONS.map((div) => (
                       <Link

@@ -74,7 +74,7 @@ export function InquiryForm({ division }: { division?: string }) {
                   <FormItem>
                     <FormLabel className="text-sm text-[#424242]">Phone (Optional)</FormLabel>
                     <FormControl>
-                      <Input placeholder="+1 (555) 000-0000" {...field} value={field.value || ''} className="h-11 bg-[#f8f8f8] border-black/[0.06] focus:border-[#144A92]/30 focus:ring-[#144A92]/10 rounded-lg" />
+                      <Input placeholder="+94 77 123 4567" {...field} value={field.value || ''} className="h-11 bg-[#f8f8f8] border-black/[0.06] focus:border-[#144A92]/30 focus:ring-[#144A92]/10 rounded-lg" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { insertJobApplicationSchema, type InsertJobApplication, DIVISION_VALUES, type DivisionKey } from "@shared/schema";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Loader2, FileUp, X, Download } from "lucide-react";
+import { Loader2, FileUp, X, Download, Briefcase } from "lucide-react";
 import { SectionHeaderSmall } from "@/components/SectionHeaderSmall";
 import type { JobPosition } from "@shared/schema";
 
@@ -85,14 +85,16 @@ export default function Careers() {
     <div className="min-h-screen bg-white font-sans">
       <Navbar />
 
-      <div className="bg-[#f8f8f8] pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeader title="Join Our Team" subtitle="Build your career with a global leader." />
+      <div className="relative bg-[#f8f8f8] pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 blueprint-grid opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="eyebrow text-[#144A92] mb-4 block">Careers</span>
+          <SectionHeader title="Join Our Team" subtitle="Build your career with Sri Lanka's leading M&E engineering contractor." />
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-padding">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 
           {/* Job Listings */}
           <div>
@@ -151,8 +153,14 @@ export default function Careers() {
                 )}
               </div>
             ) : (
-              <div className="text-center py-12 text-[#424242]">
-                <p>No open positions at the moment. Check back soon!</p>
+              <div className="flex flex-col items-center text-center py-16 px-4 bg-[#f8f8f8] rounded-xl border border-black/[0.06]">
+                <div className="w-16 h-16 rounded-full bg-[#144A92]/[0.06] flex items-center justify-center mb-5">
+                  <Briefcase className="w-7 h-7 text-[#144A92]" />
+                </div>
+                <p className="text-lg font-semibold text-black mb-1">No open positions right now</p>
+                <p className="text-[#424242] text-sm max-w-sm">
+                  We're not hiring at the moment, but check back soon &mdash; new roles open regularly.
+                </p>
               </div>
             )}
 

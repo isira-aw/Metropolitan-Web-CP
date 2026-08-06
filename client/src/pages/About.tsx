@@ -97,14 +97,16 @@ export default function About() {
       <Navbar />
 
       {/* Page Hero */}
-      <div className="bg-[#f8f8f8] border-t border-gray-200 pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeader title="About Metropolitan" subtitle="Three decades of engineering excellence." />
+      <div className="relative bg-[#f8f8f8] border-t border-gray-200 pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 blueprint-grid opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="eyebrow text-[#144A92] mb-4 block">Who We Are</span>
+          <SectionHeader title="About Metropolitan" subtitle="Six decades of engineering excellence." />
         </div>
       </div>
 
       {/* Our Legacy + Timeline */}
-      <section className="bg-white py-24 overflow-hidden">
+      <section className="bg-white section-padding overflow-hidden">
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
@@ -255,7 +257,7 @@ export default function About() {
 
           {/* CTA Button */}
           <div className="mt-10 text-center">
-            <a href="/divisions" className="inline-flex items-center gap-3 bg-[#0f0f0f] text-white px-8 py-5 rounded-full font-bold hover:bg-[#144A92] transition-all transform hover:-translate-y-1 shadow-sm">
+            <a href="/divisions" className="inline-flex items-center gap-3 bg-[#0a0e14] text-white px-8 py-5 rounded-full font-bold hover:bg-[#144A92] transition-all transform hover:-translate-y-1 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#144A92] focus-visible:ring-offset-2">
               Explore Our Services
               <Rocket size={20} />
               <ArrowRight size={18} className="opacity-50" />
@@ -266,78 +268,83 @@ export default function About() {
       </section>
 
       {/* Leadership + Core Values */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <SectionHeader title="Leadership Team" subtitle=" Meet the visionary leaders driving Innovatech Solutions forward.
-                Our executive team brings a wealth of experience and a shared
-                commitment to innovation and excellence.
-              " />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-padding pt-0">
+        <SectionHeader
+          title="Leadership Team"
+          subtitle="Meet the visionary leaders driving Metropolitan forward. Our executive team brings a wealth of experience and a shared commitment to innovation and excellence."
+        />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {leaders.map((leader, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: (index % 4) * 0.08 }}
               whileHover={{ y: -8 }}
-              className="relative group bg-white rounded-xl p-8 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-500 overflow-hidden"
+              className="relative group bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-500 overflow-hidden flex flex-col items-center text-center"
             >
-              <div className="flex flex-col items-center relative z-10">
-                {/* Image Container - clean, no rotating ring */}
-                <div className="relative w-48 h-48 mb-6">
-                  <div className="w-full h-full rounded-full overflow-hidden border-4 border-gray-50 shadow-sm">
-                    <img
-                      className="w-full h-full object-cover scale-110 group-hover:scale-115 transition-transform duration-500"
-                      src={leader.img || "/Assets/Images/People/default-person.png"}
-                      alt={leader.name}
-                    />
-                  </div>
+              {/* Image Container - clean, no rotating ring */}
+              <div className="relative w-36 h-36 md:w-40 md:h-40 mb-6">
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-gray-50 shadow-sm bg-gray-100">
+                  <img
+                    className="w-full h-full object-cover scale-110 group-hover:scale-115 transition-transform duration-500"
+                    src={leader.img || "/Assets/Images/People/default-person.png"}
+                    alt={leader.name}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Identity Section */}
+              <div className="space-y-2">
+                <h3 className="text-lg md:text-xl font-display font-bold text-[#000000] group-hover:text-[#144A92] transition-colors duration-300">
+                  {leader.name}
+                </h3>
+
+                {/* Subtle accent line */}
+                <div className="flex justify-center">
+                  <div className="h-0.5 w-8 bg-[#CB0816]/30 rounded-full group-hover:w-16 transition-all duration-500" />
                 </div>
 
-                {/* Identity Section */}
-                <div className="text-center space-y-2">
-                  <h3 className="text-2xl font-display font-bold text-[#000000] group-hover:text-[#144A92] transition-colors duration-300">
-                    {leader.name}
-                  </h3>
-
-                  {/* Subtle accent line */}
-                  <div className="flex justify-center">
-                    <div className="h-0.5 w-8 bg-[#CB0816]/30 rounded-full group-hover:w-16 transition-all duration-500" />
-                  </div>
-
-                  <p className="text-[#424242] font-medium text-sm uppercase tracking-widest pt-2">
-                    {leader.role}
-                  </p>
-                </div>
+                <p className="text-[#424242] font-medium text-xs uppercase tracking-widest pt-2">
+                  {leader.role}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* Core Values */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="bg-[#f8f8f8] text-gray-900 rounded-xl py-12 px-6 md:px-12 text-center border border-gray-200"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold font-display mb-10 text-black">
+            Our Core Values
+          </h2>
 
-<div className="bg-gray-50 text-gray-900 rounded-xl py-10 p-12 text-center border border-gray-200">
-  <h2 className="text-3xl font-bold font-display mb-10 text-gray-900">
-    Our Core Values
-  </h2>
-
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-    {["Safety First", "Sustainability", "Integrity"].map((v, i) => (
-      <div key={i} className="flex flex-col items-center">
-        <div className="w-16 h-16 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
-          <CheckCircle className="w-8 h-8 text-blue-600" />
-        </div>
-        <h3 className="text-xl font-bold text-gray-800">{v}</h3>
-      </div>
-    ))}
-  </div>
-</div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {["Safety First", "Sustainability", "Integrity"].map((v, i) => (
+              <div key={i} className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-lg bg-[#144A92]/10 flex items-center justify-center mb-4">
+                  <CheckCircle className="w-8 h-8 text-[#144A92]" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold text-black">{v}</h3>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
       </div>
 
       {/* Tabbed Section */}
-      <section className="bg-[#f8f8f8] py-4">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="bg-[#f8f8f8] section-padding">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-12">
 
             {/* Sidebar Tabs */}
@@ -482,8 +489,8 @@ export default function About() {
       </section>
 
       {/* Company Story */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
+      <section className="section-padding bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <SectionHeaderSmall
             title="Story of Our Company"
             subtitle="A legacy of quality and entrepreneurship since 1958"
@@ -528,7 +535,7 @@ export default function About() {
                   alt="Mr. J.S Ambani at the Launch of Royal Typewriters"
                   className="w-full h-auto"
                 />
-                <div className="bg-[#0f0f0f] p-4 text-white text-sm italic">
+                <div className="bg-[#0a0e14] p-4 text-white text-sm italic">
                   Mr. J.S Ambani with the American Ambassador at the Launch of Royal Typewriters in Sri Lanka, 1958
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight, Zap, Users, Award, Clock, Quote, Eye, Target } from "lucide-react";
+import { ArrowRight, Zap, Users, Award, Clock, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -12,53 +12,41 @@ import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
-const customerLogos = [
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/1.png', link: 'https://www.google.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/2.png', link: 'https://www.microsoft.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/3.png', link: 'https://www.amazon.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/4.png', link: 'https://www.netflix.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/5.png', link: 'https://www.google.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/7.png', link: 'https://www.amazon.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/8.png', link: 'https://www.netflix.com' },
-  { logo: 'https://ik.imagekit.io/ayen/Metropolitan/BrandLogos/customers/6.png', link: 'https://www.microsoft.com' },
-];
-
 const divisions = [
   {
     name: "ELV Systems",
     slug: "elv",
-    image: "https://vallect.com/wp-content/uploads/2024/05/elv-systems-1024x576.webp",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
     description: "Advanced Extra Low Voltage systems for smart building integration and security."
   },
   {
     name: "Central AC",
     slug: "central-ac",
-    image: "https://airexpert.com/wp-content/uploads/2019/05/Does-the-location-of-your-Central-AC-Unit-Matter-in-Houston.jpg",
+    image: "https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=1200&auto=format&fit=crop",
     description: "Efficient climate control solutions designed for large-scale industrial and commercial spaces."
   },
   {
     name: "Fire Detection & Protection",
     slug: "fire-detection-and-protection",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpkJhZSArPiBB38xNktZdQJUTdm6SSfu95Fg&s",
+    image: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1200&auto=format&fit=crop",
     description: "State-of-the-art suppression and detection systems to safeguard lives and assets."
   },
   {
     name: "Elevators Division",
     slug: "elevators-and-travelators",
-    image: "https://www.kyodolift.com/images/Travelator-Consultant.webp",
+    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1200&auto=format&fit=crop",
     description: "Modern vertical transportation systems focusing on speed, safety, and smooth operation."
   },
   {
     name: "Generator Division",
     slug: "generator",
-    image: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Modern_Steam_Turbine_Generator.jpg",
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1200&auto=format&fit=crop",
     description: "Sustainable energy solutions combining heavy-duty generators with high-efficiency solar tech."
   },
   {
     name: "Solar Division",
     slug: "solar",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZZk7CdkbvNxCiULOXlImwUqiiiYmL_fihFQ&s",
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop",
     description: "Sustainable energy solutions combining heavy-duty generators with high-efficiency solar tech."
   }
 ];
@@ -105,8 +93,19 @@ export default function Home() {
         {/* Gradient Depth */}
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-blue-800/40 via-transparent to-blue-900/60" />
 
+        {/* Blueprint Grid Signature Motif */}
+        <div className="absolute inset-0 z-10 blueprint-grid opacity-30" />
+
         {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10 pb-16 md:pb-10">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="eyebrow inline-block text-[var(--metro-light-blue)] mb-4 md:mb-6"
+          >
+            Engineering Excellence Since Day One
+          </motion.span>
           <div className="relative">
             <motion.h1
               className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white mb-4 md:mb-6 leading-[1.2] tracking-tight"
@@ -156,7 +155,7 @@ export default function Home() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in delay-500">
+        <div className="hidden sm:block absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in delay-500">
           <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
           </div>
@@ -180,11 +179,11 @@ export default function Home() {
 
 
       {/* ═══ MISSION & VISION ═══ */}
-      <section className="py-10 md:py-16 bg-white">
+      <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="block text-[#144A92] font-display text-lg md:text-2xl mb-2 font-medium">
-              Our,
+            <span className="eyebrow block text-[var(--metro-blue)] mb-3">
+              Who We Are
             </span>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-black leading-none tracking-tighter uppercase text-black">
@@ -237,9 +236,12 @@ export default function Home() {
       </section>
 
       {/* ═══ OUR DIVISIONS ═══ */}
-      <section className="py-10 md:py-16 bg-white">
+      <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-16">
           <div className="text-center">
+            <span className="eyebrow block text-[var(--metro-blue)] mb-3">
+              What We Do
+            </span>
             <h2 className="text-2xl md:text-4xl font-display font-bold tracking-tight text-black">
               Our Divisions
             </h2>
@@ -279,7 +281,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex-1 w-full">
-              <div className="aspect-video rounded-xl overflow-hidden shadow-lg animate-image-pop">
+              <div className="aspect-video rounded-xl overflow-hidden shadow-lg animate-image-pop card-hover">
                 <img
                   key={activeTab}
                   src={divisions[activeTab].image}
@@ -293,9 +295,12 @@ export default function Home() {
       </section>
 
       {/* ═══ OUR PLATFORMS ═══ */}
-      <section className="py-10 md:py-16 pb-16 md:pb-24">
+      <section className="section-padding">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            <span className="eyebrow block text-[var(--metro-blue)] mb-3">
+              Group Ecosystem
+            </span>
             <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
               Our Platforms
             </h2>
@@ -332,10 +337,13 @@ export default function Home() {
       </section>
 
       {/* ═══ WHY CHOOSE US ═══ */}
-      <section className="py-10 md:py-16 bg-white overflow-hidden">
+      <section className="section-padding bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4 md:gap-6">
             <div className="flex-1">
+              <span className="eyebrow block text-[var(--metro-blue)] mb-3">
+                Why Metropolitan
+              </span>
               <SectionHeader title="Why Metropolitan?" subtitle="" />
             </div>
             <p className="text-base md:text-lg text-[#424242] max-w-md border-l-2 border-[#144A92]/30 pl-4 md:pl-6 py-2">
@@ -350,14 +358,14 @@ export default function Home() {
                 title: "Advanced Equipment",
                 desc: "Harnessing state-of-the-art tools and AI-driven tech for superior results.",
                 span: "sm:col-span-1 lg:col-span-4",
-                img: "https://img.freepik.com/free-photo/ai-robot-interacting-with-futuristic-data-interface_23-2152005489.jpg?semt=ais_hybrid&w=740&q=80"
+                img: "https://images.unsplash.com/photo-1520869562399-e772f042f422?q=80&w=1200&auto=format&fit=crop"
               },
               {
                 icon: Users,
                 title: "Trained Staff",
                 desc: "Expert professionals undergo 200+ hours of specialized training yearly.",
                 span: "sm:col-span-1 lg:col-span-4",
-                img: "https://sixtysixten.com/wp-content/uploads/2024/12/ai-agent-for-employee-training.jpg"
+                img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200&auto=format&fit=crop"
               },
               {
                 icon: Award,
@@ -365,19 +373,19 @@ export default function Home() {
                 desc: "Every project passes a 50-point inspection protocol before delivery.",
                 span: "sm:col-span-2 lg:col-span-4 lg:row-span-2",
                 isLarge: true,
-                img: "https://www.smallbizdaily.com/wp-content/uploads/2021/10/shutterstock_1155561991.jpg"
+                img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop"
               },
               {
                 icon: Clock,
                 title: "24/7 Priority Support",
                 desc: "Round-the-clock emergency response units always on standby.",
                 span: "sm:col-span-2 lg:col-span-8",
-                img: "https://media.istockphoto.com/id/1494073880/photo/a-man-holding-icon-virtual-24-7-support-services-for-worldwide-nonstop-and-full-time.jpg?s=170667a&w=0&k=20&c=HoMXtrk5Js-aKnhIfceYqFKvWuFZjgATmWbcVkb1fuQ="
+                img: "https://images.unsplash.com/photo-1553775282-20af80779df7?q=80&w=1200&auto=format&fit=crop"
               }
             ].map((feature, idx) => (
               <div
                 key={idx}
-                className={`group relative overflow-hidden rounded-xl border border-gray-100 p-6 md:p-8 transition-all duration-300 hover:shadow-lg ${feature.span}`}
+                className={`group relative overflow-hidden rounded-xl border border-gray-100 p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${feature.span}`}
               >
                 <div className="absolute inset-0 z-0">
                   <img
@@ -403,9 +411,12 @@ export default function Home() {
 
       {/* ═══ TESTIMONIALS ═══ */}
       {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-10 md:py-16 bg-white">
+        <section className="section-padding bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
+              <span className="eyebrow block text-[var(--metro-blue)] mb-3">
+                Client Feedback
+              </span>
               <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
                 What Our Clients Say
               </h2>
@@ -441,9 +452,12 @@ export default function Home() {
       )}
 
       {/* ═══ LATEST PROJECTS ═══ */}
-      <section className="py-10 md:py-16 bg-white">
+      <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            <span className="eyebrow block text-[var(--metro-blue)] mb-3">
+              Our Work
+            </span>
             <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
               Featured Projects
             </h2>
@@ -478,7 +492,7 @@ export default function Home() {
       </section>
 
       {/* ═══ INQUIRY SECTION ═══ */}
-      <section className="py-10 md:py-16 bg-[#144A92]/[0.04] relative overflow-hidden">
+      <section className="section-padding bg-[#144A92]/[0.04] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="text-center lg:text-left">
@@ -506,58 +520,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ TRUSTED CUSTOMERS ═══ */}
-      <section className="py-10 md:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-scroll-reveal delay-200">
-          <div className="text-center">
-            <h2 className="text-2xl md:text-4xl font-display font-bold text-black tracking-tight">
-              Our Trusted Customers
-            </h2>
-            <div className="section-divider" />
-            <p className="text-[#424242] mt-4 md:mt-6 leading-relaxed text-sm md:text-base">
-              We proudly collaborate with industry leaders worldwide
-            </p>
-          </div>
-
-          <div className="mt-8 md:mt-12">
-            <div className="relative overflow-hidden mt-8 md:mt-12">
-
-              {/* Left Blur */}
-              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-r from-white via-white/80 to-transparent" />
-
-              {/* Right Blur */}
-              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-l from-white via-white/80 to-transparent" />
-
-              {/* Marquee */}
-              <div className="flex w-max animate-marquee gap-6 md:gap-10">
-                {[...customerLogos, ...customerLogos].map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center justify-center rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4"
-                  >
-                    <img
-                      src={item.logo}
-                      alt="Customer Logo"
-                      className="h-12 sm:h-14 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-110"
-                    />
-                  </a>
-                ))}
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </section>
-
       {/* ═══ LATEST NEWS ═══ */}
-      <section className="py-10 md:py-16 bg-white">
+      <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row-reverse items-center gap-6 md:gap-12 bg-gray-50 rounded-xl p-4 md:p-8 lg:p-12 shadow-sm">
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-6 md:gap-12 bg-gray-50 rounded-xl p-4 md:p-8 lg:p-12 shadow-sm card-hover">
             <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
+              <span className="eyebrow block text-[var(--metro-blue)] mb-1">
+                From The Blog
+              </span>
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-black tracking-tight">
                 What Are The Latest Updates?
               </h3>

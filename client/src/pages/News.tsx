@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Pagination } from "@/components/Pagination";
 import { useNews } from "@/hooks/use-news";
 import { Card } from "@/components/ui/card";
-import { Calendar, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight, Newspaper } from "lucide-react";
 import { format } from "date-fns";
 
 export default function News() {
@@ -17,13 +17,15 @@ export default function News() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <div className="bg-[#f8f8f8] pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeader title="News & Insights" subtitle="Updates from across our global operations." />
+      <div className="relative bg-[#f8f8f8] pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 blueprint-grid opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="eyebrow text-[#144A92] mb-4 block">Latest Updates</span>
+          <SectionHeader title="News & Insights" subtitle="Updates from across our operations in Sri Lanka." />
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {isLoading ? (
             Array(6).fill(0).map((_, i) => (
@@ -59,7 +61,15 @@ export default function News() {
               </Card>
             ))
           ) : (
-             <div className="col-span-full text-center py-20 text-[#424242]">No news articles found.</div>
+            <div className="col-span-full flex flex-col items-center text-center py-20 px-4">
+              <div className="w-16 h-16 rounded-full bg-[#144A92]/[0.06] flex items-center justify-center mb-5">
+                <Newspaper className="w-7 h-7 text-[#144A92]" />
+              </div>
+              <p className="text-lg font-semibold text-black mb-1">No news articles yet</p>
+              <p className="text-[#424242] text-sm max-w-sm">
+                Check back soon for updates from across our operations.
+              </p>
+            </div>
           )}
         </div>
 

@@ -246,7 +246,7 @@ export function ChatbotWidget() {
       text-white
       ring-4 ring-white
       overflow-hidden
-      transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+      transition-all duration-500 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]
       ${showAskMe ? "max-w-[180px] px-4" : "max-w-[56px] px-0"}
     `}
           aria-label={isOpen ? "Close chat" : "Open chat"}

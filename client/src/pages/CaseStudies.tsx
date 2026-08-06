@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useCaseStudies } from "@/hooks/use-case-studies";
 import { DIVISIONS, getDivisionDisplayName, type DivisionKey } from "@shared/schema";
 import { cn } from "@/lib/utils";
+import { FolderSearch } from "lucide-react";
 
 export default function CaseStudies() {
   const [selectedDivision, setSelectedDivision] = useState<DivisionKey | undefined>();
@@ -22,14 +23,15 @@ export default function CaseStudies() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <div className="bg-[#f8f8f8] pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative bg-[#f8f8f8] pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 blueprint-grid opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="eyebrow text-[#144A92] mb-4 block">Our Portfolio</span>
           <SectionHeader title="Our Projects" subtitle="Explore our portfolio of landmark projects that have transformed communities." />
         </div>
       </div>
 
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-padding">
         {/* Filters */}
         <div className="flex flex-wrap gap-2 justify-center mb-12">
           <Button
@@ -72,8 +74,14 @@ export default function CaseStudies() {
               <CaseStudyCard key={item.id} item={item} />
             ))
           ) : (
-            <div className="col-span-full text-center py-20">
-              <p className="text-xl text-[#424242]">No projects found in this category.</p>
+            <div className="col-span-full flex flex-col items-center text-center py-20 px-4">
+              <div className="w-16 h-16 rounded-full bg-[#144A92]/[0.06] flex items-center justify-center mb-5">
+                <FolderSearch className="w-7 h-7 text-[#144A92]" />
+              </div>
+              <p className="text-lg font-semibold text-black mb-1">No projects found</p>
+              <p className="text-[#424242] text-sm max-w-sm">
+                We don't have any projects in this category yet. Try a different division or check back soon.
+              </p>
             </div>
           )}
         </div>

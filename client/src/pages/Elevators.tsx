@@ -1,286 +1,84 @@
-import { useEffect } from "react";
-import { Link } from "wouter";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { SectionHeader } from "@/components/SectionHeader";
-import { CaseStudyCard } from "@/components/CaseStudyCard";
-import { InquiryForm } from "@/components/InquiryForm";
-import { useCaseStudies } from "@/hooks/use-case-studies";
-import { ArrowUp, Shield, Wrench, Zap, Users, Clock, Award, Quote } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useTestimonials } from "@/hooks/use-testimonials";
+import { DivisionPageLayout } from "@/components/DivisionPageLayout";
+import { ArrowUp, Shield, Wrench, Zap, Users, Clock } from "lucide-react";
 
 export default function Elevators() {
-  const { data: projects, isLoading } = useCaseStudies({ division: "ELEVATORS", limit: 3 });
-
-  const { data: testimonialsData } = useTestimonials({ division: "ELEVATORS" });
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const solutions = [
     {
+      icon: ArrowUp,
       title: "Passenger Elevators",
       description: "High-speed vertical transportation for residential and commercial buildings",
-      features: ["Speed up to 4m/s", "Capacity: 6-24 persons", "Energy-efficient motors", "Smooth ride quality"]
+      details: ["Speed up to 4m/s", "Capacity: 6-24 persons", "Energy-efficient motors", "Smooth ride quality"],
     },
     {
+      icon: Wrench,
       title: "Freight Elevators",
       description: "Heavy-duty cargo transport for industrial and commercial applications",
-      features: ["Load capacity up to 5000kg", "Reinforced cabins", "Wide door openings", "Durable construction"]
+      details: ["Load capacity up to 5000kg", "Reinforced cabins", "Wide door openings", "Durable construction"],
     },
     {
+      icon: Zap,
       title: "Escalators & Travelators",
       description: "Continuous flow people movers for high-traffic areas",
-      features: ["Step width: 600-1000mm", "Auto-lubrication systems", "Emergency stop safety", "Low noise operation"]
+      details: ["Step width: 600-1000mm", "Auto-lubrication systems", "Emergency stop safety", "Low noise operation"],
     },
     {
+      icon: Clock,
       title: "Modernization Services",
       description: "Upgrade existing systems with latest technology and safety features",
-      features: ["Controller upgrades", "New cabin designs", "Energy optimization", "Extended lifespan"]
-    }
+      details: ["Controller upgrades", "New cabin designs", "Energy optimization", "Extended lifespan"],
+    },
   ];
 
-  const safetyFeatures = [
-    { icon: Shield, text: "Overload protection sensors" },
-    { icon: Zap, text: "Emergency backup power systems" },
-    { icon: Users, text: "Anti-entrapment safety edges" },
-    { icon: Clock, text: "Automatic rescue devices" }
-  ];
-
-  const stats = [
-    { value: "1500+", label: "Elevators Installed" },
-    { value: "99.8%", label: "Uptime Rate" },
-    { value: "24/7", label: "Support Available" },
-    { value: "50+", label: "Certified Technicians" }
+  const specs = [
+    { label: "Elevators Installed", value: "1500+" },
+    { label: "Uptime Rate", value: "99.8%" },
+    { label: "Support Available", value: "24/7" },
+    { label: "Certified Technicians", value: "50+" },
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans">
-      <Navbar />
-
-      <div className="bg-[#0f0f0f] text-white pt-2 pb-20">
-
-      </div>
-
-      {/* HERO - Full Width with Overlay */}
-      <section className="relative h-[70vh] min-h-[600px] flex items-center">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://static.vecteezy.com/system/resources/previews/041/449/599/non_2x/ai-generated-elevator-escalator-is-moving-staircase-used-as-transportation-between-floors-or-levels-building-professionalgraphy-photo.jpg')` }}
-        />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="max-w-2xl">
-            <Badge className="mb-4 bg-white/10 text-white hover:bg-white/20 border-white/20">
-              <ArrowUp className="w-3 h-3 mr-1" />
-              Vertical Transportation Experts
-            </Badge>
-            <h1 className="text-6xl md:text-7xl font-display font-bold text-white mb-6">
-              Elevators &
-              <span className="text-[#144A92]"> Travelators</span>
-            </h1>
-            <p className="text-xl text-white/90 leading-relaxed mb-8">
-              Safe, reliable, and efficient vertical transportation solutions engineered for
-              seamless movement in modern urban environments.
-            </p>
-            <div className="flex gap-4">
-              <Button size="lg" className="bg-[#144A92] text-white rounded-lg hover:bg-[#144A92]/90">Explore Solutions</Button>
-              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 rounded-lg">
-                Modernize Existing
-              </Button>
-            </div>
-          </div>
-
-          {/* Floating Stats Card */}
-          <div className="absolute bottom-8 right-8 hidden lg:block">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-black/[0.06] w-80">
-              <div className="grid grid-cols-2 gap-4">
-                {stats.slice(0, 2).map((stat, i) => (
-                  <div key={i}>
-                    <p className="text-3xl font-bold text-[#144A92]">{stat.value}</p>
-                    <p className="text-sm text-[#424242]">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* STATS BAR */}
-      <section className="bg-[#0f0f0f] text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, i) => (
-              <div key={i}>
-                <p className="text-4xl font-bold mb-1">{stat.value}</p>
-                <p className="text-white/70 text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SOLUTIONS - Card Grid */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Comprehensive Vertical Transportation"
-            subtitle="From installation to maintenance, we deliver complete elevator and escalator solutions"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            {solutions.map((solution, i) => (
-              <div
-                key={i}
-                className="group bg-white p-8 rounded-xl border border-black/[0.06] shadow-sm hover:shadow-lg transition-all"
-              >
-                <h3 className="text-2xl font-bold text-black mb-3">
-                  {solution.title}
-                </h3>
-                <p className="text-[#424242] mb-6">{solution.description}</p>
-                <div className="grid grid-cols-2 gap-3">
-                  {solution.features.map((feature, j) => (
-                    <div key={j} className="flex items-center gap-2 text-sm">
-                      <div className="w-1.5 h-1.5 bg-[#144A92] rounded-full" />
-                      <span className="text-[#424242]">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SAFETY FIRST */}
-      <section className="py-24 bg-[#0f0f0f] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <Award className="w-16 h-16 text-[#144A92] mx-auto mb-4" />
-            <h2 className="text-white text-4xl font-display font-bold mb-4">Safety is Our Priority</h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Every elevator and escalator we install meets the highest international safety standards
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {safetyFeatures.map((feature, i) => {
-              const Icon = feature.icon;
-              return (
-                <div key={i} className="bg-white/5 p-6 rounded-xl border border-white/10 text-center">
-                  <Icon className="w-12 h-12 text-[#144A92] mx-auto mb-4" />
-                  <p className="text-white font-medium">{feature.text}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-12 text-center">
-            <div className="inline-flex flex-wrap gap-3 justify-center">
-              {["EN 81-20/50 Certified", "ISO 9001 Quality", "CE Marked", "ASME A17.1 Compliant"].map((cert, i) => (
-                <Badge key={i} variant="outline" className="bg-white/5 border-white/20 text-white px-4 py-2">
-                  {cert}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      {testimonialsData && testimonialsData.length > 0 && (
-        <section className="py-24 bg-[#f8f8f8]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SectionHeader title="What Our Clients Say" />
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
-              {testimonialsData.map((t) => (
-                <div key={t.id} className="bg-white p-8 rounded-xl shadow-sm border border-black/[0.06] hover:shadow-lg transition-shadow">
-                  <Quote className="w-8 h-8 text-[#144A92]/20 mb-4" />
-                  <p className="text-[#424242] italic mb-6">"{t.content}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#144A92]/[0.06] flex items-center justify-center text-[#144A92] font-bold">
-                      {t.author[0]}
-                    </div>
-                    <div>
-                      <p className="font-bold text-black text-sm">{t.author}</p>
-                      <p className="text-xs text-[#424242]">{t.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* PROJECTS */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Featured Installation Projects" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {isLoading ? (
-              Array(3).fill(0).map((_, i) => <div key={i} className="h-[400px] bg-[#f8f8f8] animate-pulse rounded-xl" />)
-            ) : projects?.data && projects.data.length > 0 ? (
-              projects.data.map(p => <CaseStudyCard key={p.id} item={p} />)
-            ) : (
-              <div className="col-span-3 text-center py-12 text-[#424242]">
-                No projects found for this division yet.
-              </div>
-            )}
-          </div>
-
-          {projects?.data && projects.data.length > 0 && (
-            <div className="text-center mt-12">
-              <Link href="/case-studies?division=Elevators and Travelators">
-                <Button variant="outline" size="lg">View All Projects</Button>
-              </Link>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section className="py-24 bg-[#f8f8f8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-display font-bold text-black mb-6">
-                Ready to Elevate Your Building?
-              </h2>
-              <p className="text-[#424242] text-lg mb-8">
-                Whether you need new installations or want to modernize existing systems, our team of
-                certified engineers is ready to help. Get a free consultation and site assessment today.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-black/[0.06]">
-                  <Wrench className="w-8 h-8 text-[#144A92]" />
-                  <div>
-                    <p className="font-semibold text-black">Maintenance Contracts</p>
-                    <p className="text-sm text-[#424242]">Preventive care for maximum uptime</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-black/[0.06]">
-                  <ArrowUp className="w-8 h-8 text-[#144A92]" />
-                  <div>
-                    <p className="font-semibold text-black">Modernization Services</p>
-                    <p className="text-sm text-[#424242]">Upgrade old systems to modern standards</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <InquiryForm division="Elevators and Travelators" />
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+    <DivisionPageLayout
+      divisionKey="ELEVATORS"
+      divisionLabel="Elevators and Travelators"
+      eyebrowIcon={ArrowUp}
+      eyebrowText="Vertical Transportation Experts"
+      title={
+        <>
+          Elevators &<span className="text-[#144A92]"> Travelators</span>
+        </>
+      }
+      description="Safe, reliable, and efficient vertical transportation solutions engineered for seamless movement in modern urban environments."
+      ctaPrimaryLabel="Explore Solutions"
+      ctaSecondaryLabel="Modernize Existing"
+      heroImage="https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?q=80&w=1200&auto=format&fit=crop"
+      heroImageAlt="Modern elevator interior in a commercial building"
+      heroStat={{ icon: ArrowUp, label: "Elevators Installed", value: "1500+" }}
+      specs={specs}
+      servicesTitle="Comprehensive Vertical Transportation"
+      servicesSubtitle="From installation to maintenance, we deliver complete elevator and escalator solutions"
+      services={solutions}
+      whyChooseUs={{
+        layout: "grid",
+        heading: "Safety is Our Priority",
+        headingIcon: Shield,
+        intro: "Every elevator and escalator we install meets the highest international safety standards",
+        blocks: [
+          { icon: Shield, description: "Overload protection sensors" },
+          { icon: Zap, description: "Emergency backup power systems" },
+          { icon: Users, description: "Anti-entrapment safety edges" },
+          { icon: Clock, description: "Automatic rescue devices" },
+        ],
+        badges: ["EN 81-20/50 Certified", "ISO 9001 Quality", "CE Marked", "ASME A17.1 Compliant"],
+      }}
+      projectsTitle="Featured Installation Projects"
+      viewAllLabel="View All Projects"
+      caseStudiesQueryValue="Elevators and Travelators"
+      contactHeading="Ready to Elevate Your Building?"
+      contactDescription="Whether you need new installations or want to modernize existing systems, our team of certified engineers is ready to help. Get a free consultation and site assessment today."
+      contactHighlights={[
+        { icon: Wrench, title: "Maintenance Contracts", desc: "Preventive care for maximum uptime" },
+        { icon: ArrowUp, title: "Modernization Services", desc: "Upgrade old systems to modern standards" },
+      ]}
+    />
   );
 }

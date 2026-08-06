@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-primary: "SN Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --color-text: #424242;
   --color-heading: #000000;
   --color-bg: #FFFFFF;
@@ -49,6 +48,7 @@
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Poppins', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
 
 @layer base {
@@ -62,7 +62,7 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-primary);
+    font-family: var(--font-sans);
     color: var(--color-text);
     background-color: var(--color-bg);
     line-height: 1.7;
@@ -119,7 +119,7 @@
 
 /* ── Custom Utilities ── */
 .section-padding {
-  @apply py-20 md:py-28;
+  @apply py-12 md:py-20;
 }
 .container-width {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -160,6 +160,16 @@
   background-color: rgba(20, 74, 146, 0.02);
 }
 
+/* ── Card Hover Effect (dark backgrounds) ── */
+.card-hover-dark {
+  @apply transition-all duration-300;
+}
+.card-hover-dark:hover {
+  @apply shadow-lg;
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* ── Selection Color ── */
 ::selection {
   background: rgba(20, 74, 146, 0.12);
@@ -178,4 +188,39 @@
 
 .animate-marquee {
   animation: marquee 20s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ── Blueprint Grid Signature Motif ── */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(110, 193, 228, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110, 193, 228, 0.14) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.blueprint-grid-dense {
+  background-image:
+    linear-gradient(rgba(110, 193, 228, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110, 193, 228, 0.1) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* ── Eyebrow / Technical Label ── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
